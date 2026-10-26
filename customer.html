@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل مشتری | سوپرمارکت آذربایجان 👤</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.cust-grid{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start}
+@media(max-width:960px){.cust-grid{grid-template-columns:1fr}}
+.profile-card{text-align:center}
+.avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--tomato),var(--orange));display:grid;place-items:center;font-size:48px;margin:0 auto;border:3px solid #fff;box-shadow:var(--sh)}
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+.stat{background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px;text-align:center}
+.stat b{font-size:20px;display:block}
+.stat span{font-size:12px;color:var(--muted)}
+.ocard{border:2.5px solid var(--ink);border-radius:18px;background:#fff;padding:14px;box-shadow:4px 4px 0 rgba(37,50,75,.9)}
+.ocard + .ocard{margin-top:12px}
+.ocard-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.pill{display:inline-block;background:#FFF3D6;border:1.5px solid var(--ink);border-radius:999px;padding:2px 12px;font-size:12.5px;font-weight:700}
+.oitems{font-size:13.5px;background:#fffdf7;border:1.5px dashed var(--line);border-radius:12px;padding:8px 10px;margin-top:8px;line-height:2}
+.obtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.obtns .btn{padding:8px 16px;font-size:14px;box-shadow:3px 3px 0 var(--ink)}
+.wa-float{position:fixed;bottom:18px;inset-inline-end:18px;z-index:120;background:#25D366;border:2.5px solid #fff;color:#fff;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px}
+.eita-float{position:fixed;bottom:76px;inset-inline-end:18px;z-index:120;background:#FF7A1A;border:2.5px solid #fff;color:#fff;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px}
+@media(max-width:620px){.wa-float,.eita-float{padding:9px 14px;font-size:13px}}
+</style>
+</head>
+<body>
+<div class="topbar">👤 پنل مشتری سوپرمارکت <b>آذربایجان</b> • مدیریت <b><span class="store-manager">آقای نویدی</span></b> • 📱 <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></div>
+<header><nav class="nav">
+<div class="logo"><div class="logo-mark">🧺</div><div>آذربایجان<small>پنل مشتری • سفارش‌های من</small></div></div>
+<div class="nav-links" id="navLinks"><a href="index.html">🏠 خانه</a><a href="shop.html">🛒 خرید و سفارش</a><a href="customer.html" class="active">👤 پنل مشتری</a><a href="admin.html">👨‍💼 مدیریت</a></div>
+<button class="cart-btn" onclick="openCart()">🛒 سبد خرید <span class="count cart-count">۰</span></button>
+<button class="hamb" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav></header>
+
+<div class="wrap">
+<!-- ورود -->
+<div id="loginBox" style="max-width:520px;margin:26px auto">
+<div class="form-card" style="text-align:center">
+<div style="font-size:64px">👤</div>
+<h2>ورود به پنل مشتری</h2>
+<p style="color:var(--muted);font-size:14px">با شماره موبایلت وارد شو تا سفارش‌هات رو ببینی و پیگیری کنی 💛<br>اولین بار؟ فقط موبایل + اسمت رو بزن، حسابت ساخته می‌شه!</p>
+<div class="field" style="margin-top:12px;text-align:right"><label>شماره موبایل *</label><input id="cPhone" inputmode="numeric" dir="ltr" style="text-align:left" placeholder="09108659424"></div>
+<div class="field" style="margin-top:10px;text-align:right"><label>نام و نام خانوادگی (برای اولین ورود)</label><input id="cName" placeholder="مثلاً: علی محمدی"></div>
+<button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:14px" onclick="doCustLogin()">ورود / ثبت‌نام 🚀</button>
+<hr style="border:none;border-top:2px dashed var(--line);margin:16px 0">
+<p style="font-size:14px;font-weight:700">🔍 پیگیری سریع با کد سفارش (بدون ورود):</p>
+<div style="display:flex;gap:8px;margin-top:8px"><input id="trackCode" placeholder="مثلاً AZ-4821" style="flex:1;border:2px solid var(--ink);border-radius:12px;padding:10px 14px;font-size:15px"><button class="btn btn-dark" onclick="trackOrder(true)">پیگیری</button></div>
+<div id="trackResult" style="margin-top:10px"></div>
+<a href="shop.html" style="font-size:14px;text-decoration:underline;display:inline-block;margin-top:10px">🛒 ثبت سفارش جدید</a>
+</div>
+</div>
+
+<!-- پنل -->
+<div id="panel" style="display:none">
+<section style="padding-bottom:0">
+<span class="badge"><span class="dot"></span> سلام <b id="helloName">عزیز</b>! خوش اومدی 💛</span>
+<h1 style="font-size:clamp(24px,4vw,36px)">سفارش‌های <span style="background:linear-gradient(180deg,transparent 62%,var(--sunny) 62%);padding:0 6px">من</span> 🧺</h1>
+<p style="color:#5b6a85">اینجا همه سفارش‌هات رو می‌بینی، دوباره سفارش می‌دی و وضعیتش رو پیگیری می‌کنی ✅</p>
+<div class="stat-row">
+<div class="stat"><b id="stOrders">۰</b><span>تعداد سفارش 🧾</span></div>
+<div class="stat"><b id="stSum">۰ تومان</b><span>جمع خریدها 💰</span></div>
+<div class="stat"><b id="stLast">—</b><span>آخرین سفارش 🕖</span></div>
+</div>
+</section>
+
+<section>
+<div class="cust-grid">
+<div class="form-card profile-card">
+<div class="avatar">👤</div>
+<h3 id="pName" style="margin-top:8px">—</h3>
+<p style="font-size:14px;color:var(--muted)" id="pPhone">—</p>
+<p style="font-size:13.5px;margin-top:6px" id="pAddr">—</p>
+<hr style="border:none;border-top:2px dashed var(--line);margin:12px 0">
+<div class="field" style="text-align:right"><label>ویرایش نام</label><input id="eName" placeholder="نام..."></div>
+<div class="field" style="text-align:right;margin-top:8px"><label>ویرایش آدرس</label><input id="eAddr" placeholder="آدرس..."></div>
+<button class="btn btn-green" style="width:100%;justify-content:center;margin-top:10px" onclick="saveProfile()">💾 ذخیره مشخصات</button>
+<button class="btn btn-white" style="width:100%;justify-content:center;margin-top:8px" onclick="doLogout()">🔒 خروج از حساب</button>
+<hr style="border:none;border-top:2px dashed var(--line);margin:12px 0">
+<h4>📞 پشتیبانی فروشگاه</h4>
+<p style="font-size:13.5px;color:var(--muted)">سوالی داری؟ مستقیم پیام بده:</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+<a class="btn btn-green" id="supWa" target="_blank" href="#">📲 واتساپ</a>
+<a class="btn" id="supEitaa" target="_blank" href="#" style="background:#FF7A1A;color:#fff">📩 ایتا</a>
+</div>
+<p style="font-size:12.5px;color:var(--muted);margin-top:8px">آیدی ایتا: <b id="eitaaShow">—</b></p>
+</div>
+
+<div>
+<div class="form-card">
+<div class="sec-head"><div><h2 style="font-size:20px">🧾 سفارش‌های من</h2></div><a class="btn btn-primary" href="shop.html" style="font-size:14px">+ سفارش جدید 🛒</a></div>
+<div class="toolbar"><input id="cq" placeholder="🔍 جست‌وجو با کد سفارش..." oninput="renderMyOrders()"></div>
+<div id="myOrders"></div>
+</div>
+
+<div class="form-card" style="margin-top:16px">
+<h3>🔍 پیگیری با کد</h3>
+<p style="font-size:13px;color:var(--muted)">کد پیگیری (مثل AZ-4821) رو که بعد از ثبت گرفتی اینجا بزن:</p>
+<div style="display:flex;gap:8px;margin-top:8px"><input id="trackCode2" placeholder="AZ-..." style="flex:1;border:2px solid var(--ink);border-radius:12px;padding:10px 14px;font-size:15px"><button class="btn btn-dark" onclick="trackOrder(false)">پیگیری</button></div>
+<div id="trackResult2" style="margin-top:10px"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+
+<footer><div class="wrap foot">
+<div><h4>🧺 سوپرمارکت آذربایجان</h4><p>مدیریت: <span class="store-manager">آقای نویدی</span> • 📍 <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span> • 📱 <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></p></div>
+<div><h4>دسترسی سریع</h4><li><a href="index.html">🏠 صفحه اصلی</a></li><li><a href="shop.html">🛒 خرید و سفارش</a></li><li><a href="customer.html">👤 پنل مشتری</a></li><li><a href="admin.html">👨‍💼 مدیریت</a></li></div>
+<div><h4>ساعت کاری</h4><p>🕖 هر روز ۷ صبح تا ۱۲ شب<br>📱 <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span><br>🛵 ارسال زیر ۱ ساعت</p></div>
+</div><div class="copy">© ۱۴۰۵ سوپرمارکت آذربایجان • مدیریت نویدی 💛</div></footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+<div class="drawer-head"><h3>🧺 سبد خریدت</h3><button class="add" onclick="closeCart()">بستن ✕</button></div>
+<div class="drawer-items" id="cartItems"></div>
+<div class="drawer-foot"><div class="total-row"><span>جمع کل:</span><span id="cartTotal">۰ تومان</span></div><button class="btn btn-green" style="width:100%;justify-content:center" onclick="location.href='shop.html'">تکمیل خرید ←</button></div>
+</aside>
+
+<a class="eita-float" id="eitaFloat" href="https://eitaa.com/Azarbayjanshap" target="_blank">📩 ایتا فروشگاه</a>
+<a class="wa-float" id="waFloat" href="#" target="_blank">📲 واتساپ فروشگاه</a>
+<div id="toast"></div>
+
+<script src="app.js"></script>
+<script>
+function myPhone(){ try{ return localStorage.getItem("az_customer_current")||""; }catch(e){ return ""; } }
+function cleanEitaaId(){ try{ let v=(STORE.eitaa||"Azarbayjanshap").trim().replace(/^@+/,""); v=v.replace(/.*eitaa\.com\//,"").trim(); if(!v) v="Azarbayjanshap"; return v; }catch(e){ return "Azarbayjanshap"; } }
+function waNum(){ try{ const p=(STORE.phone||"09108659424").replace(/\D/g,""); if(p.startsWith("09")) return "98"+p.slice(1); return p; }catch(e){ return "989108659424"; } }
+
+function doCustLogin(){
+  const ph=faToEn(document.getElementById("cPhone").value);
+  const nm=document.getElementById("cName").value.trim();
+  if(!/^09\d{9}$/.test(ph)){ toast("شماره موبایل باید ۱۱ رقم و با 09 شروع بشه 📱"); return; }
+  let c=getCustomer(ph);
+  if(!c){
+    // اولین ورود: از آخرین سفارش اسم/آدرس رو پیدا کن
+    const ords=ordersByPhone(ph);
+    const last=ords[0];
+    c={name:nm||(last?last.name:"مشتری عزیز"),phone:ph,addr:(last?last.addr:"")};
+    if(!nm && !last){ toast("اولین باره میای؟ اسمت رو هم بنویس 😊"); return; }
+    saveCustomer(c);
+    toast("حسابت ساخته شد، خوش اومدی! 🎉");
+  }else{
+    if(nm) { c.name=nm; saveCustomer(c); }
+    try{localStorage.setItem("az_customer_current",ph);}catch(e){}
+    toast("خوش اومدی "+c.name+"! 💛");
+  }
+  try{localStorage.setItem("az_customer_current",ph);}catch(e){}
+  showPanel();
+}
+function doLogout(){ try{localStorage.removeItem("az_customer_current");}catch(e){} location.reload(); }
+function showPanel(){
+  const ph=myPhone();
+  const c=ph?getCustomer(ph):null;
+  if(!c){ document.getElementById("loginBox").style.display=""; document.getElementById("panel").style.display="none"; return; }
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("panel").style.display="";
+  document.getElementById("helloName").textContent=c.name||"عزیز";
+  document.getElementById("pName").textContent=c.name||"—";
+  document.getElementById("pPhone").textContent=(c.phone||"").replace(/(\d{4})(\d{3})(\d{4})/,"$1 $2 $3");
+  document.getElementById("pAddr").textContent="📍 "+(c.addr||"آدرس ثبت نشده — از پایین ویرایش کن");
+  document.getElementById("eName").value=c.name||"";
+  document.getElementById("eAddr").value=c.addr||"";
+  renderMyOrders(); renderStats(); refreshSupport();
+}
+function saveProfile(){
+  const ph=myPhone(); if(!ph) return;
+  const c=getCustomer(ph)||{phone:ph};
+  c.name=document.getElementById("eName").value.trim()||c.name;
+  c.addr=document.getElementById("eAddr").value.trim()||c.addr;
+  saveCustomer(c); showPanel(); toast("مشخصاتت ذخیره شد ✅");
+}
+function renderStats(){
+  const list=ordersByPhone(myPhone());
+  document.getElementById("stOrders").textContent=list.length.toLocaleString("fa-IR");
+  const sum=list.reduce((s,o)=>s+(Number(o.totalNum)||0),0);
+  document.getElementById("stSum").textContent=fa(sum);
+  document.getElementById("stLast").textContent=list.length?fmtDT(list[0].ts):"—";
+}
+function orderCard(o){
+  const items=(o.det||[]).map(d=>`${d.emoji||"•"} ${d.name} × ${Number(d.qty).toLocaleString("fa-IR")}`).join("، ") || (o.items||[]).map(i=>i.name+" × "+i.qty).join("، ");
+  return `<div class="ocard">
+  <div class="ocard-head"><b>🧾 ${o.code}</b><span class="pill">${orderStatusFa(o.status||"new")}</span></div>
+  <div style="font-size:12.5px;color:var(--muted)">${fmtDT(o.ts)} • 🚚 ${o.ship||""} • 💰 <b>${o.total||""}</b></div>
+  <div class="oitems">${items}<br><span style="color:var(--muted)">📍 ${o.addr||""}</span></div>
+  <div class="obtns">
+  <button class="btn btn-sunny" onclick="reorder('${o.code}')">🔁 سفارش مجدد</button>
+  <button class="btn btn-green" onclick="sendAgain('${o.code}','wa')">📲 واتساپ</button>
+  <button class="btn" style="background:#FF7A1A;color:#fff" onclick="sendAgain('${o.code}','eitaa')">📩 ایتا</button>
+  </div></div>`;
+}
+function renderMyOrders(){
+  const box=document.getElementById("myOrders"); if(!box) return;
+  const q=(document.getElementById("cq").value||"").trim().toUpperCase();
+  let list=ordersByPhone(myPhone());
+  if(q) list=list.filter(o=>(o.code||"").toUpperCase().includes(q));
+  if(!list.length){ box.innerHTML='<div class="empty">هنوز سفارشی با این شماره ثبت نشده 🧺<br><a class="btn btn-primary" style="margin-top:10px" href="shop.html">اولین سفارشت رو ثبت کن 🛒</a></div>'; return; }
+  box.innerHTML=list.map(orderCard).join("");
+}
+function reorder(code){
+  const o=findOrderByCode(code); if(!o||!o.det){ toast("این سفارش قابل تکرار نیست 😅"); return; }
+  o.det.forEach(d=>{ cart[d.id]=(Number(cart[d.id])||0)+Number(d.qty||1); });
+  save(); toast("به سبد اضافه شد! می‌بریمت به صفحه سفارش 🛒");
+  setTimeout(()=>location.href="shop.html",900);
+}
+function buildText(o){
+  let lines=["🧺 سفارش "+o.code+" - سوپرمارکت آذربایجان","👤 "+o.name,"📱 "+o.phone,"📍 "+o.addr,"","🛒 اقلام:"];
+  (o.det||[]).forEach(d=>lines.push("• "+d.name+" × "+d.qty));
+  lines.push("","💰 "+(o.total||""),"🚚 "+(o.ship||""));
+  return lines.join("\n");
+}
+function sendAgain(code,where){
+  const o=findOrderByCode(code); if(!o) return;
+  const t=buildText(o);
+  if(where==="wa"){ window.open("https://wa.me/"+waNum()+"?text="+encodeURIComponent(t),"_blank"); }
+  else{
+    try{ if(navigator.clipboard) navigator.clipboard.writeText(t); }catch(e){}
+    toast("متن کپی شد! توی ایتا الصاق کن 📋");
+    setTimeout(()=>window.open("https://eitaa.com/"+cleanEitaaId(),"_blank"),600);
+  }
+}
+function trackOrder(first){
+  const inp=document.getElementById(first?"trackCode":"trackCode2");
+  const box=document.getElementById(first?"trackResult":"trackResult2");
+  const code=(inp.value||"").trim().toUpperCase();
+  if(!code){ box.innerHTML=""; return; }
+  const o=findOrderByCode(code);
+  if(!o){ box.innerHTML='<div class="empty">سفارشی با این کد پیدا نشد 😅<br><small>کد رو از پیام بعد از ثبت سفارش بردار (مثل AZ-4821)</small></div>'; return; }
+  box.innerHTML=orderCard(o);
+}
+function refreshSupport(){
+  const id=cleanEitaaId();
+  document.getElementById("eitaaShow").textContent="@"+id;
+  document.getElementById("eitaFloat").href="https://eitaa.com/"+id;
+  document.getElementById("supEitaa").href="https://eitaa.com/"+id;
+  const w="https://wa.me/"+waNum()+"?text="+encodeURIComponent("سلام سوپرمارکت آذربایجان 🙏");
+  document.getElementById("waFloat").href=w;
+  document.getElementById("supWa").href=w;
+}
+// ورود خودکار اگه قبلاً وارد شده
+(function(){
+  const ph=myPhone();
+  if(ph && getCustomer(ph)) showPanel();
+  refreshSupport();
+})();
+</script>
+</body>
+</html>

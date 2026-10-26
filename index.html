@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سوپرمارکت آذربایجان | مدیریت نویدی 🛒</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">🚚 ارسال رایگان برای خرید بالای <b>۵۰۰ هزار تومان</b> داخل شهر • مدیریت: <b>آقای نویدی</b> • 📱 <a class="store-phone-link" href="tel:09108659424" style="color:#fff"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a></div>
+<header>
+<nav class="nav">
+<div class="logo"><div class="logo-mark">🧺</div><div>آذربایجان<small>سوپرمارکت • مدیریت نویدی</small></div></div>
+<div class="nav-links" id="navLinks">
+<a href="index.html" class="active">🏠 خانه</a>
+<a href="shop.html">🛒 خرید و سفارش</a>
+<a href="#products">🍎 محصولات</a>
+<a href="#about">💛 درباره ما</a>
+<a href="customer.html">👤 پنل مشتری</a>
+<a href="admin.html">👨‍💼 مدیریت</a>
+</div>
+<button class="cart-btn" onclick="openCart()"> 🛒 سبد خرید <span class="count cart-count">۰</span></button>
+<button class="hamb" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+</header>
+
+<div class="wrap">
+<div class="hero"><div class="hero-inner">
+<div>
+<span class="badge"><span class="dot"></span> بازه امروز ۷ صبح تا ۱۲ شب • ارسال زیر ۱ ساعت</span>
+<h1>هرچی لازم داری، <span class="hl1">تازه و ارزون</span><br>از <span class="hl2">آذربایجان!</span> 🎉</h1>
+<p class="sub">سوپرمارکت آذربایجان با مدیریت <b>آقای نویدی</b>؛ از شیر و ماست و نون داغ گرفته تا میوه، تنقلات و شوینده — سفارش بده، دم در تحویل بگیر. راحت، سریع، با لبخند! 😊</p>
+<div class="hero-cta">
+<a class="btn btn-primary" href="shop.html">🛒 شروع خرید و سفارش</a>
+<a class="btn btn-white" href="#products">دیدن محصولات 🍓</a>
+</div>
+<div class="hero-search"><input id="heroSearch" placeholder="چی لازم داری؟ مثلاً: شیر، برنج، چیپس..."><button onclick="heroGo()">جست‌وجو 🔍</button></div>
+<div class="trust"><span>⭐ امتیاز ۴/۹ از ۱۲۰۰ مشتری</span><span>💰 ضمانت تازگی کالا</span><span>📦 بسته‌بندی تمیز</span></div>
+</div>
+<div class="hero-pic">
+<img src="hero.jpg" alt="قفسه میوه و سبزیجات تازه سوپرمارکت آذربایجان">
+<div class="float f1">🍅 گوجه تازه رسید!</div>
+<div class="float f2">🔥 تخفیف امروز تا ۲۰٪</div>
+<div class="float f3">🧀 پنیر تبریزی اصل داریم</div>
+</div>
+</div></div>
+</div>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 Q120,60 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 L1440,60 L0,60 Z" fill="#7C5CFF"/></svg>
+
+<div class="wrap">
+<section id="cats">
+<div class="sec-head"><div><h2>دسته‌بندی <i>خوشمزه‌ها</i> 🍭</h2><p>بزن روی هر دسته تا محصولاتش رو ببینی</p></div></div>
+<div class="cats" id="catRow"></div>
+</section>
+
+<section id="products">
+<div class="sec-head"><div><h2>پرفروش‌های <i>امروز</i> 🛍️</h2><p>تازه، باکیفیت و با قیمت منصفانه — همون که هر روز می‌خری!</p></div><a class="btn btn-dark" href="shop.html">رفتن به صفحه سفارش ←</a></div>
+<div class="toolbar"><input id="q" placeholder="🔍 جست‌وجو بین محصولات..." oninput="renderProducts()"><select id="sort" onchange="renderProducts()"><option value="">مرتب‌سازی: پیشنهادی</option><option value="cheap">ارزان‌ترین</option><option value="exp">گران‌ترین</option></select></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section>
+<div class="sec-head"><div><h2>چرا <i>آذربایجان؟</i> 💪</h2></div></div>
+<div class="feats">
+<div class="feat"><span>🌅</span><h3>تازه هر روز صبح</h3><p>میوه، سبزی و نون داغ هر روز صبح می‌رسه</p></div>
+<div class="feat"><span>🛵</span><h3>ارسال سریع</h3><p>داخل شهر زیر ۱ ساعت درب منزلتی</p></div>
+<div class="feat"><span>💸</span><h3>قیمت منصفانه</h3><p>تخفیف روزانه + ضمانت مرجوعی</p></div>
+<div class="feat"><span>🤝</span><h3>مدیریت نویدی</h3><p>با ۱۵ سال سابقه، پاسخ‌گو و مشتری‌مدار</p></div>
+</div>
+</section>
+
+<section>
+<div class="banner"><div><h2>🎁 جشنواره آخر هفته آذربایجان!</h2><p>روی لبنیات و میوه تا ۲۰٪ تخفیف + برای خرید بالای ۵۰۰ هزار تومان ارسال رایگان. فقط تا جمعه!</p></div><a class="btn btn-sunny" href="shop.html">همین حالا سفارش بده 🎉</a></div>
+</section>
+
+<section id="about">
+<div class="sec-head"><div><h2>درباره <i>ما</i> 💛</h2></div></div>
+<div class="form-card about-card" id="aboutCard">
+<div><h3 style="font-size:19px">سوپرمارکت آذربایجان — زیر نظر آقای نویدی 🧺</h3><p style="color:#5b6a85;font-size:15px;margin-top:8px">ما یه سوپرمارکت محله‌ای ولی پرانرژی هستیم! همه‌چیز از مایحتاج روزانه تا خوراکی‌های خوشمزه بچه‌ها رو یک‌جا داریم. سفارش تلفنی و اینترنتی می‌گیریم و با پیک خودمون سریع می‌رسونیم. رضایت شما اعتبار ماست. ❤️</p><p style="margin-top:10px;font-size:15px">📍 آدرس: <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span><br>📱 موبایل: <a class="store-phone-link" href="tel:09108659424"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a> 📞<br>🕖 ساعت کاری: هر روز ۷ صبح تا ۱۲ شب</p></div>
+<div style="background:#FFF3D6;border:2px dashed var(--orange);border-radius:18px;padding:16px;text-align:center"><div style="font-size:60px">👨‍💼</div><b>مدیریت: آقای نویدی</b><p style="font-size:14px;color:#5b6a85">«مشتری ما مهمون ماست؛ جنس خوب، قیمت خوب، برخورد خوب!»</p><a class="btn btn-green" style="margin-top:10px" href="shop.html">ثبت سفارش 📝</a></div>
+</div>
+</section>
+</div>
+
+<footer><div class="wrap foot">
+<div><h4>🧺 سوپرمارکت آذربایجان</h4><p>خرید راحت روزانه برای همه خانواده؛ تازه، سریع و شاد! مدیریت: آقای نویدی. ممنون که به ما اعتماد می‌کنید. ❤️</p></div>
+<div><h4>دسترسی سریع</h4><li><a href="index.html">🏠 صفحه اصلی</a></li><li><a href="shop.html">🛒 خرید و سفارش</a></li><li><a href="#products">🍎 محصولات</a></li><li><a href="customer.html">👤 پنل مشتری</a></li>
+<li><a href="admin.html">👨‍💼 ورود مدیر (مدیریت اجناس)</a></li></div>
+<div><h4>تماس با ما</h4><p>📱 <a class="store-phone-link" href="tel:09108659424"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a><br>📍 <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span><br>🕖 هر روز ۷ تا ۱۲ شب</p></div>
+</div><div class="copy">© ۱۴۰۵ سوپرمارکت آذربایجان • مدیریت نویدی • ساخته‌شده با 💛 برای مشتری‌های عزیز</div></footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+<div class="drawer-head"><h3>🧺 سبد خریدت</h3><button class="add" onclick="closeCart()">بستن ✕</button></div>
+<div class="drawer-items" id="cartItems"></div>
+<div class="drawer-foot"><div class="total-row"><span>جمع کل:</span><span id="cartTotal">۰ تومان</span></div><button class="btn btn-primary" id="checkoutBtn" style="width:100%;justify-content:center" onclick="goCheckout()">تکمیل خرید و ثبت سفارش ←</button></div>
+</aside>
+<div id="toast"></div>
+
+<script src="app.js"></script>
+<script>
+let activeCat = "";
+function renderCats(){
+  const all = [{k:"",n:"همه 🛍️",s:"همه محصولات"},{k:"dairy",n:"🥛 لبنیات",s:"شیر و پنیر"},{k:"fruit",n:"🍎 میوه و سبزی",s:"تازه روزانه"},{k:"bread",n:"🥖 نان",s:"داغ تنوری"},{k:"grocery",n:"🍚 خواربار",s:"برنج و روغن"},{k:"drink",n:"🥤 نوشیدنی",s:"خنک و گوارا"},{k:"snack",n:"🍪 تنقلات",s:"خوشمزه‌ها"}];
+  document.getElementById("catRow").innerHTML = all.map(c=>`<div class="cat ${activeCat===c.k?'active':''}" onclick="setCat('${c.k}')"><span>${c.n.split(' ')[0]}</span>${c.n}<small>${c.s}</small></div>`).join("");
+}
+function setCat(k){activeCat=k;renderCats();renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"});}
+function heroGo(){const v=document.getElementById("heroSearch").value;document.getElementById("q").value=v;renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"});}
+function renderProducts(scroll=true){
+  const q=(document.getElementById("q").value||"").trim();
+  const sort=document.getElementById("sort").value;
+  let list=PRODUCTS.filter(p=>(!activeCat||p.cat===activeCat)&&(!q||p.name.includes(q)));
+  if(sort==="cheap")list=[...list].sort((a,b)=>a.price-b.price);
+  if(sort==="exp")list=[...list].sort((a,b)=>b.price-a.price);
+  const g=document.getElementById("grid");
+  if(!list.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">😅 چیزی پیدا نشد! یه کلمه دیگه امتحان کن.</div>';return;}
+  g.innerHTML=list.map(p=>{
+    const off=p.old?Math.round((1-p.price/p.old)*100):0;
+    const inCart=cart[p.id]||0;
+    return `<div class="card">${off?`<div class="off">٪${off.toLocaleString("fa-IR")} تخفیف</div>`:""}
+    <div class="emoji-bg" style="background:${p.bg}"><div class="emoji">${p.emoji}</div></div>
+    <h3>${p.name}</h3><div class="unit">${p.unit} • ${CATS[p.cat]||""}</div>
+    <div class="price-row"><div class="price">${p.old?`<del>${fa(p.old)}</del>`:""}${fa(p.price)}</div>
+    ${inCart?`<div class="qty"><button onclick="decFromCart(${p.id})">−</button><b>${inCart.toLocaleString("fa-IR")}</b><button onclick="addToCart(${p.id});renderProducts(false)">+</button></div>`:`<button class="add" onclick="addToCart(${p.id});renderProducts(false)">افزودن 🛒</button>`}</div></div>`;}).join("");
+}
+renderCats();renderProducts();
+</script>
+<a class="eita-float" id="eitaFloatIdx" href="https://eitaa.com/Azarbayjanshap" target="_blank">📩 ایتا فروشگاه</a>
+<a class="wa-float" href="https://wa.me/989108659424?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%B3%D9%88%D9%BE%D8%B1%D9%85%D8%A7%D8%B1%DA%A9%D8%AA%20%D8%A2%D8%B0%D8%B1%D8%A8%D8%A7%DB%8C%D8%AC%D8%A7%D9%86%20%F0%9F%99%8F" target="_blank" style="position:fixed;bottom:18px;inset-inline-end:18px;z-index:120;background:#25D366;border:2.5px solid #fff;color:#fff;border-radius:999px;padding:12px 20px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.25)">📲 واتساپ فروشگاه</a>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل مدیریت | سوپرمارکت آذربایجان 👨‍💼</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.admin-grid{display:grid;grid-template-columns:400px 1fr;gap:16px;align-items:start}
+@media(max-width:960px){.admin-grid{grid-template-columns:1fr}}
+.atable{width:100%;border-collapse:collapse;font-size:14px}
+.atable th{background:var(--ink);color:#fff;padding:10px 8px;font-size:13.5px}
+.atable th:first-child{border-radius:0 12px 12px 0}.atable th:last-child{border-radius:12px 0 0 12px}
+.atable td{border-bottom:1.5px dashed var(--line);padding:9px 8px;text-align:center;vertical-align:middle}
+.atable tr:hover td{background:#FFFBF0}
+.pill{display:inline-block;background:#FFF3D6;border:1.5px solid var(--ink);border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:700}
+.iconbtn{border:2px solid var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer;font-weight:700;font-size:13px;background:#fff}
+.iconbtn.edit{background:var(--sunny)} .iconbtn.del{background:#FFE3E3} .iconbtn:hover{transform:translateY(-1px)}
+.emoji-pick{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.emoji-pick button{font-size:22px;border:2px solid var(--line);background:#fff;border-radius:10px;width:44px;height:44px;cursor:pointer}
+.emoji-pick button.sel{border-color:var(--ink);background:var(--sunny)}
+.login-wrap{max-width:440px;margin:30px auto}
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+.stat{background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px;text-align:center}
+.stat b{font-size:22px;display:block}
+.stat span{font-size:12.5px;color:var(--muted)}
+.tab-row{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.tab-row button{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:8px 18px;font-weight:700;cursor:pointer}
+.tab-row button.on{background:var(--ink);color:#fff}
+</style>
+</head>
+<body>
+<div class="topbar">👨‍💼 پنل مدیریت سوپرمارکت <b>آذربایجان</b> • <span class="store-manager">آقای نویدی</span> • <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></div>
+<header><nav class="nav">
+<div class="logo"><div class="logo-mark">🧺</div><div>آذربایجان<small>پنل مدیریت • <span class="store-manager">نویدی</span></small></div></div>
+<div class="nav-links" id="navLinks"><a href="index.html">🏠 خانه</a><a href="shop.html">🛒 خرید و سفارش</a><a href="customer.html">👤 پنل مشتری</a>
+<a href="admin.html" class="active">👨‍💼 مدیریت</a></div>
+<button class="hamb" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav></header>
+
+<div class="wrap">
+<!-- ورود -->
+<div class="login-wrap" id="loginBox">
+<div class="form-card" style="text-align:center">
+<div style="font-size:64px">🔐</div>
+<h2>ورود مدیر فروشگاه</h2>
+<p style="color:var(--muted);font-size:14px">آقای نویدی عزیز، رمزت رو بزن تا وارد پنل بشی 💛<br>رمز پیش‌فرض: <b>1234</b></p>
+<div class="field" style="margin-top:12px"><label>رمز عبور</label><input id="passIn" type="password" inputmode="numeric" placeholder="مثلاً 1234"></div>
+<button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:12px" onclick="doLogin()">ورود به پنل 🚀</button>
+<a href="index.html" style="font-size:14px;text-decoration:underline;display:inline-block;margin-top:10px">← برگشت به فروشگاه</a>
+</div>
+</div>
+
+<!-- پنل -->
+<div id="panel" style="display:none">
+<section style="padding-bottom:0">
+<span class="badge"><span class="dot"></span> خوش اومدی <span class="store-manager">آقای نویدی</span>! 💛</span>
+<h1 style="font-size:clamp(24px,4vw,36px)">مدیریت اجناس و قیمت‌ها 🛍️</h1>
+<p style="color:#5b6a85">اینجا خودت جنس اضافه کن، قیمت عوض کن، حذف کن — تغییرات همون لحظه روی سایت اعمال می‌شه ✅</p>
+<div class="stat-row">
+<div class="stat"><b id="stCount">۰</b><span>تعداد محصول 🧺</span></div>
+<div class="stat"><b id="stCats">۰</b><span>دسته‌بندی 🍭</span></div>
+<div class="stat"><b id="stOff">۰</b><span>تخفیف‌دار 🔥</span></div>
+</div>
+<div class="tab-row">
+<button class="btn btn-dark" onclick="location.href='index.html'">👁️ دیدن سایت</button>
+<button class="btn btn-white" onclick="location.href='shop.html'">🛒 دیدن صفحه سفارش</button>
+<button class="btn btn-white" onclick="doLogout()">🔒 خروج</button>
+<button class="btn btn-white" onclick="exportJSON()">📥 دانلود پشتیبان</button>
+<button class="btn btn-white" onclick="resetAll()">♻️ برگشت به لیست اولیه</button>
+</div>
+</section>
+
+<section>
+<div class="admin-grid">
+<div class="form-card" style="position:sticky;top:110px">
+<h3 id="formTitle">➕ افزودن جنس جدید</h3>
+<p style="font-size:13px;color:var(--muted)">فیلدهای ستاره‌دار لازمن. قیمت رو به تومان بزن (فارسی یا انگلیسی).</p>
+<input type="hidden" id="pId" value="">
+<div class="field" style="margin-top:8px"><label>نام جنس *</label><input id="pName" placeholder="مثلاً: پنیر لیقوان"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+<div class="field"><label>دسته *</label><select id="pCat"><option value="dairy">🥛 لبنیات</option><option value="bread">🥖 نان</option><option value="grocery">🍚 خواربار</option><option value="fruit">🍎 میوه و سبزی</option><option value="drink">🥤 نوشیدنی</option><option value="snack">🍪 تنقلات</option><option value="hygiene">🧴 شوینده و بهداشتی</option></select></div>
+<div class="field"><label>واحد</label><input id="pUnit" placeholder="هر کیلو / بسته / بطری..."></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+<div class="field"><label>قیمت (تومان) *</label><input id="pPrice" inputmode="numeric" placeholder="مثلاً 45000"></div>
+<div class="field"><label>قیمت قبل تخفیف (اختیاری)</label><input id="pOld" inputmode="numeric" placeholder="خالی = بدون تخفیف"></div>
+</div>
+<div class="field" style="margin-top:10px"><label>شکلک جنس (ایموجی) *</label><input id="pEmoji" placeholder="مثلاً 🍎" style="text-align:center;font-size:24px" maxlength="4" value="🍎">
+<div class="emoji-pick" id="emojiPick"></div>
+</div>
+<div style="display:flex;gap:10px;margin-top:14px">
+<button class="btn btn-green" style="flex:1;justify-content:center" onclick="saveProduct()">💾 ذخیره جنس</button>
+<button class="btn btn-white" onclick="clearForm()">✕ جدید</button>
+</div>
+</div>
+
+<div>
+<div class="form-card">
+<div class="sec-head"><div><h2 style="font-size:20px">📋 لیست اجناس فروشگاه</h2></div></div>
+<div class="toolbar"><input id="aq" placeholder="🔍 جست‌وجو..." oninput="renderAdmin()"><select id="acat" onchange="renderAdmin()"><option value="">همه دسته‌ها</option><option value="dairy">لبنیات</option><option value="bread">نان</option><option value="grocery">خواربار</option><option value="fruit">میوه و سبزی</option><option value="drink">نوشیدنی</option><option value="snack">تنقلات</option><option value="hygiene">شوینده</option></select></div>
+<div style="overflow:auto"><table class="atable"><thead><tr><th>جنس</th><th>نام / واحد</th><th>قیمت</th><th>عملیات</th></tr></thead><tbody id="arows"></tbody></table></div>
+</div>
+
+
+<div class="form-card" style="margin-top:16px">
+<div class="sec-head"><div><h2 style="font-size:20px">🧾 سفارش‌های مشتری‌ها</h2><p style="font-size:13px;color:var(--muted)">سفارش‌هایی که از همین مرورگر ثبت شده اینجا دیده می‌شه. برای دیدن سفارش واتساپ/ایتا، همون‌جا پیام میاد.</p></div>
+<div><button class="btn btn-white" onclick="renderOrders()">🔄 تازه‌سازی</button> <button class="btn btn-white" onclick="if(confirm('همه سفارش‌ها پاک بشه؟')){clearOrders();renderOrders();}">🗑️ پاک‌کردن همه</button></div></div>
+<div class="toolbar"><input id="oq" placeholder="🔍 جست‌وجو: اسم، موبایل یا کد AZ-..." oninput="renderOrders()"><select id="ostat" onchange="renderOrders()"><option value="">همه وضعیت‌ها</option><option value="new">ثبت شد 🆕</option><option value="preparing">در حال آماده‌سازی 👨‍🍳</option><option value="sending">در راه 🛵</option><option value="done">تحویل شد ✅</option><option value="cancelled">لغو شد ❌</option></select></div>
+<div id="orderBox" style="display:flex;flex-direction:column;gap:10px"></div>
+</div>
+
+<div class="form-card" style="margin-top:16px">
+<h3>⚙️ تنظیمات فروشگاه</h3>
+<div class="form-grid" style="margin-top:8px">
+<div class="field"><label>شماره موبایل فروشگاه *</label><input id="sPhone" dir="ltr" style="text-align:left" placeholder="09108659424"></div>
+<div class="field"><label>نام مدیریت</label><input id="sManager" placeholder="آقای نویدی"></div>
+<div class="field full"><label>آدرس فروشگاه</label><input id="sAddr" placeholder="آدرس..."></div>
+<div class="field full"><label>آیدی ایتا فروشگاه (بدون @) — مثلاً azarbayjan_shop</label><input id="sEitaa" dir="ltr" style="text-align:left" placeholder="Azarbayjanshap"></div>
+</div>
+<button class="btn btn-primary" style="margin-top:12px" onclick="saveStore()">💾 ذخیره تنظیمات</button>
+<p style="font-size:13px;color:var(--muted);margin-top:8px">شماره و آیدی ایتا رو اینجا عوض کنی، همه‌جای سایت خودکار عوض می‌شه 📱 دکمه ایتا با همین آیدی کار می‌کنه.</p>
+<hr style="border:none;border-top:2px dashed var(--line);margin:16px 0">
+<h3>🔑 تغییر رمز پنل</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+<div class="field"><label>رمز فعلی</label><input id="oldPass" type="password"></div>
+<div class="field"><label>رمز جدید</label><input id="newPass" type="password"></div>
+</div>
+<button class="btn btn-dark" style="margin-top:10px" onclick="changePass()">تغییر رمز 🔐</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+
+<footer><div class="wrap foot">
+<div><h4>🧺 سوپرمارکت آذربایجان</h4><p>پنل مدیریت • <span class="store-manager">آقای نویدی</span> • <a class="store-phone-link" href="tel:09108659424"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a></p></div>
+<div><h4>دسترسی سریع</h4><li><a href="index.html">🏠 صفحه اصلی</a></li><li><a href="shop.html">🛒 خرید و سفارش</a></li><li><a href="admin.html">👨‍💼 پنل مدیریت</a></li></div>
+<div><h4>راهنما</h4><p>تغییرات روی همین گوشی/کامپیوتر ذخیره می‌شه و همون لحظه روی سایت دیده می‌شه. برای انتقال به گوشی دیگه، «دانلود پشتیبان» رو بزن.</p></div>
+</div><div class="copy">© ۱۴۰۵ سوپرمارکت آذربایجان • مدیریت <span class="store-manager">نویدی</span> 💛</div></footer>
+
+<div id="toast"></div>
+<script src="app.js"></script>
+<script>
+function getPass(){ return localStorage.getItem("az_admin_pass")||"1234"; }
+function isLogged(){ return sessionStorage.getItem("az_admin_ok")==="1"; }
+function doLogin(){
+  const v=document.getElementById("passIn").value.trim();
+  if(v===getPass()){ sessionStorage.setItem("az_admin_ok","1"); showPanel(); toast("خوش اومدی آقای نویدی! 💛"); }
+  else toast("رمز اشتباهه عزیزم! 🔐");
+}
+function doLogout(){ sessionStorage.removeItem("az_admin_ok"); location.reload(); }
+function showPanel(){
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("panel").style.display="";
+  fillStore(); buildEmoji(); renderAdmin();
+}
+function changePass(){
+  const o=document.getElementById("oldPass").value, n=document.getElementById("newPass").value.trim();
+  if(o!==getPass()){toast("رمز فعلی اشتباهه 🔐");return;}
+  if(n.length<4){toast("رمز جدید حداقل ۴ کاراکتر باشه");return;}
+  localStorage.setItem("az_admin_pass",n); document.getElementById("oldPass").value="";document.getElementById("newPass").value=""; toast("رمز عوض شد ✅");
+}
+// ---- محصولات ----
+const EMOJIS=["🥛","🧀","🍶","🥚","🥖","🫓","🍚","🫗","🍝","🍅","🥒","🍎","🍌","🍊","🍇","🥤","🧃","🍟","🍪","🍫","🧴","🧻","🧈","🥗","🍯","☕","🍵"];
+function buildEmoji(){
+  document.getElementById("emojiPick").innerHTML=EMOJIS.map(e=>`<button type="button" onclick="pickEmoji('${e}',this)">${e}</button>`).join("");
+}
+function pickEmoji(e,btn){ document.getElementById("pEmoji").value=e; document.querySelectorAll("#emojiPick button").forEach(b=>b.classList.remove("sel")); if(btn)btn.classList.add("sel"); }
+function clearForm(){ document.getElementById("pId").value="";document.getElementById("pName").value="";document.getElementById("pPrice").value="";document.getElementById("pOld").value="";document.getElementById("pUnit").value="";document.getElementById("pEmoji").value="🍎";document.getElementById("formTitle").textContent="➕ افزودن جنس جدید"; }
+function saveProduct(){
+  const id=document.getElementById("pId").value;
+  const name=document.getElementById("pName").value.trim();
+  const cat=document.getElementById("pCat").value;
+  const unit=document.getElementById("pUnit").value.trim()||"هر عدد";
+  const price=parseInt(faToEn(document.getElementById("pPrice").value));
+  const oldRaw=faToEn(document.getElementById("pOld").value);
+  const old=oldRaw?parseInt(oldRaw):null;
+  const emoji=document.getElementById("pEmoji").value.trim()||"🛒";
+  if(name.length<2){toast("اسم جنس رو بنویس 😊");return;}
+  if(!price||price<500){toast("قیمت رو درست بزن (به تومان) 💰");return;}
+  if(old && old<=price){toast("قیمت قبل تخفیف باید بیشتر از قیمت باشه 🔥");return;}
+  const bg=CAT_BG[cat]||"#FFF3D6";
+  if(id){
+    const p=PRODUCTS.find(x=>x.id==id);
+    if(p){p.name=name;p.cat=cat;p.unit=unit;p.price=price;p.old=old;p.emoji=emoji;p.bg=bg;}
+    toast("تغییرات ذخیره شد ✅");
+  }else{
+    const nid=PRODUCTS.length?Math.max(...PRODUCTS.map(p=>p.id))+1:1;
+    PRODUCTS.unshift({id:nid,name,unit,price,old,cat,emoji,bg});
+    toast("«"+name+"» اضافه شد 🎉");
+  }
+  persistProducts(); clearForm(); renderAdmin();
+}
+function editProduct(id){
+  const p=PRODUCTS.find(x=>x.id==id); if(!p)return;
+  document.getElementById("pId").value=p.id;
+  document.getElementById("pName").value=p.name;
+  document.getElementById("pCat").value=p.cat;
+  document.getElementById("pUnit").value=p.unit;
+  document.getElementById("pPrice").value=p.price;
+  document.getElementById("pOld").value=p.old||"";
+  document.getElementById("pEmoji").value=p.emoji;
+  document.getElementById("formTitle").textContent="✏️ ویرایش: "+p.name;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function delProduct(id){
+  const p=PRODUCTS.find(x=>x.id==id);
+  if(!confirm("«"+(p?p.name:"")+"» حذف بشه؟"))return;
+  PRODUCTS=PRODUCTS.filter(x=>x.id!=id);
+  if(cart[id])delete cart[id];
+  persistProducts(); save(); renderAdmin(); toast("حذف شد 🗑️");
+}
+function renderAdmin(){
+  const q=(document.getElementById("aq").value||"").trim();
+  const c=document.getElementById("acat").value;
+  let list=PRODUCTS.filter(p=>(!c||p.cat===c)&&(!q||p.name.includes(q)));
+  document.getElementById("arows").innerHTML=list.map(p=>`<tr><td style="font-size:30px">${p.emoji}</td><td><b>${p.name}</b><br><span class="pill">${CATS[p.cat]||p.cat}</span> <small style="color:var(--muted)">${p.unit}</small></td><td><b>${fa(p.price)}</b>${p.old?`<br><del style="color:var(--muted);font-size:12px">${fa(p.old)}</del>`:""}</td><td><button class="iconbtn edit" onclick="editProduct(${p.id})">✏️ ویرایش</button> <button class="iconbtn del" onclick="delProduct(${p.id})">🗑️ حذف</button></td></tr>`).join("")||'<tr><td colspan="4" style="color:var(--muted)">محصولی نیست — از فرم کنار یه جنس اضافه کن ➕</td></tr>';
+  document.getElementById("stCount").textContent=PRODUCTS.length.toLocaleString("fa-IR");
+  document.getElementById("stCats").textContent=new Set(PRODUCTS.map(p=>p.cat)).size.toLocaleString("fa-IR");
+  document.getElementById("stOff").textContent=PRODUCTS.filter(p=>p.old).length.toLocaleString("fa-IR");
+}
+function resetAll(){ if(!confirm("همه تغییرات برگرده به لیست اولیه؟"))return; PRODUCTS=JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); persistProducts(); renderAdmin(); toast("برگشت به لیست اولیه ♻️"); }
+function exportJSON(){
+  const blob=new Blob([JSON.stringify({products:PRODUCTS,store:STORE},null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="azarbayjan-backup.json"; a.click();
+  toast("فایل پشتیبان دانلود شد 📥");
+}
+
+// ---- سفارش‌ها (مدیر) ----
+function renderOrders(){
+  const box=document.getElementById("orderBox"); if(!box) return;
+  const q=(document.getElementById("oq").value||"").trim();
+  const st=document.getElementById("ostat").value;
+  let list=getOrders();
+  if(st) list=list.filter(o=>o.status===st);
+  if(q) list=list.filter(o=>(o.name||"").includes(q)||(o.phone||"").includes(q)||(o.code||"").toUpperCase().includes(q.toUpperCase()));
+  if(!list.length){ box.innerHTML='<div class="empty">هنوز سفارشی ثبت نشده 🧺<br><small>وقتی مشتری از همین دستگاه سفارش بده، اینجا میاد.</small></div>'; return; }
+  box.innerHTML=list.map(o=>{
+    const items=(o.det||[]).map(d=>`${d.emoji||"•"} ${d.name} × ${Number(d.qty).toLocaleString("fa-IR")} (${fa(d.price*d.qty)})`).join("<br>");
+    return `<div style="border:2px solid var(--line);border-radius:14px;padding:12px;background:#fffdf7">
+    <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center">
+    <b>🧾 ${o.code}</b><span style="font-size:12.5px;color:var(--muted)">${fmtDT(o.ts)}</span>
+    <span class="pill">${orderStatusFa(o.status||"new")}</span></div>
+    <div style="font-size:14px;margin-top:6px">👤 ${o.name} • 📱 ${o.phone}<br>📍 ${o.addr}<br>🕖 ${o.time||""} • 💳 ${o.pay||""}${o.note?("<br>📝 "+o.note):""}</div>
+    <div style="font-size:13.5px;background:#fff;border:1.5px dashed var(--line);border-radius:10px;padding:8px;margin-top:8px">${items||""}</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;flex-wrap:wrap;gap:8px">
+    <b>💰 ${o.total||fa(o.totalNum||0)}</b>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <select onchange="setOrderStatus('${o.code}',this.value)" style="border:2px solid var(--ink);border-radius:10px;padding:6px">
+    <option value="new" ${o.status==="new"?"selected":""}>ثبت شد 🆕</option>
+    <option value="preparing" ${o.status==="preparing"?"selected":""}>آماده‌سازی 👨‍🍳</option>
+    <option value="sending" ${o.status==="sending"?"selected":""}>در راه 🛵</option>
+    <option value="done" ${o.status==="done"?"selected":""}>تحویل شد ✅</option>
+    <option value="cancelled" ${o.status==="cancelled"?"selected":""}>لغو ❌</option>
+    </select>
+    <button class="iconbtn del" onclick="if(confirm('حذف ${o.code}؟')){delOrder('${o.code}');renderOrders();}">🗑️</button>
+    </div></div></div>`;
+  }).join("");
+}
+const _oldRenderAdmin=renderAdmin; renderAdmin=function(){ _oldRenderAdmin(); try{renderOrders();}catch(e){} };
+
+// ---- تنظیمات ----
+function fillStore(){
+  const en2fa=s=>String(s||"").replace(/[0-9]/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+  document.getElementById("sPhone").value=STORE.phone;
+  document.getElementById("sManager").value=STORE.manager;
+  document.getElementById("sAddr").value=STORE.addr;
+  document.getElementById("sEitaa").value=STORE.eitaa||"";
+}
+function saveStore(){
+  const ph=faToEn(document.getElementById("sPhone").value);
+  if(!/^09\d{9}$/.test(ph)){toast("شماره موبایل باید ۱۱ رقم و با 09 شروع بشه 📱");return;}
+  STORE.phone=ph; STORE.phoneFa=String(ph).replace(/[0-9]/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+  STORE.manager=document.getElementById("sManager").value.trim()||"آقای نویدی";
+  STORE.addr=document.getElementById("sAddr").value.trim()||STORE.addr;
+  let eid=document.getElementById("sEitaa").value.trim().replace(/^@+/,"").replace(/.*eitaa\.com\//,"").replace(/\s+/g,"");
+  STORE.eitaa=eid;
+  persistStore(); applyStore(); toast("تنظیمات ذخیره شد ✅");
+}
+if(isLogged())showPanel();
+document.getElementById("passIn").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin();});
+</script>
+</body>
+</html>
