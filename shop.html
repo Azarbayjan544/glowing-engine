@@ -465,7 +465,7 @@ function submitOrder(openWa){
   if(name.length<3){toast("اسمت رو کامل بنویس عزیزم 😊");return;}
   if(!/^09\d{9}$/.test(phone)){toast("شماره موبایل باید ۱۱ رقم و با 09 شروع بشه 📱");return;}
   if(addr.length<8){toast("آدرست رو دقیق‌تر بنویس 📬");return;}
-  const code="AZ-"+Math.floor(1000+Math.random()*9000).toLocaleString("en-US");
+  const code="AZ-"+String(Math.floor(1000+Math.random()*9000));
   const time=document.getElementById("fTime").value;
   const pay=document.getElementById("fPay").value;
   const note=document.getElementById("fNote").value.trim();
