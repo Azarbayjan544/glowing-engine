@@ -556,12 +556,12 @@ function submitOrder(openWa){
   refreshEitaaLinks();
   document.getElementById("orderCode").textContent=code;
   document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">برای واتساپ دکمه سبز رو بزن 📲<br>برای ایتا اول «کپی متن سفارش» رو بزن بعد تو ایتا بچسبون 📩</span>`;
-  try{ document.getElementById("orderTextBox").value = ("سفارش جدید - سوپرمارکت آذربایجان\nکد پیگیری: "+code+"\nنام: "+name+"\nموبایل: "+phone+"\nآدرس: "+addr+"\nتحویل: "+time+"\nپرداخت: "+pay+"\nجمع کل: "+totalTxt+(note?"\nتوضیح: "+note:"")); }catch(e){}
+  try{ document.getElementById("orderTextBox").value = buildEitaaText(); }catch(e){}
   document.getElementById("modal").classList.add("show");
-  if(!openWa){ cart={};_oldSave(); }
+  cart={};save();try{renderMini();}catch(e){}
 }
 
-let lastOrder = null;
+var lastOrder = null;
 function waNumber(){ try{ const p=(STORE.phone||"09108659424").replace(/\D/g,""); if(p.startsWith("09")) return "98"+p.slice(1); if(p.startsWith("989")) return p; return p; }catch(e){ return "989108659424"; } }
 function buildWaText(){
   if(!lastOrder) return "سلام سوپرمارکت آذربایجان 🙏";
@@ -578,7 +578,8 @@ function refreshWaLinks(){
   const url = "https://wa.me/"+waNumber()+"?text="+encodeURIComponent(t);
   const a1=document.getElementById("waLink"); if(a1) a1.href=url;
   const a2=document.getElementById("waOrderBtn"); if(a2) a2.href=url;
-  const a3=document.getElementById("waFloat"); if(a3 && !lastOrder) a3.href="https://wa.me/"+waNumber()+"?text="+encodeURIComponent("سلام سوپرمارکت آذربایجان 🙏 یه سوال داشتم");
+  // دکمه شناور پایین هم بعد از ثبت باید سفارش کامل بفرسته نه فقط سلام
+  const a3=document.getElementById("waFloat"); if(a3) a3.href=url;
 }
 function sendWhatsAppDirect(){
   if(!cartCount()){toast("اول چندتا محصول انتخاب کن 🧺");return false;}
@@ -594,7 +595,7 @@ function sendWhatsAppDirect(){
   return false;
 }
 function closeModal(){document.getElementById("modal").classList.remove("show");}
-renderMini();renderBill();refreshEitaaLinks();
+renderMini();renderBill();refreshWaLinks();refreshEitaaLinks();
 </script>
 <script>
 (function(){
