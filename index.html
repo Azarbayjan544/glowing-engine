@@ -40,12 +40,11 @@
 <h1>هر چی لازم داری <span class="hl1">اینجا پیدا می‌کنی</span><br>از <span class="hl2">آذربایجان!</span> 🎉</h1>
 <p class="sub">هایپر آذربایجان<br>شوینده — بهداشتی — حبوبات — لبنیات — تنقلات — مواد غذایی<br>همه در آذربایجان<br>دم در تحویل بگیر، تخفیف بگیر، لبخند بزن 😊</p>
 
-<div id="installCard" style="background:#fff;border:2.5px solid #25324B;border-radius:18px;padding:14px 14px 20px;margin-top:12px;margin-bottom:20px;box-shadow:5px 5px 0 #25324B;text-align:center;position:relative;z-index:5">
-<button onclick="toggleGuide(true)" style="position:absolute;top:10px;left:10px;background:#E63946;color:#fff;border:none;border-radius:999px;font-size:12.5px;padding:5px 13px;font-weight:800;cursor:pointer;box-shadow:0 3px 10px rgba(230,57,70,.35)">❓ راهنما</button>
+<div id="installCard" style="background:#fff;border:2.5px solid #25324B;border-radius:18px;padding:20px 14px;margin-top:12px;margin-bottom:20px;box-shadow:5px 5px 0 #25324B;text-align:center;position:relative;z-index:5">
 <div style="font-size:40px">📲</div>
 <div style="font-weight:800;font-size:17px">برنامه آذربایجان را نصب کن</div>
 <div style="font-size:13.5px;color:#5b6a85;margin-top:4px">یه بار نصب کن، بعد با یه لمس بازش کن ✅</div>
-<button class="btn btn-dark pwa-install-btn" style="margin-top:10px;font-size:16px">📲 نصب برنامه</button>
+<button onclick="toggleGuide(true)" style="width:100%;margin-top:14px;background:#E63946;color:#fff;border:none;border-radius:14px;padding:14px;font-weight:900;font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(230,57,70,.35)">❓ راهنمای نصب قدم‌به‌قدم</button>
 </div>
 
 <div id="guideOverlay" onclick="if(event.target===this)toggleGuide(false)" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;padding:18px;overflow:auto">
@@ -55,10 +54,10 @@
 <div style="text-align:center;font-weight:900;font-size:18px">راهنمای کامل نصب برنامه آذربایجان</div>
 <div style="text-align:center;font-size:13px;color:#5b6a85">فقط یه بار انجام بده، همیشه دم دستته 🧺</div>
 <div style="background:#FFF7EC;border-radius:14px;padding:12px;margin-top:12px;font-size:14px">
-<b>📱 اگه گوشیت اندرویده (کروم):</b><br>
-۱. دکمه <b>«📲 نصب برنامه»</b> رو بزن<br>
-۲. تو پنجره‌ای که باز می‌شه <b>«نصب» یا Install</b> رو بزن<br>
-۳. اگه دکمه کار نکرد: سه‌نقطه <b>⋮</b> بالای کروم رو بزن ← <b>«افزودن به صفحه اصلی»</b> ← <b>افزودن</b><br>
+<b>📱 اگه گوشیت اندرویده (مرورگر):</b><br>
+۱. سه‌نقطه <b>⋮</b> بالای مرورگر رو بزن<br>
+۲. گزینه <b>«افزودن به صفحه اصلی» یا Add to Home screen</b> رو بزن<br>
+۳. تو پنجره‌ای که باز می‌شه <b>«افزودن» یا Install</b> رو بزن<br>
 ۴. حالا سبد نارنجی آذربایجان میاد رو صفحه گوشیت 🎉
 </div>
 <div style="background:#EEF6FF;border-radius:14px;padding:12px;margin-top:10px;font-size:14px">
@@ -69,9 +68,8 @@
 ۴. بالا سمت راست <b>Add</b> رو بزن
 </div>
 <div style="background:#F1F1F1;border-radius:14px;padding:10px 12px;margin-top:10px;font-size:13px;color:#444">
-💡 اگه نصب نشد: کرومت رو به‌روز کن، یه بار صفحه رو رفرش کن و دوباره امتحان کن. بعد از نصب، برنامه بدون آدرس زدن باز می‌شه.
+💡 اگه نصب نشد: مرورگرت رو به‌روز کن، یه بار صفحه رو رفرش کن و دوباره امتحان کن. بعد از نصب، برنامه بدون آدرس زدن باز می‌شه.
 </div>
-<button class="btn btn-dark pwa-install-btn" style="width:100%;justify-content:center;margin-top:12px;font-size:16px">📲 نصب برنامه</button>
 <button onclick="toggleGuide(false)" style="width:100%;margin-top:8px;background:#E63946;color:#fff;border:none;border-radius:14px;padding:12px;font-weight:800;font-size:15px;cursor:pointer">فهمیدم، ببند ❤️</button>
 </div>
 </div>
@@ -158,22 +156,6 @@ function toggleGuide(open){ var o=document.getElementById("guideOverlay"); if(!o
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function(){ try{ navigator.serviceWorker.register("sw.js").catch(function(){}); }catch(e){} });
   }
-  var deferred = null;
-  var btns = [];
-  window.addEventListener("beforeinstallprompt", function(e){
-    e.preventDefault(); deferred = e;
-    document.querySelectorAll(".pwa-install-btn").forEach(function(b){ b.style.display=""; });
-    var tip = document.getElementById("pwaTip"); if (tip) tip.textContent = "آماده نصب است! دکمه زیر را بزن 👇";
-  });
-  window.addEventListener("appinstalled", function(){ try{ toast("نصب شد! از این به بعد از روی صفحه گوشی بازش کن 🎉"); }catch(e){} });
-  window.__pwaInstall = function(){
-    if (deferred) { try{ deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }).catch(function(){}); }catch(e){} return; }
-    try{ toggleGuide(true); }catch(e){ try{ toast("از منوی مرورگر: افزودن به صفحه اصلی 📲"); }catch(e2){} }
-  };
-  document.addEventListener("click", function(e){
-    var b = e.target.closest && e.target.closest(".pwa-install-btn");
-    if (b) window.__pwaInstall();
-  });
 })();
 </script>
 
