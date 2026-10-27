@@ -146,9 +146,9 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 #toast{position:fixed;bottom:22px;inset-inline:0;margin:0 auto;width:fit-content;max-width:92vw;background:var(--ink);color:#fff;padding:11px 22px;border-radius:999px;font-size:14.5px;z-index:200;opacity:0;transform:translateY(14px);transition:.25s;pointer-events:none;border:2px solid var(--sunny)}
 #toast.show{opacity:1;transform:none}
 /* modal */
-.modal{position:fixed;inset:0;display:none;place-items:center;z-index:150;padding:18px}
+.modal{position:fixed;inset:0;display:none;place-items:center;z-index:150;padding:18px;background:rgba(37,50,75,.55);overflow:auto}
 .modal.show{display:grid}
-.modal-box{background:#fff;border:3px solid var(--ink);border-radius:26px;max-width:480px;width:100%;padding:30px 24px;text-align:center;box-shadow:8px 8px 0 var(--ink);position:relative;z-index:2}
+.modal-box{background:#fff;border:3px solid var(--ink);border-radius:26px;max-width:480px;width:100%;padding:30px 24px;text-align:center;box-shadow:8px 8px 0 var(--ink);position:relative;z-index:151;max-height:88vh;overflow:auto}
 .modal-box .big{font-size:70px}
 .code{background:#FFF3D6;border:2px dashed var(--orange);border-radius:14px;padding:8px;font-weight:700;font-size:20px;margin:10px 0;letter-spacing:1px}
 /* steps */
