@@ -75,6 +75,27 @@
 </div>
 <script>
 function toggleGuide(open){ var o=document.getElementById("guideOverlay"); if(!o) return; o.style.display=open?"block":"none"; if(open){ try{o.scrollTop=0;}catch(e){} document.body.style.overflow="hidden"; } else { document.body.style.overflow=""; } }
+function __isPwa(){
+  try{
+    if(new URLSearchParams(location.search).get("pwa")==="1") return true;
+    if(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) return true;
+    if(window.navigator.standalone===true) return true;
+  }catch(e){}
+  return false;
+}
+document.addEventListener("DOMContentLoaded", function(){
+  try{
+    if(!__isPwa()) return;
+    var c=document.getElementById("installCard");
+    if(!c) return;
+    c.style.borderColor="#2F9E44";
+    c.style.boxShadow="5px 5px 0 #2F9E44";
+    c.innerHTML='<div style="font-size:40px">🎉</div>'
+      +'<div style="font-weight:900;font-size:18px;color:#25324B">نصب شد! آذربایجان اینجاست ✅</div>'
+      +'<div style="font-size:14px;color:#5b6a85;margin-top:4px">از این به بعد بدون آدرس، همین‌جا بازش کن 🧺</div>'
+      +'<a href="shop.html" style="display:block;width:100%;margin-top:14px;background:#2F9E44;color:#fff;text-decoration:none;border-radius:14px;padding:14px;font-weight:900;font-size:18px;box-shadow:0 4px 14px rgba(47,158,68,.35)">ورود به فروشگاه 🛒</a>';
+  }catch(e){}
+});
 </script>
 
 
