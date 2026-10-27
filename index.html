@@ -14,22 +14,29 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 
+<style>
+.nav-home-center{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 18px 14px;text-align:center}
+.logo-big{font-size:34px;line-height:1.3;flex-direction:column;text-align:center;gap:8px}
+.logo-big .logo-mark{width:72px;height:72px;border-radius:24px;margin:0 auto}
+.logo-big small{font-size:15px;text-align:center}
+.nav-links-home{position:static !important;display:flex !important;flex-direction:row !important;flex-wrap:wrap;justify-content:center;background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;margin:0 !important}
+.nav-links-home a{font-size:14px;padding:8px 14px;background:#fff;border:2px solid var(--ink);border-radius:999px}
+.nav-links-home a.active{background:var(--ink);color:#fff}
+@media(max-width:960px){.nav-links-home{position:static !important;display:flex !important;flex-direction:row !important;flex-wrap:wrap;justify-content:center}}
+</style>
 </head>
 <body>
 <div class="topbar">🚚 ارسال رایگان برای خرید بالای <b>۵۰۰ هزار تومان</b> داخل شهر</div>
 <header>
-<nav class="nav">
-<div class="logo"><div class="logo-mark"><img src="icon-192.png" alt="سبد آذربایجان"></div><div>آذربایجان<small>سوپرمارکت</small></div></div>
-<div class="nav-links" id="navLinks">
+<nav class="nav nav-home-center">
+<div class="logo logo-big"><div class="logo-mark"><img src="icon-192.png" alt="هایپر آذربایجان"></div><div>هایپر آذربایجان<small>سوپرمارکت</small></div></div>
+<div class="nav-links nav-links-home" id="navLinks">
 <a href="index.html" class="active">🏠 خانه</a>
 <a href="shop.html">🛒 خرید و سفارش</a>
-
 <a href="#about">💛 درباره ما</a>
 <a href="customer.html">👤 پنل مشتری</a>
 <a href="admin.html">👨‍💼 مدیریت</a>
 </div>
-<button class="cart-btn" onclick="openCart()"> 🛒 سبد خرید <span class="count cart-count">۰</span></button>
-<button class="hamb" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
 </nav>
 </header>
 
