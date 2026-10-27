@@ -284,7 +284,14 @@ body{padding-bottom:10px}
 <div class="code" id="orderCode">AZ-0000</div>
 <p id="orderSum" style="font-size:14px"></p>
 <br><a id="waLink" class="btn btn-green" style="margin-top:10px" target="_blank" href="#">📲 ارسال این سفارش در واتساپ</a><br><br>
-<a id="eitaaLink" class="btn btn-eitaa" style="margin-top:2px" target="_blank" href="#">📩 ارسال این سفارش در ایتا</a><br><br>
+<a id="eitaaLink" class="btn btn-eitaa" style="margin-top:2px" target="_blank" href="#" onclick="return sendEitaaFromModal()">📩 ارسال این سفارش در ایتا</a>
+<div id="eitaaCopyBox" style="background:#FFF8E8;border:2px dashed var(--orange);border-radius:14px;padding:12px;margin-top:12px;text-align:right">
+<b style="font-size:14px">📩 ایتا ۲ مرحله‌ایه (مهم):</b>
+<p style="font-size:12.5px;color:#5b6a85;margin:4px 0">ایتا مثل واتساپ خودش متن رو نمی‌بره. اول «کپی» بزن، بعد که ایتا باز شد نگه دار و «چسباندن» رو بزن.</p>
+<textarea id="orderTextBox" readonly rows="5" style="width:100%;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12.5px;background:#fff;line-height:1.9" onclick="this.select()"></textarea>
+<button class="btn btn-dark" style="width:100%;justify-content:center;margin-top:8px;font-size:14px" onclick="copyOrderText(true)">📋 کپی متن سفارش</button>
+</div>
+<br>
 <button class="btn btn-primary" style="margin-top:10px" onclick="closeModal()">عالیه، ممنون! 💛</button><br><br>
 <a href="index.html" style="font-size:14px;text-decoration:underline">برگشت به صفحه اصلی</a>
 </div></div>
@@ -403,13 +410,65 @@ document.addEventListener("DOMContentLoaded",()=>{updateBadge();renderCart();app
 function cleanEitaaId(){ try{ let v=(STORE.eitaa||"Azarbayjanshap").trim().replace(/^@+/,""); v=v.replace(/.*eitaa\.com\//,"").trim(); if(!v) v="Azarbayjanshap"; return v; }catch(e){ return "Azarbayjanshap"; } }
 function eitaaChatUrl(){ const id=cleanEitaaId(); if(id) return "https://eitaa.com/"+encodeURIComponent(id); return ""; }
 function copyText(txt){
+  // نسخه قدیمی - برای سازگاری نگه داشته شده
+  copyTextAsync(txt, function(){});
+  return true;
+}
+function fallbackCopy(txt, cb){
   try{
-    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt); return true; }
+    var ta=document.createElement("textarea");
+    ta.value=txt;
+    ta.style.position="fixed"; ta.style.top="0"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ ta.setSelectionRange(0, ta.value.length); }catch(e){}
+    var ok=false;
+    try{ ok=document.execCommand("copy"); }catch(e){ ok=false; }
+    document.body.removeChild(ta);
+    if(cb) cb(ok);
+  }catch(e){ if(cb) cb(false); }
+}
+function copyTextAsync(txt, cb){
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ if(cb) cb(true); }, function(){ fallbackCopy(txt, cb); });
+      return;
+    }
   }catch(e){}
-  try{
-    const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select();
-    document.execCommand("copy"); document.body.removeChild(ta); return true;
-  }catch(e){ return false; }
+  fallbackCopy(txt, cb);
+}
+function buildEitaaText(){
+  if(!lastOrder) return "سلام سوپرمارکت آذربایجان";
+  var L = lastOrder;
+  var lines = ["سفارش جدید - سوپرمارکت آذربایجان","--------------------------","کد پیگیری: "+L.code,"نام: "+L.name,"موبایل: "+L.phone,"آدرس: "+L.addr,"تحویل: "+L.time,"پرداخت: "+L.pay,"","اقلام:"];
+  L.items.forEach(function(it){ lines.push("- "+it.name+" × "+it.qty+" - "+it.price); });
+  lines.push("","ارسال: "+L.ship,"جمع کل: "+L.total);
+  if(L.note) lines.push("توضیح: "+L.note);
+  return lines.join("\n");
+}
+function copyOrderText(fromBtn){
+  var txt = "";
+  var box = document.getElementById("orderTextBox");
+  if(box && box.value) txt = box.value;
+  else txt = buildEitaaText();
+  if(!txt || txt.length<5){ toast("اول سفارش رو ثبت کن 🧺"); return false; }
+  copyTextAsync(txt, function(ok){
+    if(ok){ toast("کپی شد! حالا برو تو ایتا و بچسبون 📋"); }
+    else{
+      try{ if(box){ box.focus(); box.select(); } }catch(e){}
+      toast("کپی خودکار نشد! متن رو نگه دار و «کپی» بزن 📋");
+    }
+  });
+  // برای گوشی: متن رو انتخاب کن که دستی هم بشه کپی کرد
+  try{ if(box){ box.focus(); box.select(); } }catch(e){}
+  return false;
+}
+function sendEitaaFromModal(){
+  copyOrderText(false);
+  var chat = eitaaChatUrl();
+  if(!chat){ toast("آیدی ایتا ثبت نشده!"); return false; }
+  toast("کپی شد! الان تو ایتا فقط «چسباندن» رو بزن 📋");
+  setTimeout(function(){ window.open(chat,"_blank"); }, 600);
+  return false;
 }
 function refreshEitaaLinks(){
   const id=cleanEitaaId();
@@ -433,16 +492,20 @@ function sendEitaaDirect(){
   if(!/^09\d{9}$/.test(phone)){toast("شماره موبایل باید ۱۱ رقم و با 09 شروع بشه 📱");return false;}
   if(addr.length<8){toast("آدرست رو دقیق‌تر بنویس 📬");return false;}
   submitOrder(true);
-  const t=buildWaText();
-  copyText(t);
+  const t=buildEitaaText();
+  // باکس متن رو هم پر کن که مشتری ببینه
+  try{ var bx=document.getElementById("orderTextBox"); if(bx) bx.value=t; }catch(e){}
+  copyTextAsync(t, function(ok){
+    if(ok) toast("کپی شد! توی ایتا فقط «چسباندن» رو بزن 📋");
+    else toast("متن رو از کادر کپی کن و تو ایتا بچسبون 📋");
+  });
   const chat=eitaaChatUrl();
   if(!chat){
-    toast("متن سفارش کپی شد! آیدی ایتا ثبت نشده — در ایتا به ما پیام بده 📋");
+    toast("متن سفارش آماده شد! در ایتا به ما پیام بده 📋");
     refreshEitaaLinks();
     return false;
   }
-  toast("متن سفارش کپی شد! توی ایتا فقط دکمه الصاق (Paste) رو بزن 📋");
-  setTimeout(()=>{ window.open(chat,"_blank"); },600);
+  setTimeout(()=>{ window.open(chat,"_blank"); },700);
   return false;
 }
 
@@ -492,7 +555,8 @@ function submitOrder(openWa){
   refreshWaLinks();
   refreshEitaaLinks();
   document.getElementById("orderCode").textContent=code;
-  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">برای اینکه سفارشت سریع به دستمون برسه، دکمه سبز واتساپ رو بزن 📲</span>`;
+  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">برای واتساپ دکمه سبز رو بزن 📲<br>برای ایتا اول «کپی متن سفارش» رو بزن بعد تو ایتا بچسبون 📩</span>`;
+  try{ document.getElementById("orderTextBox").value = ("سفارش جدید - سوپرمارکت آذربایجان\nکد پیگیری: "+code+"\nنام: "+name+"\nموبایل: "+phone+"\nآدرس: "+addr+"\nتحویل: "+time+"\nپرداخت: "+pay+"\nجمع کل: "+totalTxt+(note?"\nتوضیح: "+note:"")); }catch(e){}
   document.getElementById("modal").classList.add("show");
   if(!openWa){ cart={};_oldSave(); }
 }
