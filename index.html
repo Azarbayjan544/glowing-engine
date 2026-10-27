@@ -171,6 +171,15 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 @media(max-width:960px){.about-card{grid-template-columns:1fr}}
 
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#E8590C">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="آذربایجان">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+
 </head>
 <body>
 <div class="topbar">🚚 ارسال رایگان برای خرید بالای <b>۵۰۰ هزار تومان</b> داخل شهر • مدیریت: <b>آقای نویدی</b> • 📱 <a class="store-phone-link" href="tel:09108659424" style="color:#fff"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a></div>
@@ -200,6 +209,18 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 <a class="btn btn-primary" href="shop.html">🛒 شروع خرید و سفارش</a>
 <a class="btn btn-white" href="#products">دیدن محصولات 🍓</a>
 </div>
+<div id="installCard" style="background:#fff;border:2.5px solid #25324B;border-radius:18px;padding:14px 14px 20px;margin-top:12px;margin-bottom:110px;box-shadow:5px 5px 0 #25324B;text-align:center;position:relative;z-index:5">
+<div style="font-size:40px">📲</div>
+<div style="font-weight:800;font-size:17px">برنامه آذربایجان را نصب کن</div>
+<div id="pwaTip" style="font-size:13.5px;color:#5b6a85;margin-top:4px;line-height:2">یک بار نصب، بعدش با یک لمس باز می‌شود مثل برنامه — بدون آدرس زدن ✅</div>
+<button class="btn btn-dark pwa-install-btn" style="margin-top:10px;font-size:16px">📲 نصب برنامه</button>
+<div id="pwaHelp" style="display:none;font-size:13px;background:#FFF8E8;border-radius:12px;padding:10px;margin-top:10px;line-height:2;text-align:right">
+<b>اندروید (کروم):</b> سه‌نقطه ⋮ بالای مرورگر ← «افزودن به صفحه اصلی» ← افزودن<br>
+<b>آیفون (سافاری):</b> دکمه اشتراک‌گذاری ⬆ ← «Add to Home Screen» ← Add<br>
+بعدش آیکون سبد 🧺 می‌آید روی صفحه گوشی‌ات.
+</div>
+</div>
+
 <div class="hero-search"><input id="heroSearch" placeholder="چی لازم داری؟ مثلاً: شیر، برنج، چیپس..."><button onclick="heroGo()">جست‌وجو 🔍</button></div>
 <div class="trust"><span>⭐ امتیاز ۴/۹ از ۱۲۰۰ مشتری</span><span>💰 ضمانت تازگی کالا</span><span>📦 بسته‌بندی تمیز</span></div>
 </div>
@@ -402,5 +423,30 @@ renderCats();renderProducts();
 </script>
 <a class="eita-float" id="eitaFloatIdx" href="https://eitaa.com/Azarbayjanshap" target="_blank">📩 ایتا فروشگاه</a>
 <a class="wa-float" href="https://wa.me/989108659424?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%B3%D9%88%D9%BE%D8%B1%D9%85%D8%A7%D8%B1%DA%A9%D8%AA%20%D8%A2%D8%B0%D8%B1%D8%A8%D8%A7%DB%8C%D8%AC%D8%A7%D9%86%20%F0%9F%99%8F" target="_blank" style="position:fixed;bottom:18px;inset-inline-end:18px;z-index:120;background:#25D366;border:2.5px solid #fff;color:#fff;border-radius:999px;padding:12px 20px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.25)">📲 واتساپ فروشگاه</a>
+<script>
+(function(){
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function(){ try{ navigator.serviceWorker.register("sw.js").catch(function(){}); }catch(e){} });
+  }
+  var deferred = null;
+  var btns = [];
+  window.addEventListener("beforeinstallprompt", function(e){
+    e.preventDefault(); deferred = e;
+    document.querySelectorAll(".pwa-install-btn").forEach(function(b){ b.style.display=""; });
+    var tip = document.getElementById("pwaTip"); if (tip) tip.textContent = "آماده نصب است! دکمه زیر را بزن 👇";
+  });
+  window.addEventListener("appinstalled", function(){ try{ toast("نصب شد! از این به بعد از روی صفحه گوشی بازش کن 🎉"); }catch(e){} });
+  window.__pwaInstall = function(){
+    if (deferred) { deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }).catch(function(){}); return; }
+    var h = document.getElementById("pwaHelp"); if (h) { h.style.display = h.style.display==="none"?"":"none"; }
+    else { try{ toast("از منوی مرورگر: افزودن به صفحه اصلی 📲"); }catch(e){ alert("از منوی مرورگر گزینه «افزودن به صفحه اصلی» را بزن 📲"); } }
+  };
+  document.addEventListener("click", function(e){
+    var b = e.target.closest && e.target.closest(".pwa-install-btn");
+    if (b) window.__pwaInstall();
+  });
+})();
+</script>
+
 </body>
 </html>

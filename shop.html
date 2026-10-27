@@ -171,6 +171,15 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 @media(max-width:960px){.about-card{grid-template-columns:1fr}}
 
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#E8590C">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="آذربایجان">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+
 <style>
 .shop-layout{display:grid;grid-template-columns:1fr 380px;gap:18px;align-items:start}
 @media(max-width:960px){.shop-layout{grid-template-columns:1fr}}
@@ -523,5 +532,30 @@ function sendWhatsAppDirect(){
 function closeModal(){document.getElementById("modal").classList.remove("show");}
 renderMini();renderBill();refreshEitaaLinks();
 </script>
+<script>
+(function(){
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function(){ try{ navigator.serviceWorker.register("sw.js").catch(function(){}); }catch(e){} });
+  }
+  var deferred = null;
+  var btns = [];
+  window.addEventListener("beforeinstallprompt", function(e){
+    e.preventDefault(); deferred = e;
+    document.querySelectorAll(".pwa-install-btn").forEach(function(b){ b.style.display=""; });
+    var tip = document.getElementById("pwaTip"); if (tip) tip.textContent = "آماده نصب است! دکمه زیر را بزن 👇";
+  });
+  window.addEventListener("appinstalled", function(){ try{ toast("نصب شد! از این به بعد از روی صفحه گوشی بازش کن 🎉"); }catch(e){} });
+  window.__pwaInstall = function(){
+    if (deferred) { deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }).catch(function(){}); return; }
+    var h = document.getElementById("pwaHelp"); if (h) { h.style.display = h.style.display==="none"?"":"none"; }
+    else { try{ toast("از منوی مرورگر: افزودن به صفحه اصلی 📲"); }catch(e){ alert("از منوی مرورگر گزینه «افزودن به صفحه اصلی» را بزن 📲"); } }
+  };
+  document.addEventListener("click", function(e){
+    var b = e.target.closest && e.target.closest(".pwa-install-btn");
+    if (b) window.__pwaInstall();
+  });
+})();
+</script>
+
 </body>
 </html>
