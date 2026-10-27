@@ -3,174 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سوپرمارکت آذربایجان | مدیریت نویدی 🛒</title>
-<style>
-
-
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
---tomato:#FF5252;--orange:#FF9F1C;--sunny:#FFC93C;--leaf:#22C55E;--leaf-d:#16a34a;
---sky:#0EA5E9;--grape:#7C5CFF;--pink:#FF6FA5;
---bg:#FFF7EC;--card:#ffffff;--ink:#25324B;--muted:#7b87a0;--line:#f1e4cf;
---r:20px;--sh:0 10px 30px rgba(37,50,75,.10);
-}
-html{scroll-behavior:smooth}
-body{font-family:Tahoma,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-button,input,select,textarea{font-family:inherit}
-.wrap{max-width:1140px;margin:0 auto;padding:0 18px}
-/* top bar */
-.topbar{background:var(--ink);color:#fff;font-size:13.5px;padding:7px 0;text-align:center}
-.topbar b{color:var(--sunny)}
-/* header */
-header{position:sticky;top:0;z-index:50;background:rgba(255,247,236,.92);backdrop-filter:blur(10px);border-bottom:3px dashed #ffd9a8}
-.nav{display:flex;align-items:center;gap:14px;padding:12px 18px;max-width:1140px;margin:0 auto}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px}
-.logo-mark{width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,var(--tomato),var(--orange));display:grid;place-items:center;font-size:30px;box-shadow:var(--sh);transform:rotate(-6deg);border:3px solid #fff}
-.logo small{display:block;font-size:12px;color:var(--muted);font-weight:400}
-.nav-links{display:flex;gap:6px;margin-inline-start:auto}
-.nav-links a{padding:9px 16px;border-radius:999px;font-size:15px;font-weight:700}
-.nav-links a:hover{background:#fff}
-.nav-links a.active{background:var(--ink);color:#fff}
-.cart-btn{position:relative;border:none;cursor:pointer;background:var(--sunny);border-radius:999px;padding:10px 18px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;box-shadow:var(--sh);border:2px solid var(--ink)}
-.cart-btn .count{position:absolute;top:-9px;inset-inline-start:-6px;background:var(--tomato);color:#fff;min-width:26px;height:26px;border-radius:999px;display:grid;place-items:center;font-size:13px;border:2px solid #fff}
-.hamb{display:none;border:2px solid var(--ink);background:#fff;border-radius:12px;padding:8px 12px;font-size:18px}
-/* hero */
-.hero{position:relative;overflow:hidden}
-.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center;padding:34px 0 10px}
-.badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:700;box-shadow:4px 4px 0 var(--ink)}
-.badge .dot{width:10px;height:10px;border-radius:50%;background:var(--leaf);animation:blink 1.2s infinite}
-@keyframes blink{50%{opacity:.3}}
-h1{font-size:clamp(30px,5vw,52px);line-height:1.35;margin:14px 0 8px}
-h1 .hl1{background:linear-gradient(180deg,transparent 62%,var(--sunny) 62%);padding:0 6px}
-h1 .hl2{color:var(--tomato)}
-.hero p.sub{color:#5b6a85;font-size:17px;max-width:52ch}
-.hero-cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-.btn{border:2px solid var(--ink);border-radius:999px;padding:12px 26px;font-weight:700;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;box-shadow:5px 5px 0 var(--ink);transition:.15s}
-.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
-.btn-primary{background:var(--tomato);color:#fff}
-.btn-sunny{background:var(--sunny);color:var(--ink)}
-.btn-green{background:var(--leaf);color:#fff}
-.btn-dark{background:var(--ink);color:#fff}
-.btn-white{background:#fff;color:var(--ink)}
-.hero-search{margin-top:16px;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:8px;display:flex;gap:8px;box-shadow:var(--sh)}
-.hero-search input{flex:1;border:none;outline:none;padding:10px 14px;font-size:15px;background:transparent;min-width:0}
-.hero-search button{border:none;background:var(--grape);color:#fff;border-radius:12px;padding:10px 22px;font-weight:700;cursor:pointer}
-.trust{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;font-size:13.5px;color:#5b6a85}
-.trust span{background:#fff;border-radius:999px;padding:4px 12px;border:1.5px dashed #e8cfa3}
-.hero-pic{position:relative}
-.hero-pic img{border-radius:28px;border:4px solid #fff;box-shadow:var(--sh);transform:rotate(2deg);width:100%;height:420px;object-fit:cover}
-.float{position:absolute;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:8px 14px;font-weight:700;font-size:14px;box-shadow:4px 4px 0 var(--ink)}
-.f1{top:18px;inset-inline-start:-14px;transform:rotate(-6deg)}
-.f2{bottom:70px;inset-inline-end:-8px;transform:rotate(4deg);background:var(--sunny)}
-.f3{bottom:14px;inset-inline-start:20px;transform:rotate(-3deg)}
-.blob{position:absolute;z-index:-1;filter:saturate(1.2)}
-/* wave */
-.wave{display:block;width:100%;height:46px;margin-top:18px}
-/* sections */
-section{padding:34px 0}
-.sec-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-.sec-head h2{font-size:26px}
-.sec-head h2 i{font-style:normal;background:var(--sunny);border-radius:12px;padding:0 10px;border:2px solid var(--ink);display:inline-block;transform:rotate(-2deg)}
-.sec-head p{color:var(--muted);font-size:14.5px}
-/* cats */
-.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-.cat{background:var(--card);border:2px solid var(--ink);border-radius:var(--r);padding:14px 8px;text-align:center;cursor:pointer;box-shadow:4px 4px 0 rgba(37,50,75,.9);transition:.15s;font-weight:700;font-size:14px}
-.cat span{font-size:34px;display:block}
-.cat:hover{transform:translateY(-4px)}
-.cat.active{background:var(--ink);color:#fff}
-.cat small{display:block;font-weight:400;color:var(--muted);font-size:12px}
-.cat.active small{color:#ffd9a8}
-/* filter bar */
-.toolbar{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;align-items:center}
-.toolbar input,.toolbar select{border:2px solid var(--ink);border-radius:12px;padding:10px 14px;font-size:14.5px;background:#fff;outline:none}
-.toolbar input{flex:1;min-width:180px}
-/* products */
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:#fff;border:2.5px solid var(--ink);border-radius:22px;overflow:hidden;position:relative;box-shadow:5px 5px 0 rgba(37,50,75,.9);display:flex;flex-direction:column}
-.card .emoji{font-size:56px;text-align:center;padding:18px 10px 6px;line-height:1}
-.card .emoji-bg{margin:14px 14px 0;border-radius:16px;padding:10px 0}
-.card h3{font-size:16px;padding:8px 14px 0}
-.card .unit{font-size:12.5px;color:var(--muted);padding:0 14px}
-.card .price-row{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 12px;margin-top:auto}
-.price{font-weight:700;font-size:17px}
-.price del{display:block;font-size:12px;color:var(--muted);font-weight:400}
-.off{position:absolute;top:12px;inset-inline-start:12px;background:var(--tomato);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 12px;border:2px solid #fff;transform:rotate(-6deg)}
-.add{border:2px solid var(--ink);background:var(--sunny);border-radius:12px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:14px}
-.add:hover{background:var(--orange);color:#fff}
-.qty{display:flex;align-items:center;gap:8px}
-.qty button{width:32px;height:32px;border-radius:10px;border:2px solid var(--ink);background:#fff;font-weight:700;cursor:pointer;font-size:17px;line-height:1}
-.qty b{min-width:24px;text-align:center}
-/* features */
-.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.feat{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:18px 14px;text-align:center;box-shadow:4px 4px 0 var(--ink)}
-.feat:nth-child(1){background:#E8F9EF}.feat:nth-child(2){background:#FFF3D6}.feat:nth-child(3){background:#E7F5FE}.feat:nth-child(4){background:#F1EAFE}
-.feat span{font-size:38px}.feat h3{font-size:16px;margin:6px 0 2px}.feat p{font-size:13px;color:#5b6a85}
-/* banner */
-.banner{background:linear-gradient(135deg,var(--grape),#B388FF);border:3px solid var(--ink);border-radius:26px;padding:26px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;color:#fff;box-shadow:6px 6px 0 var(--ink);position:relative;overflow:hidden}
-.banner h2{font-size:24px}.banner p{opacity:.92;font-size:15px}
-/* footer */
-footer{background:var(--ink);color:#dfe6f3;margin-top:30px;border-radius:30px 30px 0 0}
-.foot{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:20px;padding:30px 0 10px}
-.foot h4{color:var(--sunny);margin-bottom:8px;font-size:17px}
-.foot p,.foot li{font-size:14px;list-style:none;opacity:.92}
-.copy{border-top:1px solid rgba(255,255,255,.18);padding:12px 0;text-align:center;font-size:13px;opacity:.85}
-/* drawer cart */
-.overlay{position:fixed;inset:0;background:rgba(37,50,75,.5);opacity:0;pointer-events:none;transition:.2s;z-index:90}
-.overlay.show{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(400px,94vw);background:#fffdf7;border-inline-start:3px solid var(--ink);z-index:99;transform:translateX(-110%);transition:.25s;display:flex;flex-direction:column}
-html[dir="rtl"] .drawer{transform:translateX(-110%)}
-.drawer.open{transform:none!important}
-.drawer-head{padding:16px 18px;border-bottom:2px dashed var(--line);display:flex;align-items:center;justify-content:space-between}
-.drawer-head h3{font-size:19px}
-.drawer-items{flex:1;overflow:auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
-.citem{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:14px;padding:8px 10px;background:#fff}
-.citem .e{font-size:32px;background:#FFF3D6;border-radius:10px;width:52px;height:52px;display:grid;place-items:center}
-.citem .n{font-size:13.5px;font-weight:700;line-height:1.5}
-.citem .p{font-size:13px;color:var(--muted)}
-.citem .q{margin-inline-start:auto;display:flex;align-items:center;gap:6px}
-.citem .q button{width:26px;height:26px;border-radius:8px;border:2px solid var(--ink);background:var(--sunny);font-weight:700;cursor:pointer}
-.empty{text-align:center;color:var(--muted);padding:30px 10px}
-.drawer-foot{border-top:2px dashed var(--line);padding:14px 18px}
-.total-row{display:flex;justify-content:space-between;font-weight:700;margin-bottom:10px;font-size:17px}
-/* forms */
-.form-card{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:22px;box-shadow:6px 6px 0 var(--ink)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{display:flex;flex-direction:column;gap:6px}
-.field.full{grid-column:1/-1}
-.field label{font-size:14px;font-weight:700}
-.field input,.field select,.field textarea{border:2px solid var(--ink);border-radius:12px;padding:11px 14px;font-size:15px;outline:none;background:#fffdf7}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--grape);background:#fff}
-/* toast */
-#toast{position:fixed;bottom:22px;inset-inline:0;margin:0 auto;width:fit-content;max-width:92vw;background:var(--ink);color:#fff;padding:11px 22px;border-radius:999px;font-size:14.5px;z-index:200;opacity:0;transform:translateY(14px);transition:.25s;pointer-events:none;border:2px solid var(--sunny)}
-#toast.show{opacity:1;transform:none}
-/* modal */
-.modal{position:fixed;inset:0;display:none;place-items:center;z-index:150;padding:18px;background:rgba(37,50,75,.55);overflow:auto}
-.modal.show{display:grid}
-.modal-box{background:#fff;border:3px solid var(--ink);border-radius:26px;max-width:480px;width:100%;padding:30px 24px;text-align:center;box-shadow:8px 8px 0 var(--ink);position:relative;z-index:151;max-height:88vh;overflow:auto}
-.modal-box .big{font-size:70px}
-.code{background:#FFF3D6;border:2px dashed var(--orange);border-radius:14px;padding:8px;font-weight:700;font-size:20px;margin:10px 0;letter-spacing:1px}
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
-.step{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:14px;text-align:center;font-size:14px}
-.step b{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;margin:0 auto 6px}
-/* responsive */
-@media(max-width:960px){
-.grid{grid-template-columns:repeat(3,1fr)}.cats{grid-template-columns:repeat(3,1fr)}.feats{grid-template-columns:repeat(2,1fr)}
-.hero-inner{grid-template-columns:1fr}.hero-pic img{height:280px}
-.nav-links{display:none;position:absolute;top:100%;inset-inline:12px;background:#fff;border:2px solid var(--ink);border-radius:16px;flex-direction:column;padding:10px;box-shadow:var(--sh)}
-.nav-links.open{display:flex}.hamb{display:block}
-.foot{grid-template-columns:1fr}.banner{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}
-}
-@media(max-width:620px){.grid{grid-template-columns:repeat(2,1fr)}.card .emoji{font-size:44px}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
-
-.about-card{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:960px){.about-card{grid-template-columns:1fr}}
-
-</style>
+<title>سوپرمارکت آذربایجان 🛒</title>
+<link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#E8590C">
 <meta name="mobile-web-app-capable" content="yes">
@@ -182,14 +16,14 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 
 </head>
 <body>
-<div class="topbar">🚚 ارسال رایگان برای خرید بالای <b>۵۰۰ هزار تومان</b> داخل شهر • مدیریت: <b>آقای نویدی</b> • 📱 <a class="store-phone-link" href="tel:09108659424" style="color:#fff"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a></div>
+<div class="topbar">🚚 ارسال رایگان برای خرید بالای <b>۵۰۰ هزار تومان</b> داخل شهر • 📱 <a class="store-phone-link" href="tel:09108659424" style="color:#fff"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a></div>
 <header>
 <nav class="nav">
-<div class="logo"><div class="logo-mark">🧺</div><div>آذربایجان<small>سوپرمارکت • مدیریت نویدی</small></div></div>
+<div class="logo"><div class="logo-mark"><img src="icon-192.png" alt="سبد آذربایجان"></div><div>آذربایجان<small>سوپرمارکت</small></div></div>
 <div class="nav-links" id="navLinks">
 <a href="index.html" class="active">🏠 خانه</a>
 <a href="shop.html">🛒 خرید و سفارش</a>
-<a href="#products">🛍️ محصولات</a>
+
 <a href="#about">💛 درباره ما</a>
 <a href="customer.html">👤 پنل مشتری</a>
 <a href="admin.html">👨‍💼 مدیریت</a>
@@ -202,33 +36,57 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 <div class="wrap">
 <div class="hero"><div class="hero-inner">
 <div>
-<span class="badge"><span class="dot"></span> بازه امروز ۷ صبح تا ۱۲ شب • ارسال زیر ۱ ساعت</span>
-<h1>هرچی لازم داری، <span class="hl1">تازه و ارزون</span><br>از <span class="hl2">آذربایجان!</span> 🎉</h1>
-<p class="sub">سوپرمارکت آذربایجان با مدیریت <b>آقای نویدی</b>؛ از شیر و ماست و نون داغ گرفته تا خواربار، تنقلات و شوینده — سفارش بده، دم در تحویل بگیر. راحت، سریع، با لبخند! 😊</p>
-<div class="hero-cta">
-<a class="btn btn-primary" href="shop.html">🛒 شروع خرید و سفارش</a>
-<a class="btn btn-white" href="#products">دیدن محصولات 🛍️</a>
-</div>
-<div id="installCard" style="background:#fff;border:2.5px solid #25324B;border-radius:18px;padding:14px 14px 20px;margin-top:12px;margin-bottom:110px;box-shadow:5px 5px 0 #25324B;text-align:center;position:relative;z-index:5">
+<span class="badge"><span class="dot"></span> همه‌روزه از ساعت ۶ صبح الی ۱۰ شب • ارسال زیر ۱ ساعت</span>
+<h1>هر چی لازم داری <span class="hl1">اینجا پیدا می‌کنی</span><br>از <span class="hl2">آذربایجان!</span> 🎉</h1>
+<p class="sub">هایپر آذربایجان<br>شوینده — بهداشتی — حبوبات — لبنیات — تنقلات — مواد غذایی<br>همه در آذربایجان<br>دم در تحویل بگیر، تخفیف بگیر، لبخند بزن 😊</p>
+
+<div id="installCard" style="background:#fff;border:2.5px solid #25324B;border-radius:18px;padding:14px 14px 20px;margin-top:12px;margin-bottom:20px;box-shadow:5px 5px 0 #25324B;text-align:center;position:relative;z-index:5">
+<button onclick="toggleGuide(true)" style="position:absolute;top:10px;left:10px;background:#E63946;color:#fff;border:none;border-radius:999px;font-size:12.5px;padding:5px 13px;font-weight:800;cursor:pointer;box-shadow:0 3px 10px rgba(230,57,70,.35)">❓ راهنما</button>
 <div style="font-size:40px">📲</div>
 <div style="font-weight:800;font-size:17px">برنامه آذربایجان را نصب کن</div>
-<div id="pwaTip" style="font-size:13.5px;color:#5b6a85;margin-top:4px;line-height:2">یک بار نصب، بعدش با یک لمس باز می‌شود مثل برنامه — بدون آدرس زدن ✅</div>
+<div style="font-size:13.5px;color:#5b6a85;margin-top:4px">یه بار نصب کن، بعد با یه لمس بازش کن ✅</div>
 <button class="btn btn-dark pwa-install-btn" style="margin-top:10px;font-size:16px">📲 نصب برنامه</button>
-<div id="pwaHelp" style="display:none;font-size:13px;background:#FFF8E8;border-radius:12px;padding:10px;margin-top:10px;line-height:2;text-align:right">
-<b>اندروید (کروم):</b> سه‌نقطه ⋮ بالای مرورگر ← «افزودن به صفحه اصلی» ← افزودن<br>
-<b>آیفون (سافاری):</b> دکمه اشتراک‌گذاری ⬆ ← «Add to Home Screen» ← Add<br>
-بعدش آیکون سبد 🧺 می‌آید روی صفحه گوشی‌ات.
-</div>
 </div>
 
-<div class="hero-search"><input id="heroSearch" placeholder="چی لازم داری؟ مثلاً: شیر، برنج، چیپس..."><button onclick="heroGo()">جست‌وجو 🔍</button></div>
-<div class="trust"><span>⭐ امتیاز ۴/۹ از ۱۲۰۰ مشتری</span><span>💰 ضمانت تازگی کالا</span><span>📦 بسته‌بندی تمیز</span></div>
+<div id="guideOverlay" onclick="if(event.target===this)toggleGuide(false)" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;padding:18px;overflow:auto">
+<div style="background:#fff;border-radius:20px;max-width:480px;margin:20px auto;padding:20px 18px;line-height:2.1;position:relative;border:3px solid #25324B">
+<button onclick="toggleGuide(false)" style="position:absolute;top:10px;left:10px;background:#eee;border:none;border-radius:999px;width:32px;height:32px;font-size:16px;cursor:pointer">✕</button>
+<div style="text-align:center;font-size:42px">📲</div>
+<div style="text-align:center;font-weight:900;font-size:18px">راهنمای کامل نصب برنامه آذربایجان</div>
+<div style="text-align:center;font-size:13px;color:#5b6a85">فقط یه بار انجام بده، همیشه دم دستته 🧺</div>
+<div style="background:#FFF7EC;border-radius:14px;padding:12px;margin-top:12px;font-size:14px">
+<b>📱 اگه گوشیت اندرویده (کروم):</b><br>
+۱. دکمه <b>«📲 نصب برنامه»</b> رو بزن<br>
+۲. تو پنجره‌ای که باز می‌شه <b>«نصب» یا Install</b> رو بزن<br>
+۳. اگه دکمه کار نکرد: سه‌نقطه <b>⋮</b> بالای کروم رو بزن ← <b>«افزودن به صفحه اصلی»</b> ← <b>افزودن</b><br>
+۴. حالا سبد نارنجی آذربایجان میاد رو صفحه گوشیت 🎉
+</div>
+<div style="background:#EEF6FF;border-radius:14px;padding:12px;margin-top:10px;font-size:14px">
+<b>🍎 اگه گوشیت آیفونه (سافاری):</b><br>
+۱. حتما با <b>سافاری</b> باز کن<br>
+۲. دکمه <b>اشتراک‌گذاری</b> (مربع با فلش رو به بالا ⬆️) پایین صفحه رو بزن<br>
+۳. گزینه <b>Add to Home Screen</b> رو انتخاب کن<br>
+۴. بالا سمت راست <b>Add</b> رو بزن
+</div>
+<div style="background:#F1F1F1;border-radius:14px;padding:10px 12px;margin-top:10px;font-size:13px;color:#444">
+💡 اگه نصب نشد: کرومت رو به‌روز کن، یه بار صفحه رو رفرش کن و دوباره امتحان کن. بعد از نصب، برنامه بدون آدرس زدن باز می‌شه.
+</div>
+<button class="btn btn-dark pwa-install-btn" style="width:100%;justify-content:center;margin-top:12px;font-size:16px">📲 نصب برنامه</button>
+<button onclick="toggleGuide(false)" style="width:100%;margin-top:8px;background:#E63946;color:#fff;border:none;border-radius:14px;padding:12px;font-weight:800;font-size:15px;cursor:pointer">فهمیدم، ببند ❤️</button>
+</div>
+</div>
+<script>
+function toggleGuide(open){ var o=document.getElementById("guideOverlay"); if(!o) return; o.style.display=open?"block":"none"; if(open){ try{o.scrollTop=0;}catch(e){} document.body.style.overflow="hidden"; } else { document.body.style.overflow=""; } }
+</script>
+
+
+<div class="trust"><span>💰 ضمانت تازگی کالا</span><span>📦 بسته‌بندی تمیز</span></div>
 </div>
 <div class="hero-pic">
-<img src="hero.jpg" alt="قفسه محصولات سوپرمارکت آذربایجان">
-<div class="float f1">🥛 شیر تازه رسید!</div>
-<div class="float f2">🔥 تخفیف امروز تا ۲۰٪</div>
-<div class="float f3">🧀 پنیر تبریزی اصل داریم</div>
+<img src="hero.jpg" alt="سوسیس کالباس، کنسرو، ماکارونی و شوینده - هایپر آذربایجان">
+<div class="float f1">🌭 سوسیس کالباس داریم!</div>
+<div class="float f2">🧴 شوینده و بهداشتی</div>
+<div class="float f3">🥫 کنسرو و ماکارونی</div>
 </div>
 </div></div>
 </div>
@@ -236,46 +94,56 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 Q120,60 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 L1440,60 L0,60 Z" fill="#7C5CFF"/></svg>
 
 <div class="wrap">
-<section id="cats">
-<div class="sec-head"><div><h2>دسته‌بندی <i>خوشمزه‌ها</i> 🍭</h2><p>بزن روی هر دسته تا محصولاتش رو ببینی</p></div></div>
-<div class="cats" id="catRow"></div>
+
+<section style="margin-top:6px">
+<div style="background:linear-gradient(135deg,#FFF7EC 0%,#FFE8CC 55%,#FFF7EC 100%);border:3px solid #25324B;border-radius:22px;padding:26px 18px;text-align:center;box-shadow:6px 6px 0 #25324B;position:relative;overflow:hidden">
+<div style="display:inline-block;background:#E63946;color:#fff;font-weight:800;font-size:13px;padding:5px 14px;border-radius:999px;margin-bottom:10px">🔥 فقط برای سفارش آنلاین</div>
+<div style="font-size:44px;line-height:1">🎁</div>
+<h2 style="font-size:clamp(22px,5vw,32px);font-weight:900;color:#25324B;margin:8px 0 4px">تخفیف‌های ویژه مخصوص سفارش آنلاین</h2>
+<p style="font-size:16px;font-weight:700;color:#5b6a85;margin:0 0 14px">کلی چیزای باحال دیگه این‌جاست 👇</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 16px">
+<div style="background:#fff;border:2px solid #25324B;border-radius:14px;padding:10px 6px;font-size:13px;font-weight:700">🛵<br>ارسال سریع<br><small style="color:#5b6a85">زیر ۱ ساعت</small></div>
+<div style="background:#fff;border:2px solid #25324B;border-radius:14px;padding:10px 6px;font-size:13px;font-weight:700">💸<br>تخفیف روزانه<br><small style="color:#5b6a85">تا ۲۰٪</small></div>
+<div style="background:#fff;border:2px solid #25324B;border-radius:14px;padding:10px 6px;font-size:13px;font-weight:700">🎉<br>هدیه خرید اول<br><small style="color:#5b6a85">مخصوص نصب</small></div>
+</div>
+<a href="shop.html" class="btn btn-dark" style="font-size:16px;padding:12px 26px">دیدن تخفیف‌ها و سفارش 🛒</a>
+<div style="font-size:12.5px;color:#5b6a85;margin-top:10px">نصب کن، سفارش بده، تخفیف بگیر 😊</div>
+</div>
 </section>
 
-<section id="products">
-<div class="sec-head"><div><h2>پرفروش‌های <i>امروز</i> 🛍️</h2><p>تازه، باکیفیت و با قیمت منصفانه — همون که هر روز می‌خری!</p></div><a class="btn btn-dark" href="shop.html">رفتن به صفحه سفارش ←</a></div>
-<div class="toolbar"><input id="q" placeholder="🔍 جست‌وجو بین محصولات..." oninput="renderProducts()"><select id="sort" onchange="renderProducts()"><option value="">مرتب‌سازی: پیشنهادی</option><option value="cheap">ارزان‌ترین</option><option value="exp">گران‌ترین</option></select></div>
-<div class="grid" id="grid"></div>
-</section>
 
 <section>
 <div class="sec-head"><div><h2>چرا <i>آذربایجان؟</i> 💪</h2></div></div>
 <div class="feats">
-<div class="feat"><span>🌅</span><h3>تازه هر روز صبح</h3><p>لبنیات و نون داغ هر روز صبح می‌رسه</p></div>
-<div class="feat"><span>🛵</span><h3>ارسال سریع</h3><p>داخل شهر زیر ۱ ساعت درب منزلتی</p></div>
+
+<div class="feat"><span>🛵</span><h3>ارسال سریع</h3><p>داخل شهر زیر ۱ ساعت درب منزل</p></div>
 <div class="feat"><span>💸</span><h3>قیمت منصفانه</h3><p>تخفیف روزانه + ضمانت مرجوعی</p></div>
-<div class="feat"><span>🤝</span><h3>مدیریت نویدی</h3><p>با ۱۵ سال سابقه، پاسخ‌گو و مشتری‌مدار</p></div>
+
 </div>
 </section>
 
 <section>
-<div class="banner"><div><h2>🎁 جشنواره آخر هفته آذربایجان!</h2><p>روی لبنیات و خواربار تا ۲۰٪ تخفیف + برای خرید بالای ۵۰۰ هزار تومان ارسال رایگان. فقط تا جمعه!</p></div><a class="btn btn-sunny" href="shop.html">همین حالا سفارش بده 🎉</a></div>
+<div class="banner" style="background:linear-gradient(135deg,#7C5CFF 0%,#B388FF 45%,#FF8AC2 100%);border:3px solid #25324B;text-align:center;position:relative;overflow:hidden">
+<div style="font-size:15px;font-weight:800;color:#FFE66D;text-shadow:0 2px 0 rgba(0,0,0,.2)">✨🥳✨🥳✨</div>
+<div><h2 style="font-size:clamp(24px,6vw,36px);font-weight:900;color:#fff;text-shadow:0 3px 0 #25324B,0 6px 18px rgba(0,0,0,.25);line-height:1.6;margin:6px 0">🌙 هر ماه<br>شگفتانه‌های جدید و جذاب 🎁</h2><p style="font-size:16px;font-weight:700;color:#FFF7EC;text-shadow:0 1px 0 rgba(0,0,0,.2)">هر ماه یه سورپرایز تازه تو آذربایجان منتظرته! 🎉🍭</p></div>
+<a class="btn btn-sunny" href="shop.html" style="font-size:16px;margin-top:10px">بزن بریم ببینیم 👀</a>
+</div>
 </section>
 
 <section id="about">
 <div class="sec-head"><div><h2>درباره <i>ما</i> 💛</h2></div></div>
 <div class="form-card about-card" id="aboutCard">
-<div><h3 style="font-size:19px">سوپرمارکت آذربایجان — زیر نظر آقای نویدی 🧺</h3><p style="color:#5b6a85;font-size:15px;margin-top:8px">ما یه سوپرمارکت محله‌ای ولی پرانرژی هستیم! همه‌چیز از مایحتاج روزانه تا خوراکی‌های خوشمزه بچه‌ها رو یک‌جا داریم. سفارش تلفنی و اینترنتی می‌گیریم و با پیک خودمون سریع می‌رسونیم. رضایت شما اعتبار ماست. ❤️</p><p style="margin-top:10px;font-size:15px">📍 آدرس: <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span><br>📱 موبایل: <a class="store-phone-link" href="tel:09108659424"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a> 📞<br>🕖 ساعت کاری: هر روز ۷ صبح تا ۱۲ شب</p></div>
-<div style="background:#FFF3D6;border:2px dashed var(--orange);border-radius:18px;padding:16px;text-align:center"><div style="font-size:60px">👨‍💼</div><b>مدیریت: آقای نویدی</b><p style="font-size:14px;color:#5b6a85">«مشتری ما مهمون ماست؛ جنس خوب، قیمت خوب، برخورد خوب!»</p><a class="btn btn-green" style="margin-top:10px" href="shop.html">ثبت سفارش 📝</a></div>
+<div><h3 style="font-size:19px">سوپرمارکت آذربایجان 🧺</h3><p style="color:#5b6a85;font-size:15px;margin-top:8px">ما یه سوپرمارکت محله‌ای ولی پرانرژی هستیم! همه‌چیز از مایحتاج روزانه تا خوراکی‌های خوشمزه بچه‌ها رو یک‌جا داریم. سفارش تلفنی و اینترنتی می‌گیریم و با پیک خودمون سریع می‌رسونیم. رضایت شما اعتبار ماست. ❤️</p><p style="margin-top:10px;font-size:15px">📍 آدرس: <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span><br>📱 موبایل: <a class="store-phone-link" href="tel:09108659424"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a> 📞<br>☎️ تلفن ثابت: <a href="tel:44203170" dir="ltr">۴۴۲۰۳۱۷۰</a><br>🕖 ساعت کاری: همه‌روزه از ساعت ۶ صبح الی ۱۰ شب</p></div>
+<div style="background:#FFF3D6;border:2px dashed var(--orange);border-radius:18px;padding:16px;text-align:center"><div style="font-size:60px">👨‍💼</div><b>مدیریت: آقای نویدی</b><p style="font-size:14px;color:#5b6a85">«مشتری ما مهمون ماست؛ جنس خوب، قیمت خوب، برخورد خوب!»</p></div>
 </div>
 </section>
 </div>
 
 <footer><div class="wrap foot">
-<div><h4>🧺 سوپرمارکت آذربایجان</h4><p>خرید راحت روزانه برای همه خانواده؛ تازه، سریع و شاد! مدیریت: آقای نویدی. ممنون که به ما اعتماد می‌کنید. ❤️</p></div>
-<div><h4>دسترسی سریع</h4><li><a href="index.html">🏠 صفحه اصلی</a></li><li><a href="shop.html">🛒 خرید و سفارش</a></li><li><a href="#products">🛍️ محصولات</a></li><li><a href="customer.html">👤 پنل مشتری</a></li>
-<li><a href="admin.html">👨‍💼 ورود مدیر (مدیریت اجناس)</a></li></div>
-<div><h4>تماس با ما</h4><p>📱 <a class="store-phone-link" href="tel:09108659424"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a><br>📍 <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span><br>🕖 هر روز ۷ تا ۱۲ شب</p></div>
-</div><div class="copy">© ۱۴۰۵ سوپرمارکت آذربایجان • مدیریت نویدی • ساخته‌شده با 💛 برای مشتری‌های عزیز</div></footer>
+<div><h4>🧺 سوپرمارکت آذربایجان</h4><p>خرید راحت روزانه برای همه خانواده؛ تازه، سریع و شاد! ممنون که به ما اعتماد می‌کنید. ❤️</p></div>
+
+<div><h4>تماس با ما</h4><p>📱 <a class="store-phone-link" href="tel:09108659424"><span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span></a><br>☎️ <a href="tel:44203170" dir="ltr">۴۴۲۰۳۱۷۰</a><br>📍 <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span><br>🕖 همه‌روزه از ساعت ۶ صبح الی ۱۰ شب<br>📸 اینستا: <a href="https://instagram.com/sopermarketazarbayjan" target="_blank" dir="ltr" style="color:#FFC93C">sopermarketazarbayjan@</a><br>📩 ایتا: <a href="https://eitaa.com/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a><br>💬 واتس‌اپ: <a href="https://wa.me/989108659424" target="_blank" dir="ltr" style="color:#FFC93C">09108659424</a></p></div>
+</div></footer>
 
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
 <aside class="drawer" id="drawer">
@@ -285,144 +153,9 @@ html[dir="rtl"] .drawer{transform:translateX(-110%)}
 </aside>
 <div id="toast"></div>
 
-<script>
-const DEFAULT_PRODUCTS = [
-{id:1,name:"شیر پرچرب آذربایجان",unit:"بطر ۱ لیتری",price:38000,old:45000,cat:"dairy",emoji:"🥛",bg:"#E7F5FE"},
-{id:2,name:"ماست موسیر چکیده",unit:"دبه ۱ کیلویی",price:65000,cat:"dairy",emoji:"🍶",bg:"#FFF3D6"},
-{id:3,name:"پنیر تبریزی اصل",unit:"بسته ۵۰۰ گرمی",price:120000,old:138000,cat:"dairy",emoji:"🧀",bg:"#E8F9EF"},
-{id:4,name:"تخم‌مرغ تازه محلی",unit:"شانه ۳۰ عددی",price:145000,cat:"dairy",emoji:"🥚",bg:"#FFF3D6"},
-{id:5,name:"نان بربری داغ تنوری",unit:"هر قرص",price:15000,cat:"bread",emoji:"🥖",bg:"#FFEED6"},
-{id:6,name:"نان لواش بسته‌ای",unit:"بسته ۱۰ عددی",price:28000,cat:"bread",emoji:"🫓",bg:"#FFF3D6"},
-{id:7,name:"برنج ایرانی درجه‌یک",unit:"کیسه ۵ کیلویی",price:850000,old:920000,cat:"grocery",emoji:"🍚",bg:"#E8F9EF"},
-{id:8,name:"روغن آفتابگردان",unit:"بطری ۳ لیتری",price:285000,cat:"grocery",emoji:"🫗",bg:"#E7F5FE"},
-{id:9,name:"ماکارونی رشته‌ای",unit:"بسته ۷۰۰ گرمی",price:42000,cat:"grocery",emoji:"🍝",bg:"#F1EAFE"},
-{id:14,name:"نوشابه خانواده",unit:"بطری ۱/۵ لیتری",price:45000,cat:"drink",emoji:"🥤",bg:"#E7F5FE"},
-{id:15,name:"دوغ نعنایی آذربایجان",unit:"بطری ۱/۵ لیتری",price:40000,cat:"drink",emoji:"🥛",bg:"#E8F9EF"},
-{id:16,name:"چیپس سرکه‌ای",unit:"بسته بزرگ",price:38000,cat:"snack",emoji:"🍟",bg:"#FFF3D6"},
-{id:17,name:"بیسکوییت کرمدار",unit:"بسته ۴ عددی",price:32000,old:38000,cat:"snack",emoji:"🍪",bg:"#FFEED6"},
-{id:18,name:"مایع ظرفشویی لیمویی",unit:"بطری ۱ لیتری",price:55000,cat:"hygiene",emoji:"🧴",bg:"#E7F5FE"}
-];
-const CATS = {dairy:"لبنیات",bread:"نان تازه",grocery:"خواربار",drink:"نوشیدنی",snack:"تنقلات",hygiene:"شوینده"};
-const CAT_BG = {dairy:"#E8F9EF",bread:"#FFF3D6",grocery:"#E8F9EF",drink:"#E7F5FE",snack:"#FFF3D6",hygiene:"#E7F5FE"};
+<script src="app.js"></script>
 
-function loadProducts(){
-  try{
-    const s = localStorage.getItem("az_products");
-    if(s){
-      const arr = JSON.parse(s);
-      if(Array.isArray(arr) && arr.length){
-        const cleaned = arr.filter(p=>p && p.cat!=="fruit");
-        if(cleaned.length!==arr.length){ try{localStorage.setItem("az_products",JSON.stringify(cleaned));}catch(e){} }
-        return cleaned;
-      }
-      if(Array.isArray(arr) && arr.length===0) return [];
-    }
-  }catch(e){}
-  return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-}
-let PRODUCTS = loadProducts();
-function persistProducts(){ try{localStorage.setItem("az_products",JSON.stringify(PRODUCTS));}catch(e){} }
-
-// فروشگاه (شماره تماس و تنظیمات - قابل تغییر از پنل مدیریت)
-function loadStore(){
-  const def = {phone:"09108659424", phoneFa:"۰۹۱۰۸۶۵۹۴۲۴", manager:"آقای نویدی", addr:"شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور", eitaa:"Azarbayjanshap"};
-  try{
-    const s = localStorage.getItem("az_store");
-    if(s){ const o = JSON.parse(s); return Object.assign(def,o); }
-  }catch(e){}
-  return def;
-}
-let STORE = loadStore();
-function persistStore(){ try{localStorage.setItem("az_store",JSON.stringify(STORE));}catch(e){} }
-function applyStore(){
-  document.querySelectorAll(".store-phone").forEach(el=>{ el.textContent = STORE.phoneFa; });
-  document.querySelectorAll("a.store-phone-link").forEach(el=>{ el.href = "tel:"+STORE.phone.replace(/\D/g,""); });
-  document.querySelectorAll(".store-addr").forEach(el=>{ el.textContent = STORE.addr; });
-  document.querySelectorAll(".store-manager").forEach(el=>{ el.textContent = STORE.manager; });
-}
-
-let cart = {};
-try{cart = JSON.parse(localStorage.getItem("az_cart")||"{}");}catch(e){cart={};}
-// پاک کردن اقلامی که دیگر در لیست محصولات نیستند
-Object.keys(cart).forEach(id=>{ const pp=PRODUCTS.find(p=>p.id==id); if(!pp || pp.cat==="fruit") delete cart[id]; });
-
-const fa = n => Number(n||0).toLocaleString("fa-IR") + " تومان";
-// اعداد فارسی ورودی را به انگلیسی تبدیل کن (برای قیمت و موبایل)
-function faToEn(s){ return String(s||"").replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[^0-9]/g,""); }
-function save(){localStorage.setItem("az_cart",JSON.stringify(cart));updateBadge();}
-function cartCount(){return Object.values(cart).reduce((a,b)=>a+(Number(b)||0),0);}
-function cartTotal(){return Object.entries(cart).reduce((s,[id,q])=>{const p=PRODUCTS.find(x=>x.id==id);return s+(p?p.price*q:0);},0);}
-function updateBadge(){document.querySelectorAll(".cart-count").forEach(el=>el.textContent=Number(cartCount()).toLocaleString("fa-IR"));}
-function toast(msg){const t=document.getElementById("toast");if(!t)return;t.textContent=msg;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),2200);}
-function addToCart(id){cart[id]=(Number(cart[id])||0)+1;save();renderCart();const p=PRODUCTS.find(x=>x.id==id);if(p)toast("«"+p.name+"» به سبد اضافه شد 🛒");}
-function decFromCart(id){if(!cart[id])return;cart[id]--;if(cart[id]<=0)delete cart[id];save();renderCart();refreshQtyButtons();}
-function renderCart(){
-  const box=document.getElementById("cartItems");if(!box)return;
-  const ids=Object.keys(cart);
-  if(!ids.length){box.innerHTML='<div class="empty"><div style="font-size:56px">🧺</div><b>سبدت خالیه!</b><br>یه چرخی تو فروشگاه بزن و خوشمزه‌ها رو بردار 😋</div>';}
-  else{box.innerHTML=ids.map(id=>{const p=PRODUCTS.find(x=>x.id==id);if(!p)return "";const q=cart[id];
-    return `<div class="citem"><div class="e">${p.emoji}</div><div><div class="n">${p.name}</div><div class="p">${p.unit} • ${fa(p.price)}</div></div><div class="q"><button onclick="decFromCart(${p.id})">−</button><b>${Number(q).toLocaleString("fa-IR")}</b><button onclick="addToCart(${p.id});refreshQtyButtons()">+</button></div></div>`;}).join("");}
-  const t=document.getElementById("cartTotal");if(t)t.textContent=fa(cartTotal());
-  const b=document.getElementById("checkoutBtn");if(b)b.style.display=ids.length?"":"none";
-}
-
-// ===== سفارش‌ها و مشتری‌ها (پنل مشتری + مدیر) =====
-function getOrders(){ try{ const s=localStorage.getItem("az_orders"); const a=s?JSON.parse(s):[]; return Array.isArray(a)?a:[]; }catch(e){ return []; } }
-function persistOrders(a){ try{ localStorage.setItem("az_orders", JSON.stringify(a.slice(0,200))); }catch(e){} }
-function addOrder(o){ try{ const a=getOrders(); a.unshift(o); persistOrders(a); }catch(e){} }
-function findOrderByCode(code){ code=String(code||"").trim().toUpperCase(); return getOrders().find(o=>String(o.code||"").toUpperCase()===code); }
-function ordersByPhone(phone){ phone=String(phone||"").replace(/\D/g,""); return getOrders().filter(o=>String(o.phone||"").replace(/\D/g,"")===phone); }
-function setOrderStatus(code,st){ const a=getOrders(); const o=a.find(x=>x.code===code); if(o){ o.status=st; persistOrders(a); } }
-function delOrder(code){ persistOrders(getOrders().filter(x=>x.code!==code)); }
-function clearOrders(){ persistOrders([]); }
-function getCustomers(){ try{ const s=localStorage.getItem("az_customers"); const o=s?JSON.parse(s):{}; return (o&&typeof o==="object")?o:{}; }catch(e){ return {}; } }
-function persistCustomers(o){ try{ localStorage.setItem("az_customers",JSON.stringify(o)); }catch(e){} }
-function getCustomer(phone){ const cs=getCustomers(); phone=String(phone||"").replace(/\D/g,""); return cs[phone]||null; }
-function saveCustomer(c){ try{ const cs=getCustomers(); const ph=String(c.phone||"").replace(/\D/g,""); if(!ph) return; cs[ph]={name:c.name||"",phone:ph,addr:c.addr||""}; persistCustomers(cs); try{localStorage.setItem("az_customer_current",ph);}catch(e){} }catch(e){} }
-function currentCustomerPhone(){ try{ return localStorage.getItem("az_customer_current")||""; }catch(e){ return ""; } }
-function orderStatusFa(s){ return {new:"ثبت شد 🆕",preparing:"در حال آماده‌سازی 👨‍🍳",sending:"در راه 🛵",done:"تحویل شد ✅",cancelled:"لغو شد ❌"}[s]||"ثبت شد 🆕"; }
-function fmtDT(ts){ try{ return new Date(ts).toLocaleString("fa-IR",{dateStyle:"medium",timeStyle:"short"}); }catch(e){ return ""; } }
-
-function refreshQtyButtons(){
-  if(typeof renderProducts==="function")try{renderProducts(false);}catch(e){}
-  if(typeof renderBill==="function")try{renderBill();}catch(e){}
-  if(typeof renderMini==="function")try{renderMini();}catch(e){}
-}
-function openCart(){renderCart();document.getElementById("drawer").classList.add("open");document.getElementById("overlay").classList.add("show");}
-function closeCart(){const d=document.getElementById("drawer");if(d)d.classList.remove("open");const o=document.getElementById("overlay");if(o)o.classList.remove("show");}
-function goCheckout(){if(!cartCount()){toast("سبدت خالیه عزیزم! 🧺");return;}location.href="shop.html";}
-document.addEventListener("DOMContentLoaded",()=>{updateBadge();renderCart();applyStore();});
-
-</script>
-<script>
-let activeCat = "";
-function renderCats(){
-  const all = [{k:"",n:"همه 🛍️",s:"همه محصولات"},{k:"dairy",n:"🥛 لبنیات",s:"شیر و پنیر"},{k:"bread",n:"🥖 نان",s:"داغ تنوری"},{k:"grocery",n:"🍚 خواربار",s:"برنج و روغن"},{k:"drink",n:"🥤 نوشیدنی",s:"خنک و گوارا"},{k:"snack",n:"🍪 تنقلات",s:"خوشمزه‌ها"}];
-  document.getElementById("catRow").innerHTML = all.map(c=>`<div class="cat ${activeCat===c.k?'active':''}" onclick="setCat('${c.k}')"><span>${c.n.split(' ')[0]}</span>${c.n}<small>${c.s}</small></div>`).join("");
-}
-function setCat(k){activeCat=k;renderCats();renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"});}
-function heroGo(){const v=document.getElementById("heroSearch").value;document.getElementById("q").value=v;renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"});}
-function renderProducts(scroll=true){
-  const q=(document.getElementById("q").value||"").trim();
-  const sort=document.getElementById("sort").value;
-  let list=PRODUCTS.filter(p=>(!activeCat||p.cat===activeCat)&&(!q||p.name.includes(q)));
-  if(sort==="cheap")list=[...list].sort((a,b)=>a.price-b.price);
-  if(sort==="exp")list=[...list].sort((a,b)=>b.price-a.price);
-  const g=document.getElementById("grid");
-  if(!list.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">😅 چیزی پیدا نشد! یه کلمه دیگه امتحان کن.</div>';return;}
-  g.innerHTML=list.map(p=>{
-    const off=p.old?Math.round((1-p.price/p.old)*100):0;
-    const inCart=cart[p.id]||0;
-    return `<div class="card">${off?`<div class="off">٪${off.toLocaleString("fa-IR")} تخفیف</div>`:""}
-    <div class="emoji-bg" style="background:${p.bg}"><div class="emoji">${p.emoji}</div></div>
-    <h3>${p.name}</h3><div class="unit">${p.unit} • ${CATS[p.cat]||""}</div>
-    <div class="price-row"><div class="price">${p.old?`<del>${fa(p.old)}</del>`:""}${fa(p.price)}</div>
-    ${inCart?`<div class="qty"><button onclick="decFromCart(${p.id})">−</button><b>${inCart.toLocaleString("fa-IR")}</b><button onclick="addToCart(${p.id});renderProducts(false)">+</button></div>`:`<button class="add" onclick="addToCart(${p.id});renderProducts(false)">افزودن 🛒</button>`}</div></div>`;}).join("");
-}
-renderCats();renderProducts();
-</script>
-<a class="eita-float" id="eitaFloatIdx" href="https://eitaa.com/Azarbayjanshap" target="_blank">📩 ایتا فروشگاه</a>
-<a class="wa-float" href="https://wa.me/989108659424?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%B3%D9%88%D9%BE%D8%B1%D9%85%D8%A7%D8%B1%DA%A9%D8%AA%20%D8%A2%D8%B0%D8%B1%D8%A8%D8%A7%DB%8C%D8%AC%D8%A7%D9%86%20%F0%9F%99%8F" target="_blank" style="position:fixed;bottom:18px;inset-inline-end:18px;z-index:120;background:#25D366;border:2.5px solid #fff;color:#fff;border-radius:999px;padding:12px 20px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.25)">📲 واتساپ فروشگاه</a>
+<a class="eita-float" id="eitaFloatIdx" href="https://eitaa.com/Azarbayjanshap" target="_blank" style="position:fixed;bottom:18px;inset-inline-end:18px;z-index:120;background:#FF7A1A;border:2.5px solid #fff;color:#fff;border-radius:999px;padding:12px 20px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.25)">📩 ایتا فروشگاه</a>
 <script>
 (function(){
   if ("serviceWorker" in navigator) {
@@ -437,9 +170,8 @@ renderCats();renderProducts();
   });
   window.addEventListener("appinstalled", function(){ try{ toast("نصب شد! از این به بعد از روی صفحه گوشی بازش کن 🎉"); }catch(e){} });
   window.__pwaInstall = function(){
-    if (deferred) { deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }).catch(function(){}); return; }
-    var h = document.getElementById("pwaHelp"); if (h) { h.style.display = h.style.display==="none"?"":"none"; }
-    else { try{ toast("از منوی مرورگر: افزودن به صفحه اصلی 📲"); }catch(e){ alert("از منوی مرورگر گزینه «افزودن به صفحه اصلی» را بزن 📲"); } }
+    if (deferred) { try{ deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }).catch(function(){}); }catch(e){} return; }
+    try{ toggleGuide(true); }catch(e){ try{ toast("از منوی مرورگر: افزودن به صفحه اصلی 📲"); }catch(e2){} }
   };
   document.addEventListener("click", function(e){
     var b = e.target.closest && e.target.closest(".pwa-install-btn");
