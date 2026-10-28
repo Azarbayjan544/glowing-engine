@@ -92,7 +92,7 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <div class="big-yellow-box">👀 ببین انتخاب کن 👇</div>
 
 <div class="sec-head" style="margin-top:22px"><div><h2><img src="icon-192.png" class="basket-inline" alt="سبد"> انتخاب <i>جنس</i></h2></div></div>
-<div class="toolbar"><input id="q2" placeholder="🔍 کلید جنس رو بنویس و وارد شو... (مثلاً: شیر)" oninput="renderMini()"><select id="cat2" onchange="renderMini()"><option value="">همه دسته‌ها</option><option value="labaniat">🥛 لبنیات</option><option value="drinks">🥤 نوشیدنی ها</option><option value="shoyande">🧴 شوینده</option><option value="canned">🥫 کنسرویجات</option><option value="moraba">🍯 مرباها</option><option value="hobubat">🫘 حبوبات</option><option value="tanagholat">🍪 تنقلات</option><option value="bastani">🍨 بستنی ها</option><option value="frozen">🧊 منجمدی ها</option><option value="shokolat">🍫 شکلات ها</option><option value="adviye">🌶️ ادویه جات</option><option value="khordeh">🧺 خرده ریز</option><option value="behdash">🧼 بهداشتی</option></select></div>
+<div class="toolbar"><input id="q2" placeholder="🔍 کلید جنس رو بنویس و وارد شو... (مثلاً: شیر)" oninput="renderMini()"><select id="cat2" onchange="renderMini()"><option value="">همه دسته‌ها</option><option value="dairy">🥛 لبنیات</option><option value="canned">🥫 کنسرویجات</option><option value="jam">🍯 مرباها</option><option value="wash">🧴 شوینده</option><option value="hygiene">🧼 بهداشتی</option><option value="misc">🧺 خرده ریز</option><option value="beans">🫘 حبوبات</option><option value="pasta">🍝 ماکارونی ها</option><option value="drink">🥤 نوشیدنی</option><option value="tea">☕ چای</option><option value="sauce">🍅 سس ها</option><option value="protein">🌭 سوسیس و کالباس</option><option value="snack">🍪 تنقلات</option></select></div>
 <div class="mini-grid" id="mini"></div>
 </div>
 
@@ -305,22 +305,22 @@ function sendEitaaDirect(){
 }
 
 var NEW_CATS=[
-{id:"labaniat",title:"لبنیات",emoji:"🥛",keys:["شیر","ماست","پنیر","تخم","دوغ","لبنیات"],olds:["dairy"]},
-{id:"drinks",title:"نوشیدنی ها",emoji:"🥤",keys:["نوشابه","نوشیدنی","دوغ","دلستر","آبمیوه","کوکا"],olds:["drink"]},
-{id:"shoyande",title:"شوینده",emoji:"🧴",keys:["شوینده","مایع ظرف","پودر","شوینده"],olds:["hygiene"]},
-{id:"canned",title:"کنسرویجات",emoji:"🥫",keys:["کنسرو","رب","تن ماهی"]},
-{id:"moraba",title:"مرباها",emoji:"🍯",keys:["مربا","عسل"]},
-{id:"hobubat",title:"حبوبات",emoji:"🫘",keys:["حبوبات","لوبیا","عدس","نخود","برنج","لپه"],olds:["grocery"]},
-{id:"tanagholat",title:"تنقلات",emoji:"🍪",keys:["تنقلات","چیپس","بیسکوییت","پفک"],olds:["snack"]},
-{id:"frozen",title:"منجمدی ها",emoji:"🧊",keys:["منجمد","یخ زده","ناگت","فلافل منجمد","سبزی منجمد"]},
-{id:"bastani",title:"بستنی ها",emoji:"🍨",keys:["بستنی"]},
-{id:"shokolat",title:"شکلات ها",emoji:"🍫",keys:["شکلات","کاکائو","بیسکوییت"],olds:[]},
-{id:"adviye",title:"ادویه جات",emoji:"🌶️",keys:["ادویه","زردچوبه","فلفل","نمک","زعفران"]},
-{id:"khordeh",title:"خرده ریز",emoji:"🧺",keys:["خرده","نان","لواش","بربری"],olds:["bread"]},
-{id:"behdash",title:"بهداشتی",emoji:"🧼",keys:["بهداشتی","مسواک","شامپو","صابون","دستمال"]}
+{id:"dairy",title:"لبنیات",emoji:"🥛",keys:["شیر","ماست","پنیر","تخم","دوغ","لبنی","خامه","کره"],olds:["dairy"]},
+{id:"canned",title:"کنسرویجات",emoji:"🥫",keys:["کنسرو","رب","تن ماهی","ذرت","نخودفرنگی"]},
+{id:"jam",title:"مرباها",emoji:"🍯",keys:["مربا","عسل"]},
+{id:"wash",title:"شوینده",emoji:"🧴",keys:["شوینده","مایع ظرف","پودر","وایتکس","شیشه پاک","سفیدکننده","جرمگیر"],olds:["hygiene"]},
+{id:"hygiene",title:"بهداشتی",emoji:"🧼",keys:["بهداشتی","مسواک","شامپو","صابون","پوشک","خمیر دندان","دستمال کاغذی"]},
+{id:"misc",title:"خرده ریز",emoji:"🧺",keys:["خرده","نان","لواش","بربری","روغن","قند","شکر","فویل","کیسه زباله"],olds:["bread"]},
+{id:"beans",title:"حبوبات",emoji:"🫘",keys:["حبوبات","لوبیا","عدس","نخود","لپه","برنج"],olds:[]},
+{id:"pasta",title:"ماکارونی ها",emoji:"🍝",keys:["ماکارونی","رشته","اسپاگتی","لازانیا"],olds:[]},
+{id:"drink",title:"نوشیدنی",emoji:"🥤",keys:["نوشابه","نوشیدنی","دلستر","آبمیوه","کوکا","رانی"],olds:["drink"]},
+{id:"tea",title:"چای",emoji:"☕",keys:["چای","دمنوش","قهوه","نسکافه","کاپوچینو"]},
+{id:"sauce",title:"سس ها",emoji:"🍅",keys:["سس","کچاپ","مایونز","خردل","رب گوجه"]},
+{id:"protein",title:"سوسیس و کالباس",emoji:"🌭",keys:["سوسیس","کالباس","ژامبون","هات داگ"]},
+{id:"snack",title:"تنقلات",emoji:"🍪",keys:["تنقلات","چیپس","بیسکوییت","پفک","شکلات","کاکائو","آدامس","پاستیل"],olds:["snack"]}
 ];
 function renderCats(){
-  document.getElementById("mini").innerHTML=NEW_CATS.map(c=>{const im=c.id==="khordeh"?`<img src="icon-192.png" class="cat-basket-img" alt="سبد">`:`<div class="e">${c.emoji}</div>`;return `<div class="mini cat-card">${im}<b>${c.title}</b><button onclick="openCat('${c.id}')">ورود 👀</button></div>`;}).join("");
+  document.getElementById("mini").innerHTML=NEW_CATS.map(c=>`<div class="mini cat-card"><div class="e">${c.emoji}</div><b>${c.title}</b><button onclick="openCat('${c.id}')">ورود 👀</button></div>`).join("");
 }
 function openCat(id){
   document.getElementById("cat2").value=id;

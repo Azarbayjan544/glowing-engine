@@ -3,28 +3,54 @@ const DEFAULT_PRODUCTS = [
 {id:2,name:"ماست موسیر چکیده",unit:"دبه ۱ کیلویی",price:65000,cat:"dairy",emoji:"🍶",bg:"#FFF3D6"},
 {id:3,name:"پنیر تبریزی اصل",unit:"بسته ۵۰۰ گرمی",price:120000,old:138000,cat:"dairy",emoji:"🧀",bg:"#E8F9EF"},
 {id:4,name:"تخم‌مرغ تازه محلی",unit:"شانه ۳۰ عددی",price:145000,cat:"dairy",emoji:"🥚",bg:"#FFF3D6"},
-{id:5,name:"نان بربری داغ تنوری",unit:"هر قرص",price:15000,cat:"bread",emoji:"🥖",bg:"#FFEED6"},
-{id:6,name:"نان لواش بسته‌ای",unit:"بسته ۱۰ عددی",price:28000,cat:"bread",emoji:"🫓",bg:"#FFF3D6"},
-{id:7,name:"برنج ایرانی درجه‌یک",unit:"کیسه ۵ کیلویی",price:850000,old:920000,cat:"grocery",emoji:"🍚",bg:"#E8F9EF"},
-{id:8,name:"روغن آفتابگردان",unit:"بطری ۳ لیتری",price:285000,cat:"grocery",emoji:"🫗",bg:"#E7F5FE"},
-{id:9,name:"ماکارونی رشته‌ای",unit:"بسته ۷۰۰ گرمی",price:42000,cat:"grocery",emoji:"🍝",bg:"#F1EAFE"},
+{id:5,name:"نان بربری داغ تنوری",unit:"هر قرص",price:15000,cat:"misc",emoji:"🥖",bg:"#FFEED6"},
+{id:6,name:"نان لواش بسته‌ای",unit:"بسته ۱۰ عددی",price:28000,cat:"misc",emoji:"🫓",bg:"#FFF3D6"},
+{id:7,name:"برنج ایرانی درجه‌یک",unit:"کیسه ۵ کیلویی",price:850000,old:920000,cat:"beans",emoji:"🍚",bg:"#E8F9EF"},
+{id:8,name:"روغن آفتابگردان",unit:"بطری ۳ لیتری",price:285000,cat:"misc",emoji:"🫗",bg:"#E7F5FE"},
+{id:9,name:"ماکارونی رشته‌ای",unit:"بسته ۷۰۰ گرمی",price:42000,cat:"pasta",emoji:"🍝",bg:"#F1EAFE"},
 {id:14,name:"نوشابه خانواده",unit:"بطری ۱/۵ لیتری",price:45000,cat:"drink",emoji:"🥤",bg:"#E7F5FE"},
 {id:15,name:"دوغ نعنایی آذربایجان",unit:"بطری ۱/۵ لیتری",price:40000,cat:"drink",emoji:"🥛",bg:"#E8F9EF"},
 {id:16,name:"چیپس سرکه‌ای",unit:"بسته بزرگ",price:38000,cat:"snack",emoji:"🍟",bg:"#FFF3D6"},
 {id:17,name:"بیسکوییت کرمدار",unit:"بسته ۴ عددی",price:32000,old:38000,cat:"snack",emoji:"🍪",bg:"#FFEED6"},
-{id:18,name:"مایع ظرفشویی لیمویی",unit:"بطری ۱ لیتری",price:55000,cat:"hygiene",emoji:"🧴",bg:"#E7F5FE"}
+{id:18,name:"مایع ظرفشویی لیمویی",unit:"بطری ۱ لیتری",price:55000,cat:"wash",emoji:"🧴",bg:"#E7F5FE"}
 ];
-const CATS = {dairy:"لبنیات",bread:"نان تازه",grocery:"خواربار",drink:"نوشیدنی",snack:"تنقلات",hygiene:"شوینده"};
-const CAT_BG = {dairy:"#E8F9EF",bread:"#FFF3D6",grocery:"#E8F9EF",drink:"#E7F5FE",snack:"#FFF3D6",hygiene:"#E7F5FE"};
+const CATS = {dairy:"لبنیات",canned:"کنسرویجات",jam:"مرباها",wash:"شوینده",hygiene:"بهداشتی",misc:"خرده ریز",beans:"حبوبات",pasta:"ماکارونی ها",drink:"نوشیدنی",tea:"چای",sauce:"سس ها",protein:"سوسیس و کالباس",snack:"تنقلات"};
+const CAT_BG = {dairy:"#E8F9EF",canned:"#FFEED6",jam:"#FFF3D6",wash:"#E7F5FE",hygiene:"#F1EAFE",misc:"#FFF3D6",beans:"#E8F9EF",pasta:"#F1EAFE",drink:"#E7F5FE",tea:"#FFEED6",sauce:"#FFE3E3",protein:"#FFEED6",snack:"#FFF3D6",bread:"#FFF3D6",grocery:"#E8F9EF"};
 
+function migrateOldCat(p){
+  if(!p) return p;
+  const nm=(p.name||"")+" "+(p.unit||"");
+  if(p.cat==="bread"){ p.cat="misc"; }
+  else if(p.cat==="grocery"){
+    if(/ماکارونی|رشته|اسپاگتی|لازانیا/.test(nm)) p.cat="pasta";
+    else if(/برنج|لوبیا|عدس|نخود|لپه|حبوبات/.test(nm)) p.cat="beans";
+    else p.cat="misc";
+  }
+  else if(p.cat==="hygiene"){
+    // قدیمی‌ها اکثرا شوینده بودن، بهداشتی‌ها رو جدا کن
+    if(/بهداشتی|مسواک|شامپو|صابون|پوشک|خمیر دندان|دستمال کاغذی/.test(nm)) p.cat="hygiene";
+    else p.cat="wash";
+  }
+  return p;
+}
 function loadProducts(){
   try{
     const s = localStorage.getItem("az_products");
     if(s){
       const arr = JSON.parse(s);
       if(Array.isArray(arr) && arr.length){
-        const cleaned = arr.filter(p=>p && p.cat!=="fruit");
-        if(cleaned.length!==arr.length){ try{localStorage.setItem("az_products",JSON.stringify(cleaned));}catch(e){} }
+        let cleaned = arr.filter(p=>p && p.cat!=="fruit");
+        let changed=false;
+        cleaned=cleaned.map(p=>{
+          const before=p.cat;
+          migrateOldCat(p);
+          if(p.cat!==before) changed=true;
+          // رنگ پس‌زمینه رو هم با دسته جدید هماهنگ کن
+          try{ if(CAT_BG[p.cat]) p.bg=CAT_BG[p.cat]; }catch(e){}
+          return p;
+        });
+        if(cleaned.length!==arr.length) changed=true;
+        if(changed){ try{localStorage.setItem("az_products",JSON.stringify(cleaned));}catch(e){} }
         return cleaned;
       }
       if(Array.isArray(arr) && arr.length===0) return [];

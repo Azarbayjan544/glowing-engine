@@ -112,7 +112,7 @@
 <input type="hidden" id="pId" value="">
 <div class="field" style="margin-top:8px"><label>نام جنس *</label><input id="pName" placeholder="مثلاً: پنیر لیقوان"></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
-<div class="field"><label>دسته *</label><select id="pCat"><option value="dairy">🥛 لبنیات</option><option value="bread">🥖 نان</option><option value="grocery">🍚 خواربار</option><option value="drink">🥤 نوشیدنی</option><option value="snack">🍪 تنقلات</option><option value="hygiene">🧴 شوینده و بهداشتی</option></select></div>
+<div class="field"><label>دسته *</label><select id="pCat"><option value="dairy">🥛 لبنیات</option><option value="canned">🥫 کنسرویجات</option><option value="jam">🍯 مرباها</option><option value="wash">🧴 شوینده</option><option value="hygiene">🧼 بهداشتی</option><option value="misc">🧺 خرده ریز</option><option value="beans">🫘 حبوبات</option><option value="pasta">🍝 ماکارونی ها</option><option value="drink">🥤 نوشیدنی</option><option value="tea">☕ چای</option><option value="sauce">🍅 سس ها</option><option value="protein">🌭 سوسیس و کالباس</option><option value="snack">🍪 تنقلات</option></select></div>
 <div class="field"><label>واحد</label><input id="pUnit" placeholder="هر کیلو / بسته / بطری..."></div>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
@@ -130,7 +130,7 @@
 
 <div class="form-card" style="margin-top:14px">
 <div class="sec-head"><div><h2 style="font-size:20px">📋 لیست اجناس فروشگاه</h2></div></div>
-<div class="toolbar"><input id="aq" placeholder="🔍 جست‌وجو..." oninput="renderAdmin()"><select id="acat" onchange="renderAdmin()"><option value="">همه دسته‌ها</option><option value="dairy">لبنیات</option><option value="bread">نان</option><option value="grocery">خواربار</option><option value="drink">نوشیدنی</option><option value="snack">تنقلات</option><option value="hygiene">شوینده</option></select></div>
+<div class="toolbar"><input id="aq" placeholder="🔍 جست‌وجو..." oninput="renderAdmin()"><select id="acat" onchange="renderAdmin()"><option value="">همه دسته‌ها</option><option value="dairy">لبنیات</option><option value="canned">کنسرویجات</option><option value="jam">مرباها</option><option value="wash">شوینده</option><option value="hygiene">بهداشتی</option><option value="misc">خرده ریز</option><option value="beans">حبوبات</option><option value="pasta">ماکارونی ها</option><option value="drink">نوشیدنی</option><option value="tea">چای</option><option value="sauce">سس ها</option><option value="protein">سوسیس و کالباس</option><option value="snack">تنقلات</option></select></div>
 <div style="overflow:auto"><table class="atable"><thead><tr><th>جنس</th><th>نام / واحد</th><th>قیمت</th><th>عملیات</th></tr></thead><tbody id="arows"></tbody></table></div>
 </div>
 
@@ -193,7 +193,7 @@ function changePass(){
   localStorage.setItem("az_admin_pass",n); document.getElementById("oldPass").value="";document.getElementById("newPass").value=""; toast("رمز عوض شد ✅");
 }
 // ---- محصولات ----
-const EMOJIS=["🥛","🧀","🍶","🥚","🥖","🫓","🍚","🫗","🍝","🥤","🧃","🍟","🍪","🍫","🧴","🧻","🧈","🍯","☕","🍵"];
+const EMOJIS=["🥛","🧀","🍶","🥚","🥖","🫓","🍚","🫘","🍝","🥤","🧃","☕","🍵","🍯","🥫","🍅","🌭","🍟","🍪","🍫","🧴","🧼","🧻","🧈","🫗"];
 function buildEmoji(){
   document.getElementById("emojiPick").innerHTML=EMOJIS.map(e=>`<button type="button" onclick="pickEmoji('${e}',this)">${e}</button>`).join("");
 }
