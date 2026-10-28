@@ -334,6 +334,7 @@ function backToCats(){
 }
 function matchCat(p,cid){
   if(p.cat===cid) return true;
+  try{ var allIds=NEW_CATS.map(function(x){return x.id;}); if(allIds.indexOf(p.cat)!==-1) return false; }catch(e){}
   var cat=NEW_CATS.find(x=>x.id===cid);
   if(!cat) return false;
   if(cat.olds && cat.olds.includes(p.cat)) return true;

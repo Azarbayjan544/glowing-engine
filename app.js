@@ -14,7 +14,49 @@ const DEFAULT_PRODUCTS = [
 {id:13,name:"رب گوجه گلنوش ۸۰۰ گرم",unit:"هر عدد",price:335800,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
 {id:14,name:"رب گوجه شیلتون۲۳۰ گرم",unit:"هر عدد",price:45000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
 {id:15,name:"رب گوجه آیدین ۴۰۰ گرم",unit:"هر عدد",price:126000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
-{id:16,name:"رب گوجه گلنوش ۴۰۰ گرم",unit:"هر عدد",price:185000,cat:"canned",emoji:"🥫",bg:"#FFEED6"}
+{id:16,name:"رب گوجه گلنوش ۴۰۰ گرم",unit:"هر عدد",price:185000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:17,name:"رب گوجه شیشه گلنوش ۶۸۰ گرم",unit:"هر عدد",price:316000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:18,name:"کنسرو خیارشورطبیعت ۶۶۰ گرم",unit:"هر عدد",price:340000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:19,name:"ترشی بندری شیشه گلنوش۶۷۰ گرم",unit:"هر عدد",price:129700,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:20,name:"ترشی لیته شیشه یک و یک ۶۴۰ گرم",unit:"هر عدد",price:179000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:21,name:"ترشی مخلوط شیشه بهروز ۵۵۰ گرم",unit:"هر عدد",price:159000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:22,name:"ترشی مخلوط شیشه بهروز ۵۵۰ گرم",unit:"هر عدد",price:159000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:23,name:"مربای بالنگ شیشه بهروز ۲۹۵ گرم",unit:"هر عدد",price:220000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:24,name:"مربای شیشه گلنوش هویج ۲۹۰ گرم",unit:"هر عدد",price:126000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:25,name:"مربای شیشه شاه توت بهروز ۲۹۵ گرم",unit:"هر عدد",price:335000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:26,name:"مربای شیشه انجیر بهروز ۲۹۵ گرم",unit:"هر عدد",price:190000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:27,name:"مربای شیشه سیب و دارچین بهروز ۲۹۵ گرم",unit:"هر عدد",price:185000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:28,name:"مربا شیشه تمشک بهروز ۲۹۵ گرم",unit:"هرعدد",price:280000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:29,name:"مربا شیشه به بهروز ۲۹۵ گرم",unit:"هر عدد",price:170000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:30,name:"مربا موسوی آلبالو",unit:"هر عدد",price:148000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:31,name:"مربا گل سرخ شیشه گلنوش ۲۹۰ گرم",unit:"هر عدد",price:136000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:32,name:"مربا آلبالو شیشه گلنوش ۲۹۰ گرم",unit:"هر عدد",price:230000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:33,name:"مربا شیشه توت فرنگی بهروز ۲۹۵ گرم",unit:"هر عدد",price:210000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:34,name:"مربا شیشه هویج بهردز ۲۹۵ گرم",unit:"هر عدد",price:170000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:35,name:"مربا شیشه آلبالو موسوی ۳۵۰ گرم",unit:"هر عدد",price:320000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:36,name:"مربا شیشه هویج موسوی ۳۵۰ گرم",unit:"هر عدد",price:227000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:37,name:"کمپوت گیلاس چاشنی ۴۲۰ گرم",unit:"هر عدد",price:349900,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:38,name:"کمپوت گلابی یک و یک ۴۲۰ گرم",unit:"هر عدد",price:139900,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:39,name:"کمپوت سیب یک و یک ۴۲۰ گرم",unit:"هر عدد",price:149900,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:40,name:"سس کچاپ گلنوش ۴۰۰ گرم",unit:"هر عدد",price:181000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:41,name:"سس کچاپ بهروز ۳۹۵ گرم",unit:"هر عدد",price:215000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:42,name:"سس کچاپ تند بهروز ۳۹۵ گرم",unit:"هر عدد",price:175000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:43,name:"سس مایونز شیشه بهروز ۲۴۰ گرم",unit:"هر عدد",price:218000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:44,name:"سس مایونز شیشه بهروز ۹۰۰ گرم",unit:"هر عدد",price:687000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:45,name:"کشک سمیه ۴۶۰ گرم",unit:"هر عدد",price:169000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:46,name:"کشک سمیه شیشه ۲۳۰ گرم",unit:"هر عدد",price:170000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:47,name:"کشک سمیه شیشه ۲۵۰ گرم",unit:"هر عدد",price:75000,cat:"sauce",emoji:"🍅",bg:"#FFE3E3"},
+{id:48,name:"مربا شیشه هویج ناصر ۱۷۰ گرم",unit:"هر عدد",price:126000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:49,name:"عسل شیشه ناصر۱۷۰ گرم",unit:"هر عدد",price:223000,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:50,name:"عسل کاسه ای ناصر ۷۵ گرم",unit:"هر عدد",price:85900,cat:"jam",emoji:"🍯",bg:"#FFF3D6"},
+{id:51,name:"تن ماهی شیلتون ۱۸۰ گرم",unit:"هر عدد",price:299000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:52,name:"تن ماهی طبیعت ۱۵۰ گرم",unit:"هر عدد",price:240000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:53,name:"تن ماهی طبیعت ۱۸۰ گرم",unit:"هر عدد",price:290000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:54,name:"تن ماهی شیلتون ۱۵۰ گرم",unit:"هر عدد",price:270000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:55,name:"کنسرو خیارشور بهروز ۶۶۰ گرم",unit:"هر عدد",price:240000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:56,name:"ژل آتش زا بزرگ",unit:"هر عدد",price:150000,cat:"misc",emoji:"🧺",bg:"#FFF3D6"},
+{id:57,name:"ژل آتش زا کوچک",unit:"هر عدد",price:100000,cat:"misc",emoji:"🧺",bg:"#FFF3D6"},
+{id:58,name:"الکل صنعتی کوچک",unit:"هر عدد",price:80000,cat:"misc",emoji:"🧺",bg:"#FFF3D6"}
 ];
 const CATS = {dairy:"لبنیات",canned:"کنسرویجات",jam:"مرباها",wash:"شوینده",hygiene:"بهداشتی",misc:"خرده ریز",beans:"حبوبات",pasta:"ماکارونی ها",drink:"نوشیدنی",tea:"چای",sauce:"سس ها",protein:"سوسیس و کالباس",snack:"تنقلات"};
 const CAT_BG = {dairy:"#E8F9EF",canned:"#FFEED6",jam:"#FFF3D6",wash:"#E7F5FE",hygiene:"#F1EAFE",misc:"#FFF3D6",beans:"#E8F9EF",pasta:"#F1EAFE",drink:"#E7F5FE",tea:"#FFEED6",sauce:"#FFE3E3",protein:"#FFEED6",snack:"#FFF3D6",bread:"#FFF3D6",grocery:"#E8F9EF"};
@@ -35,8 +77,30 @@ function migrateOldCat(p){
   }
   return p;
 }
+const PRODUCTS_VER = 21;
 function loadProducts(){
   try{
+    // اگه نسخه جدید سایت اومده، مشتری‌های قدیمی خودکار به‌روز بشن
+    try{
+      const vv = localStorage.getItem("az_products_ver");
+      if(vv && vv !== String(PRODUCTS_VER)){
+        try{ localStorage.setItem("az_products", JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem("az_products_ver", String(PRODUCTS_VER)); }catch(e){}
+        return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+      }
+      if(!vv){
+        try{
+          const s0 = localStorage.getItem("az_products");
+          if(s0){
+            const a0 = JSON.parse(s0);
+            if(Array.isArray(a0) && a0.length && a0.length < DEFAULT_PRODUCTS.length){
+              try{ localStorage.setItem("az_products", JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem("az_products_ver", String(PRODUCTS_VER)); }catch(e){}
+              return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+            }
+          }
+        }catch(e){}
+        try{ localStorage.setItem("az_products_ver", String(PRODUCTS_VER)); }catch(e){}
+      }
+    }catch(e){}
     const s = localStorage.getItem("az_products");
     if(s){
       const arr = JSON.parse(s);
@@ -61,7 +125,7 @@ function loadProducts(){
   return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
 }
 let PRODUCTS = loadProducts();
-function persistProducts(){ try{localStorage.setItem("az_products",JSON.stringify(PRODUCTS));}catch(e){} }
+function persistProducts(){ try{localStorage.setItem("az_products",JSON.stringify(PRODUCTS)); localStorage.setItem("az_products_ver",String(PRODUCTS_VER));}catch(e){} }
 
 // فروشگاه (شماره تماس و تنظیمات - قابل تغییر از پنل مدیریت)
 function loadStore(){
