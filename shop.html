@@ -146,11 +146,6 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <p style="font-size:12.5px;color:#5b6a85;margin:4px 0">روبیکا و ایتا خودشون متن رو نمی‌برن. اول دکمه «📋 کپی متن سفارش» رو بزن، بعد دکمه روبیکا یا ایتا رو بزن و تو پیام‌رسان «چسباندن» رو بزن.<br>برای روبیکا خودت روبیکا رو باز کن و تو <b>پیام‌رسان</b> آیدی زیر رو جستجو کن 💜</p>
 <textarea id="orderTextBox" readonly rows="5" style="width:100%;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12.5px;background:#fff;line-height:1.9" onclick="this.select()"></textarea>
 <button class="btn btn-dark" style="width:100%;justify-content:center;margin-top:8px;font-size:14px" onclick="copyOrderText(true)">📋 کپی متن سفارش</button>
-<div style="background:#F1EAFE;border:2px dashed #7A3DFF;border-radius:12px;padding:10px;margin:8px 0 0;text-align:center">
-<div style="font-size:13px;font-weight:800">💜 آیدی روبیکا ما:</div>
-<div dir="ltr" id="rubikaIdShow2" style="font-size:19px;font-weight:900;letter-spacing:.5px;margin:4px 0">Azarbayjanshap</div>
-<button type="button" onclick="copyRubikaId()" style="border:2px solid var(--ink);background:#7A3DFF;color:#fff;border-radius:10px;padding:7px 16px;font-weight:800;cursor:pointer;font-size:13.5px">📋 کپی آیدی روبیکا</button>
-</div>
 </div>
 <br><a id="rubikaLink" class="btn btn-rubika" style="margin-top:10px" href="#" onclick="return sendRubikaFromModal()">💜 ارسال این سفارش در روبیکا</a><br><br>
 <a id="eitaaLink" class="btn btn-eitaa" style="margin-top:2px" target="_blank" href="#" onclick="return sendEitaaFromModal()">📩 ارسال این سفارش در ایتا</a>
@@ -352,7 +347,7 @@ function submitOrder(openWa){
   refreshRubikaLinks();
   refreshEitaaLinks();
   document.getElementById("orderCode").textContent=code;
-  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">برای روبیکا دکمه بنفش رو بزن بعد دستی تو پیام‌رسان جستجو کن 💜<br>برای ایتا اول «کپی متن سفارش» رو بزن بعد تو ایتا بچسبون 📩</span>`;
+  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">اول «📋 کپی متن سفارش» رو بزن بعد دکمه بنفش روبیکا 💜 یا نارنجی ایتا 📩 رو بزن</span>`;
   try{ document.getElementById("orderTextBox").value = buildEitaaText(); }catch(e){}
   document.getElementById("modal").classList.add("show");
   cart={};save();try{renderMini();}catch(e){}
@@ -381,11 +376,11 @@ function copyRubikaId(){
 }
 function refreshRubikaLinks(){
   var rid=cleanRubikaId();
-  var a1=document.getElementById("rubikaLink"); if(a1) a1.href="#";
-  var a2=document.getElementById("rubikaOrderBtn"); if(a2) a2.href="#";
+  var chat=rubikaChatUrl();
+  var a1=document.getElementById("rubikaLink"); if(a1) a1.href=chat||"#";
+  var a2=document.getElementById("rubikaOrderBtn"); if(a2) a2.href=chat||"#";
   try{
     document.querySelectorAll(".rubika-id-txt").forEach(function(el){ el.textContent=rid; });
-    var s2=document.getElementById("rubikaIdShow2"); if(s2) s2.textContent=rid;
   }catch(e){}
 }
 function sendRubikaDirect(){
@@ -399,21 +394,22 @@ function sendRubikaDirect(){
   submitOrder(true);
   const txt=buildRubikaText();
   try{ var bx=document.getElementById("orderTextBox"); if(bx) bx.value=txt; }catch(e){}
-  var rid=cleanRubikaId();
   copyTextAsync(txt, function(ok){
-    if(ok) toast("متن سفارش کپی شد! حالا روبیکا رو خودت باز کن 📋");
-    else toast("کپی خودکار نشد! از کادر پایین کپی کن 📋");
+    if(ok) toast("کپی شد! توی روبیکا فقط «چسباندن» رو بزن 📋");
+    else toast("متن رو از کادر کپی کن و تو روبیکا بچسبون 📋");
   });
-  setTimeout(function(){ toast("آیدی ما: "+rid+" — تو پیام‌رسان جستجوش کن 💜"); },1000);
+  var chat=rubikaChatUrl();
+  if(chat){ setTimeout(function(){ window.open(chat,"_blank"); },700); }
   try{ var b2=document.getElementById("orderTextBox"); if(b2){ b2.focus(); b2.select(); } }catch(e){}
   return false;
 }
 function sendRubikaFromModal(){
   copyOrderText(false);
+  var chat=rubikaChatUrl();
   var rid=cleanRubikaId();
-  toast("کپی شد! روبیکا رو خودت باز کن و به "+rid+" بچسبون 📋");
-  try{ var bx=document.getElementById("orderTextBox"); if(bx){ bx.focus(); bx.select(); } }catch(e){}
-  setTimeout(function(){ toast("روبیکا → پیام‌رسان → جستجوی "+rid+" 💜"); },1800);
+  if(!chat){ toast("آیدی روبیکا ثبت نشده!"); return false; }
+  toast("کپی شد! الان تو روبیکا فقط «چسباندن» رو بزن 📋");
+  setTimeout(function(){ window.open(chat,"_blank"); }, 600);
   return false;
 }
 function closeModal(){document.getElementById("modal").classList.remove("show");}
