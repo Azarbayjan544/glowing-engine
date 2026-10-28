@@ -28,7 +28,6 @@
 .pay-opt label:has(input:checked){background:var(--ink);color:#fff}
 
 .btn-eitaa{background:#FF7A1A!important;color:#fff!important}
-.btn-rubika{background:#7A3DFF!important;color:#fff!important}
 
 body{padding-bottom:10px}
 .nav-shop-center{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 18px 14px;text-align:center}
@@ -112,8 +111,7 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 1️⃣ دکمه «✅ ثبت نهایی سفارش» رو بزن تا پنجره ثبت باز بشه<br>
 2️⃣ اول «📋 کپی متن سفارش» رو بزن تا متنت کپی بشه<br>
 3️⃣ ایتا 📩 خودش باز میشه، فقط «چسباندن» رو بزن<br>
-4️⃣ برای روبیکا 💜 دکمه بنفش رو بزن — متن کپی میشه، بعد خودت روبیکا رو باز کن، برو پایین صفحه تو تب <b>پیام‌رسان</b>، بالای صفحه ذره‌بین 🔍 رو بزن و آیدی <b dir="ltr"><span class="rubika-id-txt">Azarbayjanshap</span></b> رو جستجو کن و بچسبون<br>
-⚠️ لینک مستقیم روبیکا میره روی روبینو، برای همین باید دستی تو پیام‌رسان جستجو کنی
+3️⃣ ایتا 📩 خودش باز میشه، فقط «چسباندن» رو بزن ✅
 </div>
 <p style="font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center">بعد از ثبت، کد پیگیری می‌گیری و ما برای هماهنگی زنگ می‌زنیم 📞</p>
 </div>
@@ -126,7 +124,7 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <div><h4><img src="icon-192.png" class="basket-inline" alt="سبد"> سوپرمارکت آذربایجان</h4><p>📍 <span class="store-addr">شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور</span></p></div>
 
 <div><h4>ساعت کاری</h4><p>🕖 همه‌روزه از ساعت ۶ صبح الی ۱۰ شب</p></div>
-<div><h4>تماس با ما</h4><p>📸 اینستا: <a href="https://instagram.com/sopermarketazarbayjan" target="_blank" dir="ltr" style="color:#FFC93C">sopermarketazarbayjan@</a><br>📩 ایتا: <a href="https://eitaa.com/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a><br>💜 روبیکا (جستجو در پیام‌رسان): <span dir="ltr" style="color:#FFC93C">Azarbayjanshap</span><br>📱 <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span> • ☎️ <span dir="ltr">۴۴۲۰۳۱۷۰</span></p></div>
+<div><h4>تماس با ما</h4><p>📸 اینستا: <a href="https://instagram.com/sopermarketazarbayjan" target="_blank" dir="ltr" style="color:#FFC93C">sopermarketazarbayjan@</a><br>📩 ایتا: <a href="https://eitaa.com/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a><br>📱 <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span> • ☎️ <span dir="ltr">۴۴۲۰۳۱۷۰</span></p></div>
 </div></footer>
 
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
@@ -144,11 +142,10 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <p id="orderSum" style="font-size:14px"></p>
 <div id="eitaaCopyBox" style="background:#FFF8E8;border:2px dashed var(--orange);border-radius:14px;padding:12px;margin-top:12px;text-align:right">
 <b style="font-size:14px">📋 اول متنت رو کپی کن (مهم):</b>
-<p style="font-size:12.5px;color:#5b6a85;margin:4px 0">روبیکا و ایتا خودشون متن رو نمی‌برن. اول «📋 کپی متن سفارش» رو بزن.<br>ایتا 📩 خودش باز میشه و فقط «چسباندن» رو بزن.<br>برای روبیکا 💜 دکمه بنفش رو بزن تا کپی بشه، بعد خودت روبیکا رو باز کن، برو تو <b>پیام‌رسان</b> (تب پایین)، ذره‌بین 🔍 بالا رو بزن و آیدی <b dir="ltr">Azarbayjanshap</b> رو جستجو کن و بچسبون.<br>⚠️ روی لینک مستقیم نزن چون میره روی <b>روبینو</b>، نه پیام‌رسان.</p>
+<p style="font-size:12.5px;color:#5b6a85;margin:4px 0">ایتا خودش متن رو نمی‌بره. اول «📋 کپی متن سفارش» رو بزن، بعد دکمه نارنجی 📩 رو بزن تا ایتا باز بشه و فقط «چسباندن» رو بزن ✅</p>
 <textarea id="orderTextBox" readonly rows="5" style="width:100%;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12.5px;background:#fff;line-height:1.9" onclick="this.select()"></textarea>
 <button class="btn btn-dark" style="width:100%;justify-content:center;margin-top:8px;font-size:14px" onclick="copyOrderText(true)">📋 کپی متن سفارش</button>
 </div>
-<br><a id="rubikaLink" class="btn btn-rubika" style="margin-top:10px" href="#" onclick="return sendRubikaFromModal()">💜 ارسال این سفارش در روبیکا</a><br><br>
 <a id="eitaaLink" class="btn btn-eitaa" style="margin-top:2px" target="_blank" href="#" onclick="return sendEitaaFromModal()">📩 ارسال این سفارش در ایتا</a>
 <br>
 <button class="btn btn-primary" style="margin-top:10px" onclick="closeModal()">عالیه، ممنون! 💛</button><br><br>
@@ -203,7 +200,7 @@ function copyOrderText(fromBtn){
   else txt = buildEitaaText();
   if(!txt || txt.length<5){ toast("اول سفارش رو ثبت کن 🧺"); return false; }
   copyTextAsync(txt, function(ok){
-    if(ok){ toast("کپی شد عزیزم! حالا برو تو روبیکا/ایتا و بچسبون 📋"); }
+    if(ok){ toast("کپی شد عزیزم! حالا برو تو ایتا و بچسبون 📋"); }
     else{
       toast("کپی خودکار نشد! انگشتت رو روی متن نگه دار و «کپی» رو بزن 📋");
     }
@@ -344,74 +341,15 @@ function submitOrder(openWa){
     addOrder({code:code,ts:Date.now(),name:name,phone:phone,addr:addr,time:time,pay:pay,note:note,items:items,det:det,ship:shipTxt,total:totalTxt,totalNum:(cTotal+shipNum),status:"new"});
     saveCustomer({name:name,phone:phone,addr:addr});
   }catch(e){}
-  refreshRubikaLinks();
   refreshEitaaLinks();
   document.getElementById("orderCode").textContent=code;
-  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">اول «📋 کپی متن سفارش» رو بزن بعد برای ایتا دکمه نارنجی 📩، برای روبیکا دکمه بنفش 💜 رو بزن و دستی تو پیام‌رسان جستجو کن</span>`;
+  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">اول «📋 کپی متن سفارش» رو بزن بعد دکمه نارنجی 📩 ایتا رو بزن</span>`;
   try{ document.getElementById("orderTextBox").value = buildEitaaText(); }catch(e){}
   document.getElementById("modal").classList.add("show");
   cart={};save();try{renderMini();}catch(e){}
 }
 
 var lastOrder = null;
-function cleanRubikaId(){ try{ let v=(STORE.rubika||STORE.eitaa||"Azarbayjanshap").trim().replace(/^@+/,""); v=v.replace(/.*rubika\.ir\//,"").trim(); if(!v) v="Azarbayjanshap"; return v; }catch(e){ return "Azarbayjanshap"; } }
-function rubikaChatUrl(){ const id=cleanRubikaId(); if(id) return "https://rubika.ir/"+encodeURIComponent(id); return ""; }
-function buildRubikaText(){
-  if(!lastOrder) return "سلام سوپرمارکت آذربایجان 🙏";
-  const L = lastOrder;
-  let lines = ["🧺 سفارش جدید - سوپرمارکت آذربایجان","--------------------------","🧾 کد پیگیری: "+L.code,"👤 نام: "+L.name,"📱 موبایل: "+L.phone,"📍 آدرس: "+L.addr,"🕖 تحویل: "+L.time,"💳 پرداخت: "+L.pay,"","🛒 اقلام:"];
-  L.items.forEach(it=>{ lines.push("• "+it.name+" × "+it.qty+" - "+it.price); });
-  lines.push("","🚚 ارسال: "+L.ship,"💰 جمع کل: "+L.total);
-  if(L.note) lines.push("📝 توضیح: "+L.note);
-  lines.push("","ممنون 🙏");
-  return lines.join("\n");
-}
-function copyRubikaId(){
-  var rid=cleanRubikaId();
-  copyTextAsync(rid, function(ok){
-    if(ok) toast("آیدی کپی شد: "+rid+" 💜");
-    else toast("آیدی ما: "+rid+" — نگه دار و کپی کن 💜");
-  });
-  return false;
-}
-function refreshRubikaLinks(){
-  var rid=cleanRubikaId();
-  var chat=rubikaChatUrl();
-  var a1=document.getElementById("rubikaLink"); if(a1) a1.href=chat||"#";
-  var a2=document.getElementById("rubikaOrderBtn"); if(a2) a2.href=chat||"#";
-  try{
-    document.querySelectorAll(".rubika-id-txt").forEach(function(el){ el.textContent=rid; });
-  }catch(e){}
-}
-function sendRubikaDirect(){
-  if(!cartCount()){toast("اول چندتا محصول انتخاب کن 🧺");return false;}
-  const name=document.getElementById("fName").value.trim();
-  const phone=document.getElementById("fPhone").value.trim().replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d));
-  const addr=document.getElementById("fAddr").value.trim();
-  if(name.length<3){toast("اسمت رو کامل بنویس عزیزم 😊");return false;}
-  if(!/^09\d{9}$/.test(phone)){toast("شماره موبایل باید ۱۱ رقم و با 09 شروع بشه 📱");return false;}
-  if(addr.length<8){toast("آدرست رو دقیق‌تر بنویس 📬");return false;}
-  submitOrder(true);
-  const txt=buildRubikaText();
-  try{ var bx=document.getElementById("orderTextBox"); if(bx) bx.value=txt; }catch(e){}
-  copyTextAsync(txt, function(ok){
-    if(ok) toast("کپی شد! توی روبیکا فقط «چسباندن» رو بزن 📋");
-    else toast("متن رو از کادر کپی کن و تو روبیکا بچسبون 📋");
-  });
-  var chat=rubikaChatUrl();
-  if(chat){ setTimeout(function(){ window.open(chat,"_blank"); },700); }
-  try{ var b2=document.getElementById("orderTextBox"); if(b2){ b2.focus(); b2.select(); } }catch(e){}
-  return false;
-}
-function sendRubikaFromModal(){
-  var rid=cleanRubikaId();
-  var chat=rubikaChatUrl();
-  try{ if(chat) window.open(chat,"_blank"); }catch(e){}
-  copyOrderText(false);
-  setTimeout(function(){ toast("تو روبیکا جستجو کن: "+rid+" بعد بچسبون 💜"); },1200);
-  try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
-  return false;
-}
 function closeModal(){document.getElementById("modal").classList.remove("show");}
 
 // ===== ذخیره یک‌بار مشخصات مشتری 💾 =====
@@ -544,7 +482,7 @@ try{
 
 
 loadProfileToForm();
-renderMini();renderBill();refreshRubikaLinks();refreshEitaaLinks();
+renderMini();renderBill();refreshEitaaLinks();
 refreshSavedBar();
 </script>
 <script>

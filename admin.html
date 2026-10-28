@@ -113,7 +113,7 @@
 
 
 <div class="form-card" style="margin-top:16px">
-<div class="sec-head"><div><h2 style="font-size:20px">🧾 سفارش‌های مشتری‌ها</h2><p style="font-size:13px;color:var(--muted)">سفارش‌هایی که از همین مرورگر ثبت شده اینجا دیده می‌شه. برای دیدن سفارش روبیکا/ایتا، همون‌جا پیام میاد.</p></div>
+<div class="sec-head"><div><h2 style="font-size:20px">🧾 سفارش‌های مشتری‌ها</h2><p style="font-size:13px;color:var(--muted)">سفارش‌هایی که از همین مرورگر ثبت شده اینجا دیده می‌شه. برای دیدن سفارش ایتا، همون‌جا پیام میاد.</p></div>
 <div><button class="btn btn-white" onclick="renderOrders()">🔄 تازه‌سازی</button> <button class="btn btn-white" onclick="if(confirm('همه سفارش‌ها پاک بشه؟')){clearOrders();renderOrders();}">🗑️ پاک‌کردن همه</button></div></div>
 <div class="toolbar"><input id="oq" placeholder="🔍 جست‌وجو: اسم، موبایل یا کد AZ-..." oninput="renderOrders()"><select id="ostat" onchange="renderOrders()"><option value="">همه وضعیت‌ها</option><option value="new">ثبت شد 🆕</option><option value="preparing">در حال آماده‌سازی 👨‍🍳</option><option value="sending">در راه 🛵</option><option value="done">تحویل شد ✅</option><option value="cancelled">لغو شد ❌</option></select></div>
 <div id="orderBox" style="display:flex;flex-direction:column;gap:10px"></div>
@@ -126,10 +126,9 @@
 <div class="field"><label>نام مدیریت</label><input id="sManager" placeholder="آقای نویدی"></div>
 <div class="field full"><label>آدرس فروشگاه</label><input id="sAddr" placeholder="آدرس..."></div>
 <div class="field full"><label>آیدی ایتا فروشگاه (بدون @) — مثلاً azarbayjan_shop</label><input id="sEitaa" dir="ltr" style="text-align:left" placeholder="Azarbayjanshap"></div>
-<div class="field full"><label>آیدی روبیکا فروشگاه (بدون @) — مثلاً Azarbayjanshap</label><input id="sRubika" dir="ltr" style="text-align:left" placeholder="Azarbayjanshap"></div>
 </div>
 <button class="btn btn-primary" style="margin-top:12px" onclick="saveStore()">💾 ذخیره تنظیمات</button>
-<p style="font-size:13px;color:var(--muted);margin-top:8px">شماره و آیدی ایتا و روبیکا رو اینجا عوض کنی، همه‌جای سایت خودکار عوض می‌شه 📱 دکمه ایتا لینک مستقیم باز می‌کنه، دکمه روبیکا دستی کار می‌کنه (کپی + جستجو در پیام‌رسان) چون لینک مستقیم روبیکا میره روی روبینو.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:8px">آیدی ایتا رو اینجا عوض کنی، همه‌جای سایت خودکار عوض می‌شه 📱</p>
 <hr style="border:none;border-top:2px dashed var(--line);margin:16px 0">
 <h3>🔑 تغییر رمز پنل</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
@@ -278,7 +277,6 @@ function fillStore(){
   document.getElementById("sManager").value=STORE.manager;
   document.getElementById("sAddr").value=STORE.addr;
   document.getElementById("sEitaa").value=STORE.eitaa||"";
-  try{document.getElementById("sRubika").value=STORE.rubika||STORE.eitaa||"";}catch(e){}
 }
 function saveStore(){
   const ph=faToEn(document.getElementById("sPhone").value);
@@ -288,7 +286,6 @@ function saveStore(){
   STORE.addr=document.getElementById("sAddr").value.trim()||STORE.addr;
   let eid=document.getElementById("sEitaa").value.trim().replace(/^@+/,"").replace(/.*eitaa\.com\//,"").replace(/\s+/g,"");
   STORE.eitaa=eid;
-  try{ let rid=document.getElementById("sRubika").value.trim().replace(/^@+/,"").replace(/.*rubika\.ir\//,"").replace(/\s+/g,""); if(!rid) rid=eid; STORE.rubika=rid; }catch(e){ STORE.rubika=STORE.eitaa; }
   persistStore(); applyStore(); toast("تنظیمات ذخیره شد ✅");
 }
 if(isLogged())showPanel();
