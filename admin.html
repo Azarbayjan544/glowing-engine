@@ -33,6 +33,25 @@
 .stat{background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px;text-align:center}
 .stat b{font-size:22px;display:block}
 .stat span{font-size:12.5px;color:var(--muted)}
+.add-toggle-wrap{margin:14px 0 4px}
+#addToggleBtn{width:100%;justify-content:center;font-size:19px!important;padding:16px!important;border-radius:18px;box-shadow:4px 4px 0 rgba(37,50,75,.9)}
+#addCard{display:none;margin-bottom:16px}
+#addCard.open{display:block;animation:pop .22s ease}
+/* فیکس بیرون‌زدگی توی گوشی */
+.form-card{min-width:0;overflow:hidden}
+.field{min-width:0}
+.field input,.field select,.field textarea{min-width:0!important;width:100%!important;max-width:100%!important}
+.toolbar input{min-width:0}
+.atable{display:block;overflow-x:auto;white-space:nowrap}
+.atable table{width:100%}
+@media(max-width:600px){
+.form-card div[style*="1fr 1fr"]{grid-template-columns:1fr!important}
+.stat-row{gap:8px}
+.stat{padding:8px 4px}
+.stat b{font-size:19px}
+.tab-row button{padding:8px 14px;font-size:14px}
+}
+@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
 .tab-row{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
 .tab-row button{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:8px 18px;font-weight:700;cursor:pointer}
 .tab-row button.on{background:var(--ink);color:#fff}
@@ -81,9 +100,14 @@
 </section>
 
 <section>
-<div class="admin-grid">
-<div class="form-card" style="position:sticky;top:110px">
-<h3 id="formTitle">➕ افزودن جنس جدید</h3>
+<div class="add-toggle-wrap">
+<button id="addToggleBtn" class="btn btn-green" onclick="toggleAddCard()">➕ افزودن جنس جدید</button>
+</div>
+<div class="form-card" id="addCard">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+<h3 id="formTitle" style="margin:0">➕ افزودن جنس جدید</h3>
+<button class="iconbtn" onclick="toggleAddCard(false)" title="بستن">✕</button>
+</div>
 <p style="font-size:13px;color:var(--muted)">فیلدهای ستاره‌دار لازمن. قیمت رو به تومان بزن (فارسی یا انگلیسی).</p>
 <input type="hidden" id="pId" value="">
 <div class="field" style="margin-top:8px"><label>نام جنس *</label><input id="pName" placeholder="مثلاً: پنیر لیقوان"></div>
@@ -104,8 +128,7 @@
 </div>
 </div>
 
-<div>
-<div class="form-card">
+<div class="form-card" style="margin-top:14px">
 <div class="sec-head"><div><h2 style="font-size:20px">📋 لیست اجناس فروشگاه</h2></div></div>
 <div class="toolbar"><input id="aq" placeholder="🔍 جست‌وجو..." oninput="renderAdmin()"><select id="acat" onchange="renderAdmin()"><option value="">همه دسته‌ها</option><option value="dairy">لبنیات</option><option value="bread">نان</option><option value="grocery">خواربار</option><option value="drink">نوشیدنی</option><option value="snack">تنقلات</option><option value="hygiene">شوینده</option></select></div>
 <div style="overflow:auto"><table class="atable"><thead><tr><th>جنس</th><th>نام / واحد</th><th>قیمت</th><th>عملیات</th></tr></thead><tbody id="arows"></tbody></table></div>
@@ -136,8 +159,6 @@
 <div class="field"><label>رمز جدید</label><input id="newPass" type="password"></div>
 </div>
 <button class="btn btn-dark" style="margin-top:10px" onclick="changePass()">تغییر رمز 🔐</button>
-</div>
-</div>
 </div>
 </section>
 </div>
@@ -177,6 +198,15 @@ function buildEmoji(){
   document.getElementById("emojiPick").innerHTML=EMOJIS.map(e=>`<button type="button" onclick="pickEmoji('${e}',this)">${e}</button>`).join("");
 }
 function pickEmoji(e,btn){ document.getElementById("pEmoji").value=e; document.querySelectorAll("#emojiPick button").forEach(b=>b.classList.remove("sel")); if(btn)btn.classList.add("sel"); }
+function toggleAddCard(force){
+  var card=document.getElementById("addCard");
+  var btn=document.getElementById("addToggleBtn");
+  if(!card) return true;
+  var open=(typeof force==="boolean")?force:!card.classList.contains("open");
+  if(open){card.classList.add("open");card.style.display="";if(btn)btn.textContent="🔽 بستن فرم افزودن";setTimeout(function(){try{card.scrollIntoView({behavior:"smooth",block:"start"});}catch(e){}},60);}
+  else{card.classList.remove("open");card.style.display="none";if(btn)btn.textContent="➕ افزودن جنس جدید";}
+  return open;
+}
 function clearForm(){ document.getElementById("pId").value="";document.getElementById("pName").value="";document.getElementById("pPrice").value="";document.getElementById("pOld").value="";document.getElementById("pUnit").value="";document.getElementById("pEmoji").value="🥛";document.getElementById("formTitle").textContent="➕ افزودن جنس جدید"; }
 function saveProduct(){
   const id=document.getElementById("pId").value;
@@ -212,7 +242,7 @@ function editProduct(id){
   document.getElementById("pOld").value=p.old||"";
   document.getElementById("pEmoji").value=p.emoji;
   document.getElementById("formTitle").textContent="✏️ ویرایش: "+p.name;
-  window.scrollTo({top:0,behavior:"smooth"});
+  toggleAddCard(true);
 }
 function delProduct(id){
   const p=PRODUCTS.find(x=>x.id==id);
