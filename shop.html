@@ -110,7 +110,7 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <b>💡 راهنمای ارسال (جدید و بدون قفل):</b><br>
 1️⃣ دکمه «✅ ثبت نهایی سفارش» رو بزن تا پنجره ثبت باز بشه<br>
 2️⃣ دکمه «📋 کپی متن سفارش» رو بزن و صبر کن بگه «کپی شد» ✅<br>
-3️⃣ بعد دکمه نارنجی «📩 ارسال در ایتا» رو بزن تا ایتا باز بشه، توی چت فقط نگه دار و «چسباندن» رو بزن
+3️⃣ بعد دکمه نارنجی «📩 ارسال در ایتا» رو بزن تا ایتا باز بشه، توی چت فقط نگه دار و «چسباندن» رو بزن<br>4️⃣ توی ایتا حتما دکمه ارسال ✈️ (مثلث آبی) رو بزن، وگرنه فقط پیش‌نویس می‌مونه و به چت نمی‌ره
 </div>
 <p style="font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center">بعد از ثبت، کد پیگیری می‌گیری و ما برای هماهنگی زنگ می‌زنیم 📞</p>
 </div>
@@ -262,7 +262,7 @@ function sendEitaaFromModal(){
     return false;
   }
   try{ window.open(chat,"_blank"); }catch(e){ try{ location.href=chat; }catch(e2){} }
-  setTimeout(function(){ toast("حالا توی ایتا فقط نگه دار و «چسباندن» رو بزن 📋 اگه پیغام دسترسی اومد «اجازه دادن» رو بزن"); },600);
+  setTimeout(function(){ toast("حالا توی ایتا «چسباندن» رو بزن بعد حتما دکمه ارسال ✈️ رو بزن تا بره تو چت 📋"); },600);
   return false;
 }
 function refreshEitaaLinks(){
@@ -333,8 +333,9 @@ function backToCats(){
   renderMini();
 }
 function matchCat(p,cid){
+  if(p.cat===cid) return true;
   var cat=NEW_CATS.find(x=>x.id===cid);
-  if(!cat) return p.cat===cid;
+  if(!cat) return false;
   if(cat.olds && cat.olds.includes(p.cat)) return true;
   var nm=(p.name||"")+" "+(p.unit||"");
   for(var i=0;i<cat.keys.length;i++){ if(nm.includes(cat.keys[i])) return true; }
@@ -392,7 +393,7 @@ function submitOrder(openWa){
   refreshEitaaLinks();
   __orderCopied=false;
   document.getElementById("orderCode").textContent=code;
-  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">اول «📋 قدم ۱: کپی» رو بزن بعد «📩 قدم ۲: ایتا» رو بزن</span>`;
+  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">اول «📋 قدم ۱: کپی» رو بزن بعد «📩 قدم ۲: ایتا» رو بزن و توی ایتا دکمه ارسال ✈️ رو بزن</span>`;
   try{ document.getElementById("orderTextBox").value = buildEitaaText(); }catch(e){}
   document.getElementById("modal").classList.add("show");
   cart={};save();try{renderMini();}catch(e){}

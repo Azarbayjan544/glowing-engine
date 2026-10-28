@@ -1,18 +1,20 @@
 const DEFAULT_PRODUCTS = [
-{id:1,name:"شیر پرچرب آذربایجان",unit:"بطر ۱ لیتری",price:38000,old:45000,cat:"dairy",emoji:"🥛",bg:"#E7F5FE"},
-{id:2,name:"ماست موسیر چکیده",unit:"دبه ۱ کیلویی",price:65000,cat:"dairy",emoji:"🍶",bg:"#FFF3D6"},
-{id:3,name:"پنیر تبریزی اصل",unit:"بسته ۵۰۰ گرمی",price:120000,old:138000,cat:"dairy",emoji:"🧀",bg:"#E8F9EF"},
-{id:4,name:"تخم‌مرغ تازه محلی",unit:"شانه ۳۰ عددی",price:145000,cat:"dairy",emoji:"🥚",bg:"#FFF3D6"},
-{id:5,name:"نان بربری داغ تنوری",unit:"هر قرص",price:15000,cat:"misc",emoji:"🥖",bg:"#FFEED6"},
-{id:6,name:"نان لواش بسته‌ای",unit:"بسته ۱۰ عددی",price:28000,cat:"misc",emoji:"🫓",bg:"#FFF3D6"},
-{id:7,name:"برنج ایرانی درجه‌یک",unit:"کیسه ۵ کیلویی",price:850000,old:920000,cat:"beans",emoji:"🍚",bg:"#E8F9EF"},
-{id:8,name:"روغن آفتابگردان",unit:"بطری ۳ لیتری",price:285000,cat:"misc",emoji:"🫗",bg:"#E7F5FE"},
-{id:9,name:"ماکارونی رشته‌ای",unit:"بسته ۷۰۰ گرمی",price:42000,cat:"pasta",emoji:"🍝",bg:"#F1EAFE"},
-{id:14,name:"نوشابه خانواده",unit:"بطری ۱/۵ لیتری",price:45000,cat:"drink",emoji:"🥤",bg:"#E7F5FE"},
-{id:15,name:"دوغ نعنایی آذربایجان",unit:"بطری ۱/۵ لیتری",price:40000,cat:"drink",emoji:"🥛",bg:"#E8F9EF"},
-{id:16,name:"چیپس سرکه‌ای",unit:"بسته بزرگ",price:38000,cat:"snack",emoji:"🍟",bg:"#FFF3D6"},
-{id:17,name:"بیسکوییت کرمدار",unit:"بسته ۴ عددی",price:32000,old:38000,cat:"snack",emoji:"🍪",bg:"#FFEED6"},
-{id:18,name:"مایع ظرفشویی لیمویی",unit:"بطری ۱ لیتری",price:55000,cat:"wash",emoji:"🧴",bg:"#E7F5FE"}
+{id:1,name:"کنسرو لوبیا چیتی بهروز",unit:"هر عدد",price:160000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:2,name:"کنسرو لوبیا چیتی گلنوش",unit:"هر عدد",price:162000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:3,name:"کنسرو مایه ماکارونی بهروز",unit:"هر عدد",price:190000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:4,name:"کنسرو نخود سبز بهروز",unit:"هر عدد",price:200000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:5,name:"کنسرو ذرت بهروز",unit:"هر عدد",price:215000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:6,name:"کنسرو لوبیا چیتی با قارچ یک و یک",unit:"هر عدد",price:209000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:7,name:"رب شیشه سمیه ۲۸۵ گرم",unit:"هر عدد",price:384000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:8,name:"کنسرو خوراک بادمجان گلنوش",unit:"هر عدد",price:183000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:9,name:"کنسرو عدسی بهروز",unit:"هر عدد",price:180000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:10,name:"کنسرو نخود آبگوشتی بهروز",unit:"هر عدد",price:152000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:11,name:"کنسرو خوراک بادمجان بهروز",unit:"هر عدد",price:130000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:12,name:"رب گوجه مکنزی ۸۰۰ گرم",unit:"هر عدد",price:280000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:13,name:"رب گوجه گلنوش ۸۰۰ گرم",unit:"هر عدد",price:335800,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:14,name:"رب گوجه شیلتون۲۳۰ گرم",unit:"هر عدد",price:45000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:15,name:"رب گوجه آیدین ۴۰۰ گرم",unit:"هر عدد",price:126000,cat:"canned",emoji:"🥫",bg:"#FFEED6"},
+{id:16,name:"رب گوجه گلنوش ۴۰۰ گرم",unit:"هر عدد",price:185000,cat:"canned",emoji:"🥫",bg:"#FFEED6"}
 ];
 const CATS = {dairy:"لبنیات",canned:"کنسرویجات",jam:"مرباها",wash:"شوینده",hygiene:"بهداشتی",misc:"خرده ریز",beans:"حبوبات",pasta:"ماکارونی ها",drink:"نوشیدنی",tea:"چای",sauce:"سس ها",protein:"سوسیس و کالباس",snack:"تنقلات"};
 const CAT_BG = {dairy:"#E8F9EF",canned:"#FFEED6",jam:"#FFF3D6",wash:"#E7F5FE",hygiene:"#F1EAFE",misc:"#FFF3D6",beans:"#E8F9EF",pasta:"#F1EAFE",drink:"#E7F5FE",tea:"#FFEED6",sauce:"#FFE3E3",protein:"#FFEED6",snack:"#FFF3D6",bread:"#FFF3D6",grocery:"#E8F9EF"};
