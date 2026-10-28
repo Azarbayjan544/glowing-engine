@@ -161,13 +161,16 @@ function sendAgain(code){
   (o.det||[]).forEach(d=>lines.push("• "+d.name+" × "+d.qty));
   lines.push("","💰 "+(o.total||""));
   const t=lines.join("\n");
+  var rid=cleanRubikaId();
   copyTxt(t, function(ok){
-    if(ok) toast("کپی شد! توی روبیکا فقط «چسباندن» رو بزن 📋");
-    else toast("متن آماده شد! توی روبیکا بچسبون 📋");
+    if(ok) toast("کپی شد! تو پیام‌رسان روبیکا به "+rid+" بچسبون 📋");
+    else toast("متن آماده شد! تو پیام‌رسان بچسبون 📋");
   });
   const url=rubikaChatUrl();
   if(!url){ toast("آیدی روبیکا ثبت نشده!"); return; }
-  setTimeout(function(){ window.open(url,"_blank"); },700);
+  toast("آیدی ما: "+rid+" — تو بخش پیام‌رسان جستجوش کن 💜");
+  setTimeout(function(){ window.open(url,"_blank"); },900);
+  setTimeout(function(){ toast("اگه روبینو باز شد، باید بری تو بخش پیام‌رسان ⚠️"); },2600);
 }
 function trackOne(){
   const inp=document.getElementById("trackCode");

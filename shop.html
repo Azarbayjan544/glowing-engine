@@ -112,7 +112,7 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <div style="background:#FFF8E8;border:2px dashed var(--orange);border-radius:14px;padding:10px 12px;margin-top:10px;font-size:13px;line-height:2;text-align:right">
 <b>💡 راهنمای ارسال:</b><br>
 1️⃣ اول دکمه «✅ ثبت نهایی سفارش» رو بزن تا کد پیگیری بگیری<br>
-2️⃣ دکمه بنفش روبیکا رو بزنی متن سفارشت خودکار کپی میشه، بعد که روبیکا باز شد فقط نگه دار و «چسباندن» رو بزن 💜<br>
+2️⃣ دکمه بنفش روبیکا رو بزنی متن سفارشت خودکار کپی میشه 💜 بعد که روبیکا باز شد، تو قسمت <b>پیام‌رسان</b> به آیدی <b dir="ltr">Azarbayjanshap</b> پیام بده و «چسباندن» رو بزن 📋 (اگه صفحه نصب باز شد یعنی روبیکا نداری، اول نصبش کن)<br>
 3️⃣ دکمه نارنجی ایتا رو بزنی متن سفارشت خودکار کپی میشه، بعد که ایتا باز شد فقط نگه دار و «چسباندن» رو بزن 📋
 </div>
 <p style="font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center">بعد از ثبت، کد پیگیری می‌گیری و ما برای هماهنگی زنگ می‌زنیم 📞</p>
@@ -145,8 +145,8 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <br><a id="rubikaLink" class="btn btn-rubika" style="margin-top:10px" target="_blank" href="#" onclick="return sendRubikaFromModal()">💜 ارسال این سفارش در روبیکا</a><br><br>
 <a id="eitaaLink" class="btn btn-eitaa" style="margin-top:2px" target="_blank" href="#" onclick="return sendEitaaFromModal()">📩 ارسال این سفارش در ایتا</a>
 <div id="eitaaCopyBox" style="background:#FFF8E8;border:2px dashed var(--orange);border-radius:14px;padding:12px;margin-top:12px;text-align:right">
-<b style="font-size:14px">📩 ایتا ۲ مرحله‌ایه (مهم):</b>
-<p style="font-size:12.5px;color:#5b6a85;margin:4px 0">روبیکا و ایتا خودشون متن رو نمی‌برن. اول «کپی» بزن، بعد که ایتا باز شد نگه دار و «چسباندن» رو بزن.</p>
+<b style="font-size:14px">💜📩 روبیکا و ایتا ۲ مرحله‌ایه (مهم):</b>
+<p style="font-size:12.5px;color:#5b6a85;margin:4px 0">روبیکا و ایتا خودشون متن رو نمی‌برن. اول «کپی» بزن، بعد که باز شد تو قسمت <b>پیام‌رسان</b> به آیدی <b dir="ltr">Azarbayjanshap</b> برو و نگه دار و «چسباندن» رو بزن.<br>⚠️ اگه به‌جای چت، صفحه <b>روبینو</b> یا <b>نصب روبیکا</b> باز شد: یعنی یا روبیکا نداری (اول از بازار نصب کن) یا اشتباهی رفتی تو روبینو — باید برگردی تو بخش پیام‌رسان و آیدی رو جستجو کنی.</p>
 <textarea id="orderTextBox" readonly rows="5" style="width:100%;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12.5px;background:#fff;line-height:1.9" onclick="this.select()"></textarea>
 <button class="btn btn-dark" style="width:100%;justify-content:center;margin-top:8px;font-size:14px" onclick="copyOrderText(true)">📋 کپی متن سفارش</button>
 </div>
@@ -383,21 +383,26 @@ function sendRubikaDirect(){
   submitOrder(true);
   const txt=buildRubikaText();
   try{ var bx=document.getElementById("orderTextBox"); if(bx) bx.value=txt; }catch(e){}
+  var rid=cleanRubikaId();
   copyTextAsync(txt, function(ok){
-    if(ok) toast("کپی شد! توی روبیکا فقط «چسباندن» رو بزن 📋");
-    else toast("متن رو از کادر کپی کن و تو روبیکا بچسبون 📋");
+    if(ok) toast("کپی شد! تو پیام‌رسان روبیکا به "+rid+" بچسبون 📋");
+    else toast("کپی خودکار نشد! متن رو از کادر پایین کپی کن 📋");
   });
   const chat=rubikaChatUrl();
   if(!chat){ toast("آیدی روبیکا ثبت نشده!"); return false; }
-  setTimeout(()=>{ window.open(chat,"_blank"); },700);
+  toast("آیدی ما در روبیکا: "+rid+" — تو بخش پیام‌رسان جستجوش کن 💜");
+  setTimeout(()=>{ window.open(chat,"_blank"); },900);
+  setTimeout(()=>{ toast("اگه صفحه روبینو یا نصب باز شد، برگرد تو پیام‌رسان و آیدی رو جستجو کن ⚠️"); },2600);
   return false;
 }
 function sendRubikaFromModal(){
   copyOrderText(false);
   var chat=rubikaChatUrl();
+  var rid=cleanRubikaId();
   if(!chat){ toast("آیدی روبیکا ثبت نشده!"); return false; }
-  toast("کپی شد! الان تو روبیکا فقط «چسباندن» رو بزن 📋");
-  setTimeout(function(){ window.open(chat,"_blank"); },600);
+  toast("کپی شد! تو پیام‌رسان روبیکا به "+rid+" بچسبون 📋");
+  setTimeout(function(){ window.open(chat,"_blank"); },700);
+  setTimeout(function(){ toast("اگه روبینو باز شد، باید بری تو بخش پیام‌رسان ⚠️"); },2500);
   return false;
 }
 function closeModal(){document.getElementById("modal").classList.remove("show");}
