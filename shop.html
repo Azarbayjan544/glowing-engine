@@ -203,22 +203,21 @@ function copyOrderText(fromBtn){
   else txt = buildEitaaText();
   if(!txt || txt.length<5){ toast("اول سفارش رو ثبت کن 🧺"); return false; }
   copyTextAsync(txt, function(ok){
-    if(ok){ toast("کپی شد! حالا برو تو ایتا و بچسبون 📋"); }
+    if(ok){ toast("کپی شد عزیزم! حالا برو تو روبیکا/ایتا و بچسبون 📋"); }
     else{
-      try{ if(box){ box.focus(); box.select(); } }catch(e){}
-      toast("کپی خودکار نشد! متن رو نگه دار و «کپی» بزن 📋");
+      toast("کپی خودکار نشد! انگشتت رو روی متن نگه دار و «کپی» رو بزن 📋");
     }
+    try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
   });
-  // برای گوشی: متن رو انتخاب کن که دستی هم بشه کپی کرد
-  try{ if(box){ box.focus(); box.select(); } }catch(e){}
+  // فوکس نمی‌کنیم که کیبورد موبایل باز نشه و صفحه قفل نکنه
+  try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
   return false;
 }
 function sendEitaaFromModal(){
-  copyOrderText(false);
   var chat = eitaaChatUrl();
   if(!chat){ toast("آیدی ایتا ثبت نشده!"); return false; }
-  toast("کپی شد! الان تو ایتا فقط «چسباندن» رو بزن 📋");
-  setTimeout(function(){ window.open(chat,"_blank"); }, 600);
+  try{ window.open(chat,"_blank"); }catch(e){}
+  copyOrderText(false);
   return false;
 }
 function refreshEitaaLinks(){
@@ -377,8 +376,9 @@ function copyRubikaId(){
 }
 function refreshRubikaLinks(){
   var rid=cleanRubikaId();
-  var a1=document.getElementById("rubikaLink"); if(a1) a1.href="#";
-  var a2=document.getElementById("rubikaOrderBtn"); if(a2) a2.href="#";
+  var chat=rubikaChatUrl();
+  var a1=document.getElementById("rubikaLink"); if(a1) a1.href=chat||"#";
+  var a2=document.getElementById("rubikaOrderBtn"); if(a2) a2.href=chat||"#";
   try{
     document.querySelectorAll(".rubika-id-txt").forEach(function(el){ el.textContent=rid; });
   }catch(e){}
@@ -404,11 +404,12 @@ function sendRubikaDirect(){
   return false;
 }
 function sendRubikaFromModal(){
-  copyOrderText(false);
   var rid=cleanRubikaId();
-  toast("متن کپی شد! حالا خودت روبیکا رو باز کن 📋");
-  try{ var bx=document.getElementById("orderTextBox"); if(bx){ bx.focus(); bx.select(); } }catch(e){}
-  setTimeout(function(){ toast("روبیکا → تب پیام‌رسان → 🔍 جستجوی "+rid+" 💜"); },1600);
+  var chat=rubikaChatUrl();
+  try{ if(chat) window.open(chat,"_blank"); }catch(e){}
+  copyOrderText(false);
+  setTimeout(function(){ toast("تو روبیکا جستجو کن: "+rid+" بعد بچسبون 💜"); },1200);
+  try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
   return false;
 }
 function closeModal(){document.getElementById("modal").classList.remove("show");}
