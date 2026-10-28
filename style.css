@@ -48,6 +48,8 @@ h1 .hl2{color:var(--tomato)}
 .btn-green{background:var(--leaf);color:#fff}
 .btn-dark{background:var(--ink);color:#fff}
 .btn-white{background:#fff;color:var(--ink)}
+.btn-rubika{background:#7A3DFF;color:#fff}
+.btn-eitaa{background:#FF7A1A!important;color:#fff!important}
 .hero-search{margin-top:16px;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:8px;display:flex;gap:8px;box-shadow:var(--sh)}
 .hero-search input{flex:1;border:none;outline:none;padding:10px 14px;font-size:15px;background:transparent;min-width:0}
 .hero-search button{border:none;background:var(--grape);color:#fff;border-radius:12px;padding:10px 22px;font-weight:700;cursor:pointer}

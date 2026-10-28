@@ -68,7 +68,7 @@
 <hr class="divider">
 <h4>📞 سوالی داری؟</h4>
 <div style="display:flex;gap:8px;margin-top:8px">
-<a class="btn btn-green" id="supWa" target="_blank" href="#" style="flex:1;justify-content:center">📲 واتساپ</a>
+<a class="btn btn-rubika" id="supRubika" target="_blank" href="#" style="flex:1;justify-content:center">💜 روبیکا</a>
 <a class="btn" id="supEitaa" target="_blank" href="#" style="flex:1;justify-content:center;background:#FF7A1A;color:#fff">📩 ایتا</a>
 </div>
 <p style="font-size:12.5px;color:var(--muted);margin-top:8px">همه‌روزه از ساعت ۶ صبح الی ۱۰ شب جواب می‌دیم 🕖</p>
@@ -80,7 +80,7 @@
 <footer><div class="wrap foot">
 <div><h4>🧺 سوپرمارکت آذربایجان</h4><p>📍 شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور • 📱 ۰۹۱۰۸۶۵۹۴۲۴</p></div>
 <div><h4>ساعت کاری</h4><p>🕖 همه‌روزه از ساعت ۶ صبح الی ۱۰ شب<br>📱 <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span><br>☎️ <span dir="ltr">۴۴۲۰۳۱۷۰</span><br>🛵 ارسال زیر ۱ ساعت</p></div>
-<div><h4>تماس با ما</h4><p>📸 اینستا: <a href="https://instagram.com/sopermarketazarbayjan" target="_blank" dir="ltr" style="color:#FFC93C">sopermarketazarbayjan@</a><br>📩 ایتا: <a href="https://eitaa.com/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a><br>💬 واتس‌اپ: <a href="https://wa.me/989108659424" target="_blank" dir="ltr" style="color:#FFC93C">09108659424</a></p></div>
+<div><h4>تماس با ما</h4><p>📸 اینستا: <a href="https://instagram.com/sopermarketazarbayjan" target="_blank" dir="ltr" style="color:#FFC93C">sopermarketazarbayjan@</a><br>📩 ایتا: <a href="https://eitaa.com/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a><br>💜 روبیکا: <a href="https://rubika.ir/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a></p></div>
 </div></footer>
 
 <div id="toast"></div>
@@ -88,7 +88,8 @@
 <script>
 function myPhone(){ try{ return localStorage.getItem("az_customer_current")||""; }catch(e){ return ""; } }
 function cleanEitaaId(){ try{ let v=(STORE.eitaa||"Azarbayjanshap").trim().replace(/^@+/,""); v=v.replace(/.*eitaa\.com\//,"").trim(); if(!v) v="Azarbayjanshap"; return v; }catch(e){ return "Azarbayjanshap"; } }
-function waNum(){ try{ const p=(STORE.phone||"09108659424").replace(/\D/g,""); if(p.startsWith("09")) return "98"+p.slice(1); return p; }catch(e){ return "989108659424"; } }
+function cleanRubikaId(){ try{ let v=(STORE.rubika||STORE.eitaa||"Azarbayjanshap").trim().replace(/^@+/,""); v=v.replace(/.*rubika\.ir\//,"").trim(); if(!v) v="Azarbayjanshap"; return v; }catch(e){ return "Azarbayjanshap"; } }
+function rubikaChatUrl(){ const id=cleanRubikaId(); if(id) return "https://rubika.ir/"+encodeURIComponent(id); return ""; }
 
 function showMine(){
   let ph = "";
@@ -133,7 +134,7 @@ function orderCard(o){
   ${items?`<div class="oitems">${items}</div>`:""}
   <div class="obtns">
   <button class="btn btn-sunny" onclick="reorder('${o.code}')">🔁 دوباره می‌خوام</button>
-  <button class="btn btn-green" onclick="sendAgain('${o.code}','wa')">📲 واتساپ</button>
+  <button class="btn btn-rubika" onclick="sendAgain('${o.code}')">💜 روبیکا</button>
   </div></div>`;
 }
 
@@ -143,13 +144,30 @@ function reorder(code){
   save(); toast("رفت تو سبد! می‌بریمت به خرید 🛒");
   setTimeout(()=>location.href="shop.html",900);
 }
-function sendAgain(code,where){
+function copyTxt(txt, cb){
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ if(cb) cb(true); }, function(){
+        try{ var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.top="0"; ta.style.opacity="0"; document.body.appendChild(ta); ta.focus(); ta.select(); var ok=false; try{ ok=document.execCommand("copy"); }catch(e){} document.body.removeChild(ta); if(cb) cb(ok); }catch(e){ if(cb) cb(false); }
+      });
+      return;
+    }
+  }catch(e){}
+  try{ var ta2=document.createElement("textarea"); ta2.value=txt; ta2.style.position="fixed"; ta2.style.top="0"; ta2.style.opacity="0"; document.body.appendChild(ta2); ta2.focus(); ta2.select(); var ok2=false; try{ ok2=document.execCommand("copy"); }catch(e){} document.body.removeChild(ta2); if(cb) cb(ok2); }catch(e){ if(cb) cb(false); }
+}
+function sendAgain(code){
   const o=findOrderByCode(code); if(!o) return;
   let lines=["🧺 سفارش "+o.code+" - سوپرمارکت آذربایجان","👤 "+o.name,"📱 "+o.phone,"📍 "+o.addr,"","🛒 اقلام:"];
   (o.det||[]).forEach(d=>lines.push("• "+d.name+" × "+d.qty));
   lines.push("","💰 "+(o.total||""));
   const t=lines.join("\n");
-  window.open("https://wa.me/"+waNum()+"?text="+encodeURIComponent(t),"_blank");
+  copyTxt(t, function(ok){
+    if(ok) toast("کپی شد! توی روبیکا فقط «چسباندن» رو بزن 📋");
+    else toast("متن آماده شد! توی روبیکا بچسبون 📋");
+  });
+  const url=rubikaChatUrl();
+  if(!url){ toast("آیدی روبیکا ثبت نشده!"); return; }
+  setTimeout(function(){ window.open(url,"_blank"); },700);
 }
 function trackOne(){
   const inp=document.getElementById("trackCode");
@@ -169,7 +187,7 @@ function trackOne(){
   try{
     const id=cleanEitaaId();
     document.getElementById("supEitaa").href="https://eitaa.com/"+id;
-    document.getElementById("supWa").href="https://wa.me/"+waNum()+"?text="+encodeURIComponent("سلام سوپرمارکت آذربایجان 🙏");
+    try{ document.getElementById("supRubika").href=rubikaChatUrl(); }catch(e){}
   }catch(e){}
 })();
 </script>

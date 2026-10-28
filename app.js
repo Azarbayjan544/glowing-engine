@@ -37,7 +37,7 @@ function persistProducts(){ try{localStorage.setItem("az_products",JSON.stringif
 
 // فروشگاه (شماره تماس و تنظیمات - قابل تغییر از پنل مدیریت)
 function loadStore(){
-  const def = {phone:"09108659424", phoneFa:"۰۹۱۰۸۶۵۹۴۲۴", manager:"آقای نویدی", addr:"شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور", eitaa:"Azarbayjanshap"};
+  const def = {phone:"09108659424", phoneFa:"۰۹۱۰۸۶۵۹۴۲۴", manager:"آقای نویدی", addr:"شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور", eitaa:"Azarbayjanshap", rubika:"Azarbayjanshap"};
   try{
     const s = localStorage.getItem("az_store");
     if(s){ const o = JSON.parse(s); return Object.assign(def,o); }
