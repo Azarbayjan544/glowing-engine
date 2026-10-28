@@ -141,31 +141,56 @@ function reorder(code){
   save(); toast("رفت تو سبد! می‌بریمت به خرید 🛒");
   setTimeout(()=>location.href="shop.html",900);
 }
+function eitaaChatUrl(){ try{ var v=(STORE.eitaa||"Azarbayjanshap").trim().replace(/^@+/,""); v=v.replace(/.*eitaa\.com\//,"").trim(); if(!v) v="Azarbayjanshap"; return "https://eitaa.com/"+encodeURIComponent(v); }catch(e){ return "https://eitaa.com/Azarbayjanshap"; } }
 function copyTxt(txt, cb){
+  // اول روش بدون اجازه‌خواستن (مخصوص موبایل که قفل نکنه)
+  function fb(t, callback){
+    try{
+      var ta=document.createElement("textarea");
+      ta.value=t; ta.setAttribute("readonly","");
+      ta.style.position="fixed"; ta.style.top="0"; ta.style.left="0";
+      ta.style.width="1px"; ta.style.height="1px"; ta.style.opacity="0";
+      document.body.appendChild(ta);
+      try{ ta.focus({preventScroll:true}); }catch(e){ try{ta.focus();}catch(e2){} }
+      try{ ta.select(); }catch(e){}
+      try{ ta.setSelectionRange(0, ta.value.length); }catch(e){}
+      var ok=false;
+      try{ ok=document.execCommand("copy"); }catch(e){ ok=false; }
+      try{ ta.blur(); }catch(e){}
+      document.body.removeChild(ta);
+      try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
+      callback(ok);
+    }catch(e){ callback(false); }
+  }
   try{
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(function(){ if(cb) cb(true); }, function(){
-        try{ var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.top="0"; ta.style.opacity="0"; document.body.appendChild(ta); ta.focus(); ta.select(); var ok=false; try{ ok=document.execCommand("copy"); }catch(e){} document.body.removeChild(ta); if(cb) cb(ok); }catch(e){ if(cb) cb(false); }
-      });
-      return;
-    }
-  }catch(e){}
-  try{ var ta2=document.createElement("textarea"); ta2.value=txt; ta2.style.position="fixed"; ta2.style.top="0"; ta2.style.opacity="0"; document.body.appendChild(ta2); ta2.focus(); ta2.select(); var ok2=false; try{ ok2=document.execCommand("copy"); }catch(e){} document.body.removeChild(ta2); if(cb) cb(ok2); }catch(e){ if(cb) cb(false); }
+    fb(txt, function(ok){
+      if(ok){ if(cb) cb(true); return; }
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(txt).then(function(){ if(cb) cb(true); }, function(){ if(cb) cb(false); });
+          return;
+        }
+      }catch(e){}
+      if(cb) cb(false);
+    });
+  }catch(e){ if(cb) cb(false); }
 }
-
-
 function sendAgain(code){
   const o=findOrderByCode(code); if(!o) return;
   let lines=["🧺 سفارش "+o.code+" - سوپرمارکت آذربایجان","👤 "+o.name,"📱 "+o.phone,"📍 "+o.addr,"","🛒 اقلام:"];
   (o.det||[]).forEach(d=>lines.push("• "+d.name+" × "+d.qty));
   lines.push("","💰 "+(o.total||""));
-  const t=lines.join("
-");
+  const t=lines.join("\n");
   copyTxt(t, function(ok){
-    if(ok) toast("متن کپی شد! تو ایتا بچسبون 📋");
-    else toast("متن آماده شد! تو ایتا بچسبون 📋");
+    if(ok) toast("کپی شد عزیزم! ✅ حالا می‌برمت تو ایتا فقط بچسبون 📋");
+    else toast("انگشتت رو روی متن نگه دار و کپی کن، بعد تو ایتا بچسبون 📋");
   });
-})();
+  // باز کردن ایتا با فاصله تا با کپی قاطی نکنه و قفل نده
+  setTimeout(function(){
+    try{ var chat=eitaaChatUrl(); window.open(chat,"_blank"); }catch(e){}
+    setTimeout(function(){ toast("توی ایتا فقط نگه دار و «چسباندن» رو بزن 📋 اگه پیغام دسترسی اومد «اجازه دادن» رو بزن"); },800);
+  },700);
+}
 </script>
 <script>
 (function(){

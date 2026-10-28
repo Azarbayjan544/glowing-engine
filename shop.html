@@ -107,11 +107,10 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 </div>
 <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:12px" onclick="submitOrder()">✅ ثبت نهایی سفارش</button>
 <div style="background:#FFF8E8;border:2px dashed var(--orange);border-radius:14px;padding:10px 12px;margin-top:10px;font-size:13px;line-height:2;text-align:right">
-<b>💡 راهنمای ارسال:</b><br>
+<b>💡 راهنمای ارسال (جدید و بدون قفل):</b><br>
 1️⃣ دکمه «✅ ثبت نهایی سفارش» رو بزن تا پنجره ثبت باز بشه<br>
-2️⃣ اول «📋 کپی متن سفارش» رو بزن تا متنت کپی بشه<br>
-3️⃣ ایتا 📩 خودش باز میشه، فقط «چسباندن» رو بزن<br>
-3️⃣ ایتا 📩 خودش باز میشه، فقط «چسباندن» رو بزن ✅
+2️⃣ دکمه «📋 کپی متن سفارش» رو بزن و صبر کن بگه «کپی شد» ✅<br>
+3️⃣ بعد دکمه نارنجی «📩 ارسال در ایتا» رو بزن تا ایتا باز بشه، توی چت فقط نگه دار و «چسباندن» رو بزن
 </div>
 <p style="font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center">بعد از ثبت، کد پیگیری می‌گیری و ما برای هماهنگی زنگ می‌زنیم 📞</p>
 </div>
@@ -141,12 +140,12 @@ footer .wrap.foot p{text-align:center;line-height:2.1}
 <div class="code" id="orderCode">AZ-0000</div>
 <p id="orderSum" style="font-size:14px"></p>
 <div id="eitaaCopyBox" style="background:#FFF8E8;border:2px dashed var(--orange);border-radius:14px;padding:12px;margin-top:12px;text-align:right">
-<b style="font-size:14px">📋 اول متنت رو کپی کن (مهم):</b>
-<p style="font-size:12.5px;color:#5b6a85;margin:4px 0">ایتا خودش متن رو نمی‌بره. اول «📋 کپی متن سفارش» رو بزن، بعد دکمه نارنجی 📩 رو بزن تا ایتا باز بشه و فقط «چسباندن» رو بزن ✅</p>
+<b style="font-size:14px">📋 قدم ۱: اول متنت رو کپی کن:</b>
+<p style="font-size:12.5px;color:#5b6a85;margin:4px 0">اول دکمه «📋 کپی متن سفارش» رو بزن و صبر کن بگه «کپی شد» ✅<br>بعد قدم ۲: دکمه نارنجی 📩 رو بزن تا ایتا باز بشه.</p>
 <textarea id="orderTextBox" readonly rows="5" style="width:100%;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12.5px;background:#fff;line-height:1.9" onclick="this.select()"></textarea>
-<button class="btn btn-dark" style="width:100%;justify-content:center;margin-top:8px;font-size:14px" onclick="copyOrderText(true)">📋 کپی متن سفارش</button>
+<button class="btn btn-dark" style="width:100%;justify-content:center;margin-top:8px;font-size:14px" id="copyBtn" onclick="copyOrderText(true)">📋 قدم ۱: کپی متن سفارش</button>
 </div>
-<a id="eitaaLink" class="btn btn-eitaa" style="margin-top:2px" target="_blank" href="#" onclick="return sendEitaaFromModal()">📩 ارسال این سفارش در ایتا</a>
+<a id="eitaaLink" class="btn btn-eitaa" style="margin-top:2px" target="_blank" href="#" onclick="return sendEitaaFromModal()">📩 قدم ۲: باز کردن ایتا و ارسال</a>
 <br>
 <button class="btn btn-primary" style="margin-top:10px" onclick="closeModal()">عالیه، ممنون! 💛</button><br><br>
 <a href="shop.html" onclick="closeModal();return false;" style="font-size:14px;text-decoration:underline">برگشت به صفحه سفارش 🛒</a>
@@ -162,27 +161,49 @@ function copyText(txt){
   copyTextAsync(txt, function(){});
   return true;
 }
+var __orderCopied=false;
 function fallbackCopy(txt, cb){
   try{
     var ta=document.createElement("textarea");
     ta.value=txt;
-    ta.style.position="fixed"; ta.style.top="0"; ta.style.opacity="0";
-    document.body.appendChild(ta); ta.focus(); ta.select();
+    ta.setAttribute("readonly","");
+    ta.style.position="fixed"; ta.style.top="0"; ta.style.left="0";
+    ta.style.width="1px"; ta.style.height="1px"; ta.style.opacity="0";
+    document.body.appendChild(ta);
+    // بدون اسکرول و بدون باز کردن کیبورد
+    try{ ta.focus({preventScroll:true}); }catch(e){ try{ta.focus();}catch(e2){} }
+    try{ ta.select(); }catch(e){}
     try{ ta.setSelectionRange(0, ta.value.length); }catch(e){}
     var ok=false;
     try{ ok=document.execCommand("copy"); }catch(e){ ok=false; }
+    try{ ta.blur(); }catch(e){}
     document.body.removeChild(ta);
+    try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
     if(cb) cb(ok);
   }catch(e){ if(cb) cb(false); }
 }
 function copyTextAsync(txt, cb){
+  // اول روش قدیمی بدون اجازه‌خواستن، اگه نشد کلیپ‌برد جدید
+  try{
+    fallbackCopy(txt, function(ok){
+      if(ok){ if(cb) cb(true); return; }
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(txt).then(function(){ if(cb) cb(true); }, function(){ if(cb) cb(false); });
+          return;
+        }
+      }catch(e){}
+      if(cb) cb(false);
+    });
+    return;
+  }catch(e){}
   try{
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(function(){ if(cb) cb(true); }, function(){ fallbackCopy(txt, cb); });
+      navigator.clipboard.writeText(txt).then(function(){ if(cb) cb(true); }, function(){ if(cb) cb(false); });
       return;
     }
   }catch(e){}
-  fallbackCopy(txt, cb);
+  if(cb) cb(false);
 }
 function buildEitaaText(){
   if(!lastOrder) return "سلام سوپرمارکت آذربایجان";
@@ -199,22 +220,49 @@ function copyOrderText(fromBtn){
   if(box && box.value) txt = box.value;
   else txt = buildEitaaText();
   if(!txt || txt.length<5){ toast("اول سفارش رو ثبت کن 🧺"); return false; }
+  var btn = document.getElementById("copyBtn");
+  var oldT = btn ? btn.innerHTML : "";
+  if(btn) btn.innerHTML = "⏳ داره کپی میشه...";
   copyTextAsync(txt, function(ok){
-    if(ok){ toast("کپی شد عزیزم! حالا برو تو ایتا و بچسبون 📋"); }
+    if(btn) btn.innerHTML = oldT;
+    if(ok){
+      __orderCopied = true;
+      toast("کپی شد عزیزم! ✅ حالا دکمه نارنجی 📩 رو بزن");
+      try{
+        var bx=document.getElementById("orderTextBox");
+        if(bx){ bx.select(); try{bx.setSelectionRange(0,bx.value.length);}catch(e){} try{bx.blur();}catch(e){} }
+      }catch(e){}
+    }
     else{
-      toast("کپی خودکار نشد! انگشتت رو روی متن نگه دار و «کپی» رو بزن 📋");
+      __orderCopied = false;
+      toast("کپی خودکار نشد! انگشتت رو ۲ ثانیه روی متن نگه دار و «کپی» رو بزن 📋");
+      try{
+        var bx2=document.getElementById("orderTextBox");
+        if(bx2){ bx2.focus(); bx2.select(); }
+      }catch(e){}
     }
     try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
   });
-  // فوکس نمی‌کنیم که کیبورد موبایل باز نشه و صفحه قفل نکنه
   try{ if(document.activeElement) document.activeElement.blur(); }catch(e){}
   return false;
 }
 function sendEitaaFromModal(){
   var chat = eitaaChatUrl();
   if(!chat){ toast("آیدی ایتا ثبت نشده!"); return false; }
-  try{ window.open(chat,"_blank"); }catch(e){}
-  copyOrderText(false);
+  // مهم: اینجا دیگه کپی نمی‌کنیم که گوشی پیغام دسترسی نده و قفل نکنه
+  // اول باید دکمه «کپی» رو زده باشی
+  if(!__orderCopied){
+    var bx=document.getElementById("orderTextBox");
+    if(!bx || !bx.value || bx.value.length<5){ toast("اول سفارش رو ثبت کن 🧺"); return false; }
+    toast("اول دکمه «📋 قدم ۱: کپی» رو بزن، بعد بیا اینجا 📋");
+    try{
+      var cb=document.getElementById("copyBtn");
+      if(cb){ cb.style.transform="scale(1.05)"; setTimeout(function(){cb.style.transform="";},600); }
+    }catch(e){}
+    return false;
+  }
+  try{ window.open(chat,"_blank"); }catch(e){ try{ location.href=chat; }catch(e2){} }
+  setTimeout(function(){ toast("حالا توی ایتا فقط نگه دار و «چسباندن» رو بزن 📋 اگه پیغام دسترسی اومد «اجازه دادن» رو بزن"); },600);
   return false;
 }
 function refreshEitaaLinks(){
@@ -342,8 +390,9 @@ function submitOrder(openWa){
     saveCustomer({name:name,phone:phone,addr:addr});
   }catch(e){}
   refreshEitaaLinks();
+  __orderCopied=false;
   document.getElementById("orderCode").textContent=code;
-  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">اول «📋 کپی متن سفارش» رو بزن بعد دکمه نارنجی 📩 ایتا رو بزن</span>`;
+  document.getElementById("orderSum").innerHTML=`<b>${name}</b> عزیز، مبلغ قابل پرداخت: <b>${totalTxt}</b><br>به آدرس: ${addr}<br><span style="font-size:13px">اول «📋 قدم ۱: کپی» رو بزن بعد «📩 قدم ۲: ایتا» رو بزن</span>`;
   try{ document.getElementById("orderTextBox").value = buildEitaaText(); }catch(e){}
   document.getElementById("modal").classList.add("show");
   cart={};save();try{renderMini();}catch(e){}
