@@ -1,5 +1,5 @@
 // برنامه آذربایجان — حافظه آفلاین (PWA)
-const CACHE = "az-v8";
+const CACHE = "az-v10";
 const CORE = [
   "./",
   "./index.html",

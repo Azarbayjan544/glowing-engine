@@ -68,7 +68,7 @@
 <hr class="divider">
 <h4>📞 سوالی داری؟</h4>
 <div style="display:flex;gap:8px;margin-top:8px">
-<a class="btn btn-rubika" id="supRubika" target="_blank" href="#" style="flex:1;justify-content:center">💜 روبیکا</a>
+<a class="btn btn-rubika" id="supRubika" href="#" onclick="return goRubikaSupport()" style="flex:1;justify-content:center">💜 روبیکا</a>
 <a class="btn" id="supEitaa" target="_blank" href="#" style="flex:1;justify-content:center;background:#FF7A1A;color:#fff">📩 ایتا</a>
 </div>
 <p style="font-size:12.5px;color:var(--muted);margin-top:8px">همه‌روزه از ساعت ۶ صبح الی ۱۰ شب جواب می‌دیم 🕖</p>
@@ -80,7 +80,7 @@
 <footer><div class="wrap foot">
 <div><h4>🧺 سوپرمارکت آذربایجان</h4><p>📍 شهرستان چهارباغ، روستای عرب‌آباد، خیابان شهید صمدی، کوچه نور • 📱 ۰۹۱۰۸۶۵۹۴۲۴</p></div>
 <div><h4>ساعت کاری</h4><p>🕖 همه‌روزه از ساعت ۶ صبح الی ۱۰ شب<br>📱 <span class="store-phone">۰۹۱۰۸۶۵۹۴۲۴</span><br>☎️ <span dir="ltr">۴۴۲۰۳۱۷۰</span><br>🛵 ارسال زیر ۱ ساعت</p></div>
-<div><h4>تماس با ما</h4><p>📸 اینستا: <a href="https://instagram.com/sopermarketazarbayjan" target="_blank" dir="ltr" style="color:#FFC93C">sopermarketazarbayjan@</a><br>📩 ایتا: <a href="https://eitaa.com/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a><br>💜 روبیکا: <a href="https://rubika.ir/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a></p></div>
+<div><h4>تماس با ما</h4><p>📸 اینستا: <a href="https://instagram.com/sopermarketazarbayjan" target="_blank" dir="ltr" style="color:#FFC93C">sopermarketazarbayjan@</a><br>📩 ایتا: <a href="https://eitaa.com/Azarbayjanshap" target="_blank" dir="ltr" style="color:#FFC93C">Azarbayjanshap@</a><br>💜 روبیکا (جستجو در پیام‌رسان): <span dir="ltr" style="color:#FFC93C">Azarbayjanshap</span></p></div>
 </div></footer>
 
 <div id="toast"></div>
@@ -155,6 +155,23 @@ function copyTxt(txt, cb){
   }catch(e){}
   try{ var ta2=document.createElement("textarea"); ta2.value=txt; ta2.style.position="fixed"; ta2.style.top="0"; ta2.style.opacity="0"; document.body.appendChild(ta2); ta2.focus(); ta2.select(); var ok2=false; try{ ok2=document.execCommand("copy"); }catch(e){} document.body.removeChild(ta2); if(cb) cb(ok2); }catch(e){ if(cb) cb(false); }
 }
+function copyRubikaId(){
+  var rid=cleanRubikaId();
+  copyTxt(rid, function(ok){
+    if(ok) toast("آیدی کپی شد: "+rid+" 💜");
+    else toast("آیدی ما: "+rid+" 💜");
+  });
+  return false;
+}
+function goRubikaSupport(){
+  var rid=cleanRubikaId();
+  copyTxt(rid, function(ok){
+    if(ok) toast("آیدی کپی شد: "+rid+" — تو پیام‌رسان جستجوش کن 💜");
+    else toast("آیدی ما: "+rid+" — تو پیام‌رسان جستجوش کن 💜");
+  });
+  setTimeout(function(){ toast("روبیکا رو خودت باز کن → پیام‌رسان → جستجو 📋"); },1200);
+  return false;
+}
 function sendAgain(code){
   const o=findOrderByCode(code); if(!o) return;
   let lines=["🧺 سفارش "+o.code+" - سوپرمارکت آذربایجان","👤 "+o.name,"📱 "+o.phone,"📍 "+o.addr,"","🛒 اقلام:"];
@@ -163,14 +180,10 @@ function sendAgain(code){
   const t=lines.join("\n");
   var rid=cleanRubikaId();
   copyTxt(t, function(ok){
-    if(ok) toast("کپی شد! تو پیام‌رسان روبیکا به "+rid+" بچسبون 📋");
-    else toast("متن آماده شد! تو پیام‌رسان بچسبون 📋");
+    if(ok) toast("متن کپی شد! روبیکا رو خودت باز کن و به "+rid+" بچسبون 📋");
+    else toast("متن آماده شد! به "+rid+" بچسبون 📋");
   });
-  const url=rubikaChatUrl();
-  if(!url){ toast("آیدی روبیکا ثبت نشده!"); return; }
-  toast("آیدی ما: "+rid+" — تو بخش پیام‌رسان جستجوش کن 💜");
-  setTimeout(function(){ window.open(url,"_blank"); },900);
-  setTimeout(function(){ toast("اگه روبینو باز شد، باید بری تو بخش پیام‌رسان ⚠️"); },2600);
+  setTimeout(function(){ toast("آیدی ما: "+rid+" — تو پیام‌رسان جستجو کن 💜"); },1000);
 }
 function trackOne(){
   const inp=document.getElementById("trackCode");
@@ -190,7 +203,7 @@ function trackOne(){
   try{
     const id=cleanEitaaId();
     document.getElementById("supEitaa").href="https://eitaa.com/"+id;
-    try{ document.getElementById("supRubika").href=rubikaChatUrl(); }catch(e){}
+    try{ document.getElementById("supRubika").href="#"; }catch(e){}
   }catch(e){}
 })();
 </script>
